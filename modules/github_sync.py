@@ -117,7 +117,7 @@ def dong_bo_toan_bo_du_an(token=None, repo=REPO_NAME, branch=BRANCH):
         dirs[:] = [d for d in dirs if d not in EXCLUDE_DIRS and not d.startswith('.')]
         for file in files:
             ext = os.path.splitext(file)[1].lower()
-            if ext in EXCLUDE_EXTS or file in ["github_token.txt", "google_credentials.json", "hwood_seo_cloud_package.zip"]:
+            if ext in EXCLUDE_EXTS or file in ["github_token.txt", "google_credentials.json", "hwood_seo_cloud_package.zip"] or file.startswith("gsc-keyword-report"):
                 continue
             full_path = os.path.join(root, file)
             rel_path = os.path.relpath(full_path, BASE_DIR).replace("\\", "/")
