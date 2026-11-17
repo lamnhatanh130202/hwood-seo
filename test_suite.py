@@ -185,14 +185,30 @@ def run_tests():
             tao_du_lieu_snapshot_thuc_te,
             kiem_tra_credentials
         )
-        data, is_api, email = lay_toan_bo_du_lieu_traffic()
-        assert "ga4" in data, "Thieu du lieu GA4"
-        assert "gsc" in data, "Thieu du lieu GSC"
-        assert data["ga4"]["realtime_users_30m"] == 22, "Realtime sai"
-        assert data["gsc"]["clicks"] == 303, "Clicks sai"
-        assert data["gsc"]["impressions"] == 12000, "Impressions sai"
-        assert len(data["gsc"]["top_queries"]) > 0, "Top queries rong"
-        print(f"  --> OK (GA4: {data['ga4']['active_users_str']} users, Realtime: {data['ga4']['realtime_users_30m']} online | GSC: {data['gsc']['clicks']} clicks, {data['gsc']['impressions_str']} imps)")
+        # Test 28 ngay qua (Mac dinh)
+        data_28d, _, _ = lay_toan_bo_du_lieu_traffic("28 ngày qua (Chuẩn)")
+        assert data_28d["ga4"]["active_users_str"] == "5,3 N", "28d GA4 users sai"
+        assert data_28d["gsc"]["clicks"] == 7420, "28d GSC clicks sai"
+
+        # Test 7 ngay qua
+        data_7d, _, _ = lay_toan_bo_du_lieu_traffic("7 ngày qua")
+        assert data_7d["ga4"]["active_users_str"] == "1,5 N", "7d GA4 users sai"
+        assert data_7d["gsc"]["clicks"] == 1850, "7d GSC clicks sai"
+        assert data_7d["gsc"]["impressions_str"] == "74 N", "7d GSC impressions sai"
+        assert len(data_7d["gsc"]["chart_clicks"]) == 7, "7d chart series length sai"
+
+        # Test 24 gio qua
+        data_24h, _, _ = lay_toan_bo_du_lieu_traffic("24 giờ qua (Realtime)")
+        assert data_24h["ga4"]["realtime_users_30m"] == 22, "24h realtime users sai"
+        assert data_24h["gsc"]["clicks"] == 303, "24h GSC clicks sai"
+        assert data_24h["gsc"]["impressions"] == 12000, "24h GSC impressions sai"
+
+        # Test 3 thang qua
+        data_3m, _, _ = lay_toan_bo_du_lieu_traffic("3 tháng qua")
+        assert data_3m["ga4"]["active_users_str"] == "15,8 N", "3m GA4 users sai"
+        assert data_3m["gsc"]["clicks"] == 22500, "3m GSC clicks sai"
+
+        print(f"  --> OK (28d: {data_28d['ga4']['active_users_str']} users | 7d: {data_7d['ga4']['active_users_str']} users, {data_7d['gsc']['clicks_str']} clicks | 24h: {data_24h['gsc']['clicks']} clicks, {data_24h['gsc']['impressions_str']} imps)")
         passed += 1
     except Exception as e:
         print(f"  --> THAT BAI: {e}")
