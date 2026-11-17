@@ -1,0 +1,32 @@
+============================================================
+ 3 DÒNG CẦN THÊM VÀO app.py (CHỈ THÊM, KHÔNG SỬA DÒNG CŨ)
+============================================================
+
+▶ BƯỚC A — Thêm import (dưới dòng 'from tabs.tab7_chat_chien_luoc import render_tab7'):
+
+from tabs.tab8_bot_farm import render_tab8
+
+
+▶ BƯỚC B — Sửa dòng khai báo st.tabs (thêm biến tab_bot_farm và tên tab cuối danh sách):
+
+tab_viet_moi, tab_kham_bai_cu, tab_ma_tran_kw, tab_rank_tracker, tab_ke_hoach_thang, tab_chat_advisor, tab_lich_su, tab_bot_farm = st.tabs([
+    "✍️ Viết Bài Mới", 
+    "🔍 Sửa Bài Cũ / WP", 
+    "📊 Ma Trận Keyword", 
+    "🎯 Thứ Hạng Google", 
+    "📅 Kế Hoạch Tháng", 
+    "💬 Cố Vấn & Lỗi Sai", 
+    "📚 Lịch Sử Bài Lưu",
+    "🤖 5 Bot Quét Thứ Hạng"
+])
+
+
+▶ BƯỚC C — Thêm khối render (ở cuối file, sau khối 'with tab_lich_su: ...'):
+
+with tab_bot_farm:
+    render_tab8()
+
+
+============================================================
+ XONG! Chạy lại: streamlit run app.py
+============================================================

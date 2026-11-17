@@ -1,0 +1,40 @@
+{
+  "_huong_dan": "Sao chép file này thành 'bot_proxies.json' và điền thông tin 5 proxy/VPN. Mỗi bot dùng 1 IP riêng. Nếu để trống proxy_server thì bot đó dùng IP máy tính.",
+  "bots": [
+    {
+      "bot_id": "bot_01",
+      "name": "Bot Hà Nội",
+      "proxy_server": "http://1.2.3.4:8080",
+      "proxy_username": "user1",
+      "proxy_password": "pass1"
+    },
+    {
+      "bot_id": "bot_02",
+      "name": "Bot Đà Nẵng",
+      "proxy_server": "socks5://5.6.7.8:1080",
+      "proxy_username": "user2",
+      "proxy_password": "pass2"
+    },
+    {
+      "bot_id": "bot_03",
+      "name": "Bot TP.HCM 1",
+      "proxy_server": "http://9.10.11.12:8080",
+      "proxy_username": "",
+      "proxy_password": ""
+    },
+    {
+      "bot_id": "bot_04",
+      "name": "Bot Cần Thơ",
+      "proxy_server": "",
+      "proxy_username": "",
+      "proxy_password": ""
+    },
+    {
+      "bot_id": "bot_05",
+      "name": "Bot Hải Phòng",
+      "proxy_server": "",
+      "proxy_username": "",
+      "proxy_password": ""
+    }
+  ]
+}

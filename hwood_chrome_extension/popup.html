@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>HWOOD SCheck - Quét Thứ Hạng Google</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      margin: 0;
+      padding: 14px;
+      width: 440px;
+      background-color: #f8fafc;
+      color: #1e293b;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 2px solid #22c55e;
+      padding-bottom: 10px;
+      margin-bottom: 12px;
+    }
+    .header h2 {
+      margin: 0;
+      font-size: 1.15rem;
+      color: #166534;
+    }
+    .header p {
+      margin: 2px 0 0 0;
+      font-size: 0.78rem;
+      color: #64748b;
+    }
+    label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #334155;
+      display: block;
+      margin-bottom: 4px;
+    }
+    input[type="text"], textarea {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 8px 10px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      margin-bottom: 10px;
+    }
+    textarea {
+      height: 90px;
+      resize: vertical;
+      font-family: inherit;
+    }
+    .btn-primary {
+      background-color: #16a34a;
+      color: #fff;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      padding: 9px 16px;
+      cursor: pointer;
+      width: 100%;
+      font-size: 0.9rem;
+      transition: 0.2s;
+    }
+    .btn-primary:hover {
+      background-color: #15803d;
+    }
+    .btn-secondary {
+      background-color: #e2e8f0;
+      color: #334155;
+      font-size: 0.78rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 4px;
+      padding: 4px 8px;
+      cursor: pointer;
+      margin-bottom: 8px;
+    }
+    .status-box {
+      margin-top: 12px;
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 10px;
+      max-height: 180px;
+      overflow-y: auto;
+      font-size: 0.82rem;
+    }
+    .res-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 5px 0;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    .badge-top {
+      background: #dcfce7;
+      color: #15803d;
+      font-weight: bold;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.78rem;
+    }
+    .badge-na {
+      background: #f1f5f9;
+      color: #64748b;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.78rem;
+    }
+    .footer {
+      margin-top: 10px;
+      font-size: 0.75rem;
+      color: #64748b;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div style="font-size: 1.8rem;">🪵</div>
+    <div>
+      <h2>HWOOD SCheck (Rank Scanner)</h2>
+      <p>Quét thứ hạng Google tự động bằng trình duyệt - Chuẩn SpinEditor</p>
+    </div>
+  </div>
+
+  <div style="background:#f0fdf4; border:1px solid #bbf7d0; color:#15803d; font-size:0.75rem; padding:5px 8px; border-radius:4px; margin-bottom:10px; font-weight:600;">
+    🛡️ Đã TẮT CÁ NHÂN HÓA (&pws=0 & Omit Cookies) - Thứ hạng khách quan 100%, không bị ảnh hưởng do xem web nhiều lần!
+  </div>
+
+  <label for="domainInput">Website mục tiêu cần theo dõi:</label>
+  <input type="text" id="domainInput" value="hwood.vn">
+
+  <div style="display: flex; justify-content: space-between; align-items: center;">
+    <label for="kwInput">Danh sách từ khóa (mỗi từ 1 dòng):</label>
+    <button class="btn-secondary" id="btnLoadPresets">Nạp mẫu từ khóa HWOOD</button>
+  </div>
+  <textarea id="kwInput" placeholder="tấm ốp nano&#10;tấm pvc vân đá&#10;tấm ốp asa&#10;gỗ nhựa ngoài trời">tấm ốp nano
+tấm pvc vân đá
+tấm ốp asa
+gỗ nhựa ngoài trời</textarea>
+
+  <button class="btn-primary" id="btnStartScan">🚀 BẮT ĐẦU QUÉT TỰ ĐỘNG BẰNG CHROME</button>
+
+  <div id="progressText" style="margin-top: 8px; font-size: 0.8rem; font-weight: 600; color: #15803d; display: none;"></div>
+
+  <div class="status-box" id="resultsBox" style="display: none;">
+    <div style="font-weight: bold; margin-bottom: 6px; color: #334155;">Kết quả quét trực tiếp:</div>
+    <div id="resultsList"></div>
+  </div>
+
+  <div style="margin-top: 10px; display: none;" id="syncBox">
+    <button class="btn-primary" id="btnDownloadJson" style="background-color: #2563eb;">📥 TẢI FILE LỊCH SỬ THỨ HẠNG VỀ MÁY</button>
+  </div>
+
+  <div class="footer">
+    💡 Extension chạy trực tiếp trên phiên đăng nhập Chrome của bạn nên 100% không bị Google chặn Captcha!
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

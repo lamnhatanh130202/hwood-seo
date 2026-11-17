@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "HWOOD SEO SCheck - Quét Thứ Hạng Google Tự Động",
+  "version": "1.0.0",
+  "description": "Tiện ích mở rộng Chrome tự động kiểm tra thứ hạng từ khóa thực tế trên Google cho website hwood.vn (Công nghệ giống SCheckPro của SpinEditor)",
+  "icons": {},
+  "permissions": [
+    "activeTab",
+    "storage",
+    "tabs"
+  ],
+  "host_permissions": [
+    "*://*.google.com.vn/*",
+    "*://*.google.com/*",
+    "http://localhost:*/*"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "HWOOD SCheck - Rank Checker"
+  }
+}
