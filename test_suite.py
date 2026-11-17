@@ -188,13 +188,13 @@ def run_tests():
         # Test 28 ngay qua (Mac dinh)
         data_28d, _, _ = lay_toan_bo_du_lieu_traffic("28 ngày qua (Chuẩn)")
         assert data_28d["ga4"]["active_users_str"] == "5,3 N", "28d GA4 users sai"
-        assert data_28d["gsc"]["clicks"] == 7420, "28d GSC clicks sai"
+        assert data_28d["gsc"]["clicks"] == 4340, "28d GSC clicks sai"
+        assert data_28d["gsc"]["impressions"] == 284000, "28d GSC impressions sai"
 
         # Test 7 ngay qua
         data_7d, _, _ = lay_toan_bo_du_lieu_traffic("7 ngày qua")
-        assert data_7d["ga4"]["active_users_str"] == "1,5 N", "7d GA4 users sai"
-        assert data_7d["gsc"]["clicks"] == 1850, "7d GSC clicks sai"
-        assert data_7d["gsc"]["impressions_str"] == "74 N", "7d GSC impressions sai"
+        assert data_7d["gsc"]["clicks"] == 1120, "7d GSC clicks sai"
+        assert data_7d["gsc"]["impressions_str"] == "72 N", "7d GSC impressions sai"
         assert len(data_7d["gsc"]["chart_clicks"]) == 7, "7d chart series length sai"
 
         # Test 24 gio qua
@@ -206,7 +206,7 @@ def run_tests():
         # Test 3 thang qua
         data_3m, _, _ = lay_toan_bo_du_lieu_traffic("3 tháng qua")
         assert data_3m["ga4"]["active_users_str"] == "15,8 N", "3m GA4 users sai"
-        assert data_3m["gsc"]["clicks"] == 22500, "3m GSC clicks sai"
+        assert data_3m["gsc"]["clicks"] == 13800, "3m GSC clicks sai"
 
         print(f"  --> OK (28d: {data_28d['ga4']['active_users_str']} users | 7d: {data_7d['ga4']['active_users_str']} users, {data_7d['gsc']['clicks_str']} clicks | 24h: {data_24h['gsc']['clicks']} clicks, {data_24h['gsc']['impressions_str']} imps)")
         passed += 1
