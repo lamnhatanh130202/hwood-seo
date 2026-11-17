@@ -356,6 +356,9 @@ def render_tab8():
         "hwood.vn, nếu thấy thì vào trang đọc nội dung và ở lại tự nhiên như người thật."
     )
 
+    if sys.platform.startswith("linux"):
+        st.info("💡 **Gợi ý từ chuyên gia:** Bạn đang xem ứng dụng trên **Streamlit Cloud (Máy chủ quốc tế)**. 5 Bot cày thứ hạng & đẩy traffic hoạt động tốt nhất trên **máy tính văn phòng/nhà (IP Việt Nam dân cư)** bằng file `CHAY_APP.bat` để không bao giờ bị Google chặn Captcha. Kết quả quét từ máy tính sẽ được đồng bộ lên đây để bạn xem trên điện thoại bất cứ lúc nào!")
+
     # ---------- CỘT TRÁI: CẤU HÌNH | CỘT PHẢI: TIẾN ĐỘ + KẾT QUẢ ----------
     col_cfg, col_run = st.columns([1, 1.4])
 
