@@ -21,7 +21,7 @@ CACHE_FILE = os.path.join(BASE_DIR, "ga4_gsc_cache.json")
 
 DEFAULT_SETTINGS = {
     "site_url": "https://hwood.vn/",
-    "ga4_property_id": "properties/384729102",
+    "ga4_property_id": "properties/483751353",
     "looker_embed_url": "",
     "che_do_ket_noi": "TuDong"
 }
