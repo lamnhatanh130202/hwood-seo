@@ -1,0 +1,39 @@
+{
+  "bots": [
+    {
+      "bot_id": "bot_01",
+      "name": "Bot 1",
+      "proxy_server": "",
+      "proxy_username": "",
+      "proxy_password": ""
+    },
+    {
+      "bot_id": "bot_02",
+      "name": "Bot 2",
+      "proxy_server": "",
+      "proxy_username": "",
+      "proxy_password": ""
+    },
+    {
+      "bot_id": "bot_03",
+      "name": "Bot 3",
+      "proxy_server": "",
+      "proxy_username": "",
+      "proxy_password": ""
+    },
+    {
+      "bot_id": "bot_04",
+      "name": "Bot 4",
+      "proxy_server": "",
+      "proxy_username": "",
+      "proxy_password": ""
+    },
+    {
+      "bot_id": "bot_05",
+      "name": "Bot 5",
+      "proxy_server": "",
+      "proxy_username": "",
+      "proxy_password": ""
+    }
+  ]
+}
