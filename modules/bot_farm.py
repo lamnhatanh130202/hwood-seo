@@ -304,6 +304,9 @@ class BotWorker(threading.Thread):
         self.dwell_min = dwell_min
         self.dwell_max = dwell_max
         self.visit_pages = visit_pages
+        # Tự động chuyển sang Headless nếu chạy trên Linux / Streamlit Cloud không có màn hình
+        if sys.platform.startswith("linux") and not os.environ.get("DISPLAY"):
+            headless = True
         self.headless = headless
         self.click_zalo = click_zalo
         self.delay_between_min = delay_between_min
@@ -1091,11 +1094,24 @@ class BotWorker(threading.Thread):
                     ]
 
                     def _create_browser_session(use_proxy_dict):
-                        br = p.chromium.launch(
-                            headless=self.headless,
-                            proxy=use_proxy_dict,
-                            args=launch_args,
-                        )
+                        try:
+                            br = p.chromium.launch(
+                                headless=self.headless,
+                                proxy=use_proxy_dict,
+                                args=launch_args,
+                            )
+                        except Exception as e_br:
+                            if "executable doesn't exist" in str(e_br).lower() or "playwright install" in str(e_br).lower():
+                                import subprocess
+                                self._log("⏳ Đang cài đặt bộ Chromium Playwright cho máy chủ...")
+                                subprocess.run([sys.executable, "-m", "playwright", "install", "chromium"])
+                                br = p.chromium.launch(
+                                    headless=self.headless,
+                                    proxy=use_proxy_dict,
+                                    args=launch_args,
+                                )
+                            else:
+                                raise e_br
                         ctx = br.new_context(
                             user_agent=self.config.user_agent,
                             viewport=self.config.viewport,
