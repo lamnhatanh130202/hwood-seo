@@ -106,7 +106,7 @@ def render_tab9():
         st.markdown("##### 🔍 B. Hiệu Suất Tìm Kiếm Google (Google Search Console):")
         c_gsc1, c_gsc2, c_gsc3, c_gsc4 = st.columns(4)
         with c_gsc1:
-            st.metric("Tổng số lượt nhấp (Clicks)", f"{gsc_data.get('clicks', 303)}", gsc_data.get("clicks_growth", "+14,2%"))
+            st.metric("Tổng số lượt nhấp (Clicks)", gsc_data.get("clicks_str", str(gsc_data.get("clicks", 303))), gsc_data.get("clicks_growth", "+14,2%"))
         with c_gsc2:
             st.metric("Tổng số lượt hiển thị", gsc_data.get("impressions_str", "12 N"), gsc_data.get("impressions_growth", "+18,5%"))
         with c_gsc3:
@@ -118,20 +118,24 @@ def render_tab9():
         st.markdown("##### 📉 C. Biểu Đồ Tăng Trưởng:")
         c_ch1, c_ch2 = st.columns(2)
         with c_ch1:
-            st.caption("Biểu đồ số lượt nhấp & hiển thị 24 Giờ (Google Search Console - Đỉnh 15:00):")
+            caption_gsc = gsc_data.get("chart_title_gsc", "Biểu đồ số lượt nhấp & hiển thị (Search Console):")
+            st.caption(caption_gsc)
+            x_gsc = gsc_data.get("chart_x_name", "Thời Gian")
             df_gsc_line = pd.DataFrame({
-                "Giờ": gsc_data.get("hours_labels", []),
-                "Lượt Nhấp (Clicks)": gsc_data.get("hours_clicks", []),
-                "Lượt Hiển Thị (x10)": [int(x / 10) for x in gsc_data.get("hours_impressions", [])]
-            }).set_index("Giờ")
+                x_gsc: gsc_data.get("chart_labels", gsc_data.get("hours_labels", [])),
+                "Lượt Nhấp (Clicks)": gsc_data.get("chart_clicks", gsc_data.get("hours_clicks", [])),
+                "Lượt Hiển Thị (x10)": [int(x / 10) for x in gsc_data.get("chart_impressions", gsc_data.get("hours_impressions", []))]
+            }).set_index(x_gsc)
             st.line_chart(df_gsc_line, color=["#2563eb", "#9333ea"])
 
         with c_ch2:
-            st.caption("Biểu đồ khách truy cập mỗi ngày trong 28 ngày qua (Google Analytics 4):")
+            caption_ga4 = ga4_data.get("chart_title_ga4", "Biểu đồ khách truy cập (Google Analytics 4):")
+            st.caption(caption_ga4)
+            x_ga4 = ga4_data.get("chart_x_name", "Thời Gian")
             df_ga4_area = pd.DataFrame({
-                "Ngày": ga4_data.get("timeline_days", []),
-                "Khách Truy Cập": ga4_data.get("timeline_users", [])
-            }).set_index("Ngày")
+                x_ga4: ga4_data.get("chart_labels", ga4_data.get("timeline_days", [])),
+                "Khách Truy Cập": ga4_data.get("chart_users", ga4_data.get("timeline_users", []))
+            }).set_index(x_ga4)
             st.area_chart(df_ga4_area, color="#15803d")
 
     # --------------------------------------------------------------------------
