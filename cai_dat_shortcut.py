@@ -23,10 +23,10 @@ def tao_shortcut(target_lnk_path, name="HWOOD SEO AI"):
 $WshShell = New-Object -ComObject WScript.Shell
 $Shortcut = $WshShell.CreateShortcut('{target_lnk_path}')
 $Shortcut.TargetPath = '{PYTHONW_PATH}'
-$Shortcut.Arguments = '`"{LAUNCHER_PATH}`"'
+$Shortcut.Arguments = '"{LAUNCHER_PATH}"'
 $Shortcut.WorkingDirectory = '{BASE_DIR}'
 $Shortcut.IconLocation = '{ICON_PATH}, 0'
-$Shortcut.Description = 'HWOOD VIỆT NAM - Trợ Lý Content SEO & Kỹ Thuật Vật Liệu AI'
+$Shortcut.Description = 'HWOOD VIET NAM - Tro Ly Content SEO & Ky Thuat AI'
 $Shortcut.WindowStyle = 7
 $Shortcut.Save()
 """
