@@ -7,12 +7,17 @@ FILE_QUY_CHUAN_CHUNG = "quy_chuan_seo_chung.json"
 FILE_LICH_SU_CHAT = "lich_su_chat_advisor.json"
 
 DEFAULT_QUY_CHUAN = [
-    "Giá sản phẩm và thi công phải luôn minh bạch, ghi rõ đã bao gồm thuế VAT 8% hoặc kèm ghi chú rõ ràng về thuế VAT 8%.",
-    "Tuyệt đối không nhầm lẫn giữa gỗ nhựa ngoài trời (WPC cốt bột gỗ + hạt nhựa PE/PP, phủ ASA) và tấm ốp nội thất (nhựa PVC nguyên sinh/Nano không chịu được nắng mưa ngoài trời).",
-    "Trong các bài viết hướng dẫn thi công sàn gỗ nhựa ngoài trời, bắt buộc nhắc đến khoảng cách hệ khung đà sắt mạ kẽm (chuẩn 30 - 35cm), khe hở giãn nở nhiệt (3 - 5mm) và độ dốc thoát nước tối thiểu 1%.",
-    "Khuyến nghị sử dụng keo chuyên dụng HWOOD 3X-BOND khi thi công tấm ốp tường PVC vân đá và tấm Nano, không dùng các loại keo silicone thông thường dễ bong tróc.",
-    "Tone giọng bài viết luôn chuyên nghiệp, xưng hô 'HWOOD VIỆT NAM', tôn trọng thợ thầu và đại lý, cam kết bảo hành sản phẩm từ 5 đến 10 năm theo tiêu chuẩn nhà máy.",
-    "Mỗi bài viết phải giải quyết triệt để Search Intent của từ khóa (Báo giá thì có bảng giá; So sánh thì có bảng đối đầu ưu/nhược điểm; Kỹ thuật thì có quy trình và checklist nghiệm thu)."
+    "Thông tin thương hiệu chuẩn: HWOOD VIỆT NAM | Slogan: 'Save Tree, Beautify Home!' | Trụ sở: 148/72 Đường Trường Lưu, P. Long Trường, TP.HCM (tuyệt đối không ghi TP. Thủ Đức). Hotline/Zalo: 0912 565 353 – 0919 741 080 | Zalo OA: https://zalo.me/3061490811747253783 | Email: sales@hwood.vn | Bảo hành: 5 năm (HWOOD) và 1 năm (TENOWOOD). Miễn phí ship <=25km tại TP.HCM cho đơn từ 25 triệu chưa VAT hoặc từ 50 thùng keo. Quà tặng mẫu: 'bộ mẫu sản phẩm'.",
+    "Định vị nhà phân phối sỉ: HWOOD chỉ cung ứng vật tư xuất kho, dự toán chỉ tính 100% chi phí vật tư, tách riêng chi phí khung sắt và thợ thi công thành lưu ý tham khảo.",
+    "Giá sản phẩm và thi công phải luôn minh bạch, ghi rõ đã bao gồm thuế VAT 8% hoặc kèm ghi chú rõ ràng về thuế VAT 8% theo khổ rộng hiệu dụng.",
+    "Tấm Ốp Nội Thất (Nano, PVC Vân Đá, Lam Sóng): Cấu tạo 4 lớp (Lớp UV, Lớp film 5 nhóm vân, Lớp keo Kleiberit Đức, Lớp đế PVC nguyên sinh tổ ong rỗng). Tuổi thọ 10-15 năm (CẤM ghi 20 năm). Nano 5kg mềm (~120-131k/m²) ốp trần/tường; Nano 6kg cứng (~147k/m²) làm vách TV/trần giật cấp. PVC vân đá dán trực tiếp, KHÔNG hèm, CẤM dùng ke inox. Keo 3X-BOND: 1 chai 300ml dán 5-7m². CẤM dùng từ '3D' cho tấm phẳng nano/PVC.",
+    "Gỗ Nhựa Ngoài Trời (WPC): Phân biệt 3 dòng: 1 lớp HDPE (đồng chất); 2 lớp phủ ASA (Quatest 3 KT3-00698BXD5 nở nước 0,08%); 2 lớp phủ Polymer 360 độ. HWOOD TUYỆT ĐỐI KHÔNG CÓ SÀN PHỦ ASA (chỉ có sàn 1 lớp HDPE và sàn 2 lớp Polymer).",
+    "Thi công sàn ngoài trời: Xương đà khoảng cách 30-35cm (rỗng) hoặc 35-40cm (đặc). BẮT BUỘC ĐI ĐÀ ĐÔI tại điểm nối đối đầu 2 thanh sàn. Khe giãn nở 3-5mm, cách tường 8-15mm. Nền bê tông dốc 1-2% thoát nước.",
+    "Hệ Lam & Trụ Pergola: Bắt buộc luồn lõi thép hộp mạ kẽm (trụ 120 luồn 80x80/90x90; trụ 100 luồn 50x50), nắp chụp trên đỉnh, CHÂN TRỤ BẮT BUỘC CHỪA KHE THOÁT NƯỚC TỰ NHIÊN (CẤM BỊT KÍN KEO).",
+    "Cửa cổng ngoài trời: Dùng tấm phẳng ASA HW123W16ASA hoặc Polymer HW146CE21. CẤM dùng lam rỗng xếp khít, sàn polymer hay tấm mỏng 12mm.",
+    "Keo & Silicone 3X-BOND: Dùng từ 'trám trít' hoặc 'trám khe'. Silicone trung tính X500 (57k, 7 màu), Silicone axit X300 (59k, 3 màu: Trắng trong, Trắng sữa, Xám Xingfa - TUYỆT ĐỐI KHÔNG CÓ MÀU ĐEN; axit ăn mòn kim loại).",
+    "Semantic SEO (Koray): 4 câu đầu tiên (<60 từ) Quick Answer (Định nghĩa + Giá VAT 8% + Ứng dụng). 1/3 đầu trang có Bảng tóm tắt giá hoặc Bảng thông số. H2/H3 <300 từ; câu <20 từ; đoạn 3-4 câu. Từ cấm: 'tốt nhất', 'số 1', '100%', 'tuyệt đối', 'vĩnh cửu', 'không mối mọt', 'mưa axit', 'dẻo dai'.",
+    "Khối CTA chốt đơn cuối bài: Hotline 0912 565 353 – 0919 741 080 | Nút Zalo OA chuẩn: https://zalo.me/3061490811747253783."
 ]
 
 def doc_quy_chuan_chung():
