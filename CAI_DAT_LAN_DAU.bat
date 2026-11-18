@@ -59,25 +59,31 @@ if "%PY%"=="python" (
     echo.
     echo [3/3] Dang cai dat Chromium cho Bot Playwright...
     python -m playwright install chromium
+    echo [4/4] Dang tao shortcut Ung dung Desktop...
+    python cai_dat_shortcut.py
 ) else if "%PY%"=="py" (
     py -3 -m pip install --upgrade pip
     py -3 -m pip install -r requirements.txt
     echo.
     echo [3/3] Dang cai dat Chromium cho Bot Playwright...
     py -3 -m playwright install chromium
+    echo [4/4] Dang tao shortcut Ung dung Desktop...
+    py -3 cai_dat_shortcut.py
 ) else (
     "%PY%" -m pip install --upgrade pip
     "%PY%" -m pip install -r requirements.txt
     echo.
     echo [3/3] Dang cai dat Chromium cho Bot Playwright...
     "%PY%" -m playwright install chromium
+    echo [4/4] Dang tao shortcut Ung dung Desktop...
+    "%PY%" cai_dat_shortcut.py
 )
 
 echo.
 echo ===================================================
 echo   CAI DAT HOAN TAT!
-echo   Bay gio ban co the bam dup chuot vao file:
-echo   CHAY_APP.bat de mo ung dung.
+echo   Icon "HWOOD SEO AI" da duoc tao tren Desktop.
+echo   Ban co the nhap dup chuot de chay truc tiep nhu mot App.
 echo ===================================================
 echo.
 pause
