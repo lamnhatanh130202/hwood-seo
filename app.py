@@ -22,8 +22,8 @@ from tabs.tab9_traffic_analytics import render_tab9
 # 1. CẤU HÌNH GIAO DIỆN TRANG WEB STREAMLIT
 # ==============================================================================
 st.set_page_config(
-    page_title="HWOOD - Trợ Lý Viết Bài SEO",
-    page_icon="🪵",
+    page_title="HWOOD VIỆT NAM - SEO AI Assistant",
+    page_icon=os.path.join(os.path.dirname(__file__), "hwood_app_icon.png") if os.path.exists(os.path.join(os.path.dirname(__file__), "hwood_app_icon.png")) else "🪵",
     layout="wide"
 )
 
