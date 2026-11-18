@@ -41,19 +41,71 @@ def main():
 
     print("\n=======================================================")
     print("   HWOOD SEO ASSISTANT DANG KHOI DONG TAI: http://localhost:8501")
-    print("   Luu y: Giu nguyen cua so nay trong khi su dung.")
+    print("   Che do: Cua so Ung dung Doc lap (Native App Mode)")
     print("=======================================================\n")
 
-    cmd = [
+    # Kiem tra trinh duyet Chrome/Edge de mo che do App Window
+    browser = None
+    for p in [
+        r"C:\Program Files\Google\Chrome\Application\chrome.exe",
+        r"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe",
+        os.path.expandvars(r"%LOCALAPPDATA%\Google\Chrome\Application\chrome.exe"),
+        r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe",
+        r"C:\Program Files\Microsoft\Edge\Application\msedge.exe",
+    ]:
+        if os.path.exists(p):
+            browser = p
+            break
+
+    profile_dir = os.path.join(script_dir, ".app_profile")
+    os.makedirs(profile_dir, exist_ok=True)
+
+    server_cmd = [
         sys.executable, "-m", "streamlit", "run", "app.py",
-        "--server.headless", "false",
+        "--server.headless", "true",
         "--server.showEmailPrompt", "false",
         "--browser.gatherUsageStats", "false"
     ]
+
     try:
-        subprocess.run(cmd)
+        server_proc = subprocess.Popen(server_cmd)
+        
+        # Cho server san sang
+        import time, socket
+        for _ in range(40):
+            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+                s.settimeout(0.5)
+                if s.connect_ex(('127.0.0.1', 8501)) == 0:
+                    break
+            time.sleep(0.3)
+
+        if browser:
+            app_args = [
+                browser,
+                "--app=http://localhost:8501",
+                f"--user-data-dir={profile_dir}",
+                "--window-size=1450,920",
+                "--window-position=40,20",
+                "--app-id=hwood-seo-assistant"
+            ]
+            browser_proc = subprocess.Popen(app_args)
+            browser_proc.wait()
+        else:
+            import webbrowser
+            webbrowser.open("http://localhost:8501")
+            server_proc.wait()
+
     except KeyboardInterrupt:
         print("\nDa dung ung dung HWOOD SEO.")
+    finally:
+        try:
+            server_proc.terminate()
+            server_proc.wait(timeout=2)
+        except Exception:
+            try:
+                server_proc.kill()
+            except Exception:
+                pass
 
 if __name__ == "__main__":
     main()
