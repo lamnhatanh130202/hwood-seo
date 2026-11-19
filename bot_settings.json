@@ -3,7 +3,7 @@
   "delay_min": 8,
   "delay_max": 15,
   "dwell_min": 30,
-  "dwell_max": 60,
+  "dwell_max": 63,
   "visit_pages": true,
   "click_zalo": false,
   "headless": false
