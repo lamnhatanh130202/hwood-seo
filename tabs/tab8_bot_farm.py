@@ -364,19 +364,27 @@ def render_tab8():
 
     with col_cfg:
         st.markdown("#### 1️⃣ Danh sách từ khóa (5 bot dùng chung)")
-        preset_choice = "Nhập tay"
+
+        def on_preset_change():
+            chosen = st.session_state.get("sel_bot_preset")
+            if chosen and chosen != "Nhập tay" and chosen in BO_TU_KHOA_HWOOD_PRESETS:
+                st.session_state["bot_farm_keywords_input"] = "\n".join(BO_TU_KHOA_HWOOD_PRESETS[chosen])
+
+        if "bot_farm_keywords_input" not in st.session_state:
+            st.session_state["bot_farm_keywords_input"] = "gỗ nhựa ngoài trời\ntấm nhựa ốp tường\ntrần nano"
+
         if HAS_PRESETS:
-            preset_choice = st.selectbox(
+            st.selectbox(
                 "Chọn bộ từ khóa mẫu:",
                 options=["Nhập tay"] + list(BO_TU_KHOA_HWOOD_PRESETS.keys()),
+                key="sel_bot_preset",
+                on_change=on_preset_change,
                 help="Chọn bộ mẫu để tự động nạp vào ô bên dưới, rồi bạn có thể sửa thêm.",
             )
-        default_kw = ""
-        if preset_choice != "Nhập tay" and HAS_PRESETS:
-            default_kw = "\n".join(BO_TU_KHOA_HWOOD_PRESETS.get(preset_choice, []))
+
         keywords_text = st.text_area(
             "Mỗi dòng 1 từ khóa:",
-            value=default_kw,
+            key="bot_farm_keywords_input",
             height=160,
             placeholder="gỗ nhựa ngoài trời\ntấm nhựa ốp tường\ntrần nano\n...",
         )
