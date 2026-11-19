@@ -13102,5 +13102,132 @@
       }
     ],
     "trang_thai": "ok"
+  },
+  {
+    "tu_khoa": "tấm nhựa ốp tường chống ẩm",
+    "bot_id": "bot_01",
+    "bot_name": "Bot 1",
+    "thoi_gian": "19/11/2026 09:16:46",
+    "ket_qua_hwood": [],
+    "trang_thai": "loi",
+    "loi": "Mouse.wheel: Target page, context or browser has been closed"
+  },
+  {
+    "tu_khoa": "tấm nhựa ốp tường",
+    "bot_id": "bot_04",
+    "bot_name": "Bot 4",
+    "thoi_gian": "19/11/2026 09:16:49",
+    "ket_qua_hwood": [],
+    "trang_thai": "ngoai_top_50"
+  },
+  {
+    "tu_khoa": "vách tivi pvc vân đá",
+    "bot_id": "bot_05",
+    "bot_name": "Bot 5",
+    "thoi_gian": "19/11/2026 09:16:51",
+    "ket_qua_hwood": [],
+    "trang_thai": "ngoai_top_50"
+  },
+  {
+    "tu_khoa": "trần nhựa nano giật cấp",
+    "bot_id": "bot_03",
+    "bot_name": "Bot 3",
+    "thoi_gian": "19/11/2026 09:16:48",
+    "ket_qua_hwood": [],
+    "trang_thai": "ngoai_top_50"
+  },
+  {
+    "tu_khoa": "tấm nhựa ốp tường phòng khách",
+    "bot_id": "bot_02",
+    "bot_name": "Bot 2",
+    "thoi_gian": "19/11/2026 09:16:47",
+    "ket_qua_hwood": [],
+    "trang_thai": "ngoai_top_50"
+  },
+  {
+    "tu_khoa": "phào chỉ pvc vân đá",
+    "bot_id": "bot_01",
+    "bot_name": "Bot 1",
+    "thoi_gian": "19/11/2026 09:17:59",
+    "ket_qua_hwood": [],
+    "trang_thai": "bi_chan_captcha"
+  },
+  {
+    "tu_khoa": "báo giá thi công trần nhựa nano",
+    "bot_id": "bot_02",
+    "bot_name": "Bot 2",
+    "thoi_gian": "19/11/2026 09:18:15",
+    "ket_qua_hwood": [],
+    "trang_thai": "loi",
+    "loi": "Mouse.wheel: Target page, context or browser has been closed"
+  },
+  {
+    "tu_khoa": "tấm ốp tường pvc nano",
+    "bot_id": "bot_01",
+    "bot_name": "Bot 1",
+    "thoi_gian": "19/11/2026 09:18:21",
+    "ket_qua_hwood": [],
+    "trang_thai": "bi_chan_captcha"
+  },
+  {
+    "tu_khoa": "tấm pvc vân đá",
+    "bot_id": "bot_03",
+    "bot_name": "Bot 3",
+    "thoi_gian": "19/11/2026 09:18:12",
+    "ket_qua_hwood": [],
+    "trang_thai": "loi",
+    "loi": "Mouse.wheel: Target page, context or browser has been closed"
+  },
+  {
+    "tu_khoa": "keo dán pvc 3x-bond",
+    "bot_id": "bot_05",
+    "bot_name": "Bot 5",
+    "thoi_gian": "19/11/2026 09:18:14",
+    "ket_qua_hwood": [],
+    "trang_thai": "loi",
+    "loi": "Mouse.wheel: Target page, context or browser has been closed"
+  },
+  {
+    "tu_khoa": "tấm nhựa giả đá hoa cương",
+    "bot_id": "bot_04",
+    "bot_name": "Bot 4",
+    "thoi_gian": "19/11/2026 09:18:14",
+    "ket_qua_hwood": [],
+    "trang_thai": "ngoai_top_50"
+  },
+  {
+    "tu_khoa": "tấm nhựa pvc vân đá tráng gương",
+    "bot_id": "bot_02",
+    "bot_name": "Bot 2",
+    "thoi_gian": "19/11/2026 09:18:58",
+    "ket_qua_hwood": [],
+    "trang_thai": "loi",
+    "loi": "Page.goto: Target page, context or browser has been closed\nCall log:\n  - navigating to \"https://www.google.com.vn/search?q=t%E1%BA%A5m+nh%E1%BB%B1a+pvc+v%C3%A2n+%C4%91%C3%A1+tr%C3%A1ng+g%C6%B0%C6%A1ng"
+  },
+  {
+    "tu_khoa": "tấm ốp tường nano phẳng",
+    "bot_id": "bot_01",
+    "bot_name": "Bot 1",
+    "thoi_gian": "19/11/2026 09:19:03",
+    "ket_qua_hwood": [],
+    "trang_thai": "loi",
+    "loi": "Page.goto: Target page, context or browser has been closed\nCall log:\n  - navigating to \"https://www.google.com.vn/search?q=t%E1%BA%A5m+%E1%BB%91p+t%C6%B0%E1%BB%9Dng+nano+ph%E1%BA%B3ng&hl=vi&gl=vn\", wa"
+  },
+  {
+    "tu_khoa": "báo giá tấm pvc vân đá",
+    "bot_id": "bot_04",
+    "bot_name": "Bot 4",
+    "thoi_gian": "19/11/2026 09:19:07",
+    "ket_qua_hwood": [],
+    "trang_thai": "loi",
+    "loi": "Page.goto: Target page, context or browser has been closed\nCall log:\n  - navigating to \"https://www.google.com.vn/search?q=b%C3%A1o+gi%C3%A1+t%E1%BA%A5m+pvc+v%C3%A2n+%C4%91%C3%A1&hl=vi&gl=vn\", waiting"
+  },
+  {
+    "tu_khoa": "tấm ốp nano",
+    "bot_id": "bot_05",
+    "bot_name": "Bot 5",
+    "thoi_gian": "19/11/2026 09:19:07",
+    "ket_qua_hwood": [],
+    "trang_thai": "bi_chan_captcha"
   }
 ]
