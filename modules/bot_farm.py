@@ -455,10 +455,17 @@ class BotWorker(threading.Thread):
                 if (seenElements.has(heading)) return;
                 seenElements.add(heading);
 
-                const card = heading.closest('div.MjjYud, div.g, div.tF2Cxc, [data-attrid*="overview"], .c2xzTb, .xpdopen') || heading.parentElement;
-                const headingA = heading.closest('a') || heading.querySelector('a') || (card ? card.querySelector('a:has(h3), a') : null);
+                // Tìm thẻ liên kết a gắn liền trực tiếp với tiêu đề này (tuyệt đối không lấy nhầm a của kết quả khác)
+                const headingA = heading.closest('a') || (heading.parentElement ? heading.parentElement.querySelector('a') : null) || heading.querySelector('a');
                 
-                let citeEl = card ? card.querySelector('cite') : null;
+                // Tìm cite thuộc riêng kết quả này
+                let citeEl = null;
+                if (headingA) {
+                    citeEl = headingA.querySelector('cite') || (headingA.parentElement ? headingA.parentElement.querySelector('cite') : null);
+                }
+                if (!citeEl && heading.parentElement) {
+                    citeEl = heading.parentElement.querySelector('cite');
+                }
                 let citeText = (citeEl ? citeEl.innerText : '').toLowerCase();
                 let citeIsHwood = citeText.includes('hwood.vn');
 
@@ -475,10 +482,10 @@ class BotWorker(threading.Thread):
                     bestUrl = linkUrl;
                     isHwood = true;
                 } else if (citeIsHwood) {
-                    isHwood = true;
-                    if (card) {
-                        let cardLinks = Array.from(card.querySelectorAll('a'));
-                        for (let a of cardLinks) {
+                    // Nếu thẻ cite ghi rõ hwood.vn, tìm link hwood.vn ngay trong cụm của heading này
+                    let directParent = (headingA ? headingA.parentElement : heading.parentElement);
+                    if (directParent) {
+                        for (let a of directParent.querySelectorAll('a')) {
                             let u = cleanGoogleUrl(a.href || a.getAttribute('href') || a.getAttribute('data-url') || '');
                             if (isStrictHwood(u) && u.replace(/^https?:\/\//i, '').replace(/^www\./i, '').replace(/\/+$/, '') !== 'hwood.vn') {
                                 bestUrl = u;
@@ -486,21 +493,23 @@ class BotWorker(threading.Thread):
                             }
                         }
                     }
-                    if (!bestUrl) {
-                        bestUrl = (linkUrl && linkUrl.startsWith('http')) ? linkUrl : 'https://hwood.vn';
+                    if (!bestUrl && isStrictHwood(linkUrl)) {
+                        bestUrl = linkUrl;
                     }
+                    if (!bestUrl) {
+                        bestUrl = 'https://hwood.vn';
+                    }
+                    isHwood = true;
                 } else {
                     if (linkUrl && linkUrl.startsWith('http') && !ignoreHosts.some(x => linkUrl.includes(x))) {
                         bestUrl = linkUrl;
-                    } else if (card) {
-                        for (let a of card.querySelectorAll('a')) {
-                            let u = cleanGoogleUrl(a.href || a.getAttribute('href') || '');
-                            if (u && u.startsWith('http') && !ignoreHosts.some(x => u.includes(x))) {
-                                bestUrl = u;
-                                break;
-                            }
-                        }
                     }
+                    isHwood = false;
+                }
+
+                // NGUYÊN TẮC BẢO VỆ TUYỆT ĐỐI: Bất kể thế nào, nếu bestUrl không phải hwood.vn thì isHwood PHẢI LÀ FALSE!
+                if (!isStrictHwood(bestUrl)) {
+                    isHwood = false;
                 }
 
                 if (!bestUrl) return;
@@ -508,6 +517,7 @@ class BotWorker(threading.Thread):
                 seenUrls.add(bestUrl);
                 pos += 1;
 
+                const card = heading.closest('div.MjjYud, div.g, div.tF2Cxc, [data-attrid*="overview"], .c2xzTb, .xpdopen') || heading.parentElement;
                 let sType = 'organic';
                 let sLabel = `Top ${pos}`;
                 if (card && (card.closest('[data-attrid*="overview"], [aria-label*="AI"]') || card.matches('[data-attrid*="overview"], [aria-label*="AI"]'))) {
@@ -518,7 +528,8 @@ class BotWorker(threading.Thread):
                     sLabel = '💎 Top 0 Featured';
                 }
 
-                if (isHwood) {
+                // CHỈ gắn cờ target nếu thực sự là hwood.vn và link của headingA cũng dẫn tới hwood.vn
+                if (isHwood && isStrictHwood(bestUrl)) {
                     if (card) card.setAttribute('data-bot-hwood-card', 'true');
                     if (headingA) {
                         headingA.setAttribute('data-bot-hwood-target', 'true');
@@ -814,22 +825,20 @@ class BotWorker(threading.Thread):
                 candidate_selectors.extend([
                     f"a[data-bot-url*='{slug}']",
                     f"h3[data-bot-url*='{slug}']",
-                    f"a[href*='{slug}']:has(h3)",
-                    f"h3:has(a[href*='{slug}'])",
-                    f"a[href*='{slug}']",
+                    f"a[href*='hwood.vn'][href*='{slug}']",
+                    f"a[href*='hwood.vn']:has(h3)",
                 ])
             else:
                 candidate_selectors.extend([
                     "a[data-bot-url='https://hwood.vn']",
                     "h3[data-bot-url='https://hwood.vn']",
-                    "a:has(h3)[href*='hwood.vn']",
+                    "a[href*='hwood.vn']:has(h3)",
                 ])
 
             candidate_selectors.extend([
                 f"a[href*='{clean_target}']",
-                "a[data-bot-hwood-target='true']",
+                "a[data-bot-hwood-target='true'][href*='hwood.vn']",
                 "h3[data-bot-hwood-target='true']",
-                "[data-bot-hwood-target='true']",
                 "[data-bot-fallback-link='true']",
             ])
 
@@ -847,15 +856,22 @@ class BotWorker(threading.Thread):
             # 3. Nếu tìm thấy phần tử: Xác thực an toàn trước khi bấm để TUYỆT ĐỐI KHÔNG CLICK NHẦM ĐỐI THỦ
             if target_locator is not None:
                 try:
-                    # Kiểm tra thẻ a có thực sự chứa link hwood.vn hay không
+                    # Kiểm tra thẻ a có thực sự chứa domain hwood.vn hay không
                     is_safe = page.evaluate("""(el) => {
                         if (!el) return false;
                         const a = el.closest('a') || el.querySelector('a') || el;
                         let raw = a.href || a.getAttribute('href') || a.getAttribute('data-url') || a.getAttribute('data-bot-url') || '';
                         let u = raw.toLowerCase();
-                        if (u.includes('hwood.vn')) return true;
-                        if (a.getAttribute('data-bot-hwood-target') === 'true' || a.getAttribute('data-bot-fallback-link') === 'true') return true;
-                        return false;
+                        if (!u.includes('hwood.vn')) return false;
+                        // Kiểm tra không phải domain khác chứa từ khóa hwood trong slug (ví dụ: hoangangroup.com/...hwood...)
+                        try {
+                            let parsed = new URL(raw, 'https://www.google.com');
+                            let host = parsed.hostname.toLowerCase();
+                            if (host !== 'hwood.vn' && host !== 'www.hwood.vn' && !host.endsWith('.hwood.vn') && !host.includes('google.')) {
+                                return false;
+                            }
+                        } catch(e) {}
+                        return true;
                     }""", target_locator.element_handle())
 
                     if not is_safe:
@@ -999,7 +1015,7 @@ class BotWorker(threading.Thread):
                 self._write_progress("dwelling", f"Đang đọc bài viết: {elapsed}/{dwell}s (cuộn chuột)")
                 if random.random() < 0.65:
                     try:
-                        active_page.mouse.wheel(0, random.randint(150, 450))
+                        active_page.evaluate(f"window.scrollBy({{ top: {random.randint(180, 420)}, behavior: 'smooth' }});")
                     except Exception:
                         pass
         except Exception:
@@ -1226,16 +1242,26 @@ class BotWorker(threading.Thread):
                             for page_num in range(1, self.max_pages + 1):
                                 self._write_progress("running", f"Đang tìm kiếm '{TARGET_DOMAIN}' trên Google (Trang {page_num})...")
 
-                                # 1. Quét ngay vị trí đầu trang (bắt ngay Top 1, 2, 3, AI Overview, Featured Snippet)
+                                # 1. Cuộn mượt nhẹ để kích hoạt Google nạp đầy đủ (lazy-load) toàn bộ 10 kết quả trang
+                                for _ in range(2):
+                                    try:
+                                        page.evaluate("window.scrollBy({ top: 550, behavior: 'smooth' });")
+                                    except Exception:
+                                        pass
+                                    human_sleep(0.4, 0.7)
+
+                                # Quét bắt ngay các kết quả
                                 serp = self._extract_serp_results(page)
                                 hwood_hits = self._find_hwood_results(serp)
 
-                                # 2. Nếu chưa thấy ở ngay đầu trang (Top 1, 2, 3):
-                                # Cuộn nhẹ xuống từ từ như người thật để quét tiếp các kết quả bên dưới
+                                # 2. Nếu chưa thấy ở nửa trên: Cuộn tiếp xuống sâu hơn để tìm tiếp
                                 if not hwood_hits:
-                                    for _ in range(4):
-                                        page.mouse.wheel(0, random.randint(350, 500))
-                                        human_sleep(0.7, 1.3)
+                                    for _ in range(3):
+                                        try:
+                                            page.evaluate("window.scrollBy({ top: 750, behavior: 'smooth' });")
+                                        except Exception:
+                                            pass
+                                        human_sleep(0.5, 0.9)
                                         serp = self._extract_serp_results(page)
                                         hwood_hits = self._find_hwood_results(serp)
                                         if hwood_hits:
@@ -1407,9 +1433,14 @@ def chay_5_bot(
     print("=" * 60)
     print(f"🤖 KHỞI CHẠY {len(bots)} BOT | {len(unique_kw)} TỪ KHÓA | Quét tới trang {max_pages}")
     print("=" * 60)
+    has_empty_proxy = any(not (b.config.proxy_server or "").strip() for b in bots)
     for b in bots:
         b.start()
-        human_sleep(0.5, 1.5)  # Khởi động lệch pha, không mở 5 cửa sổ cùng lúc
+        # Khởi động lệch pha: nếu dùng chung IP máy thật thì giãn cách 2.5 - 4s để tránh Google quét cùng lúc
+        if has_empty_proxy:
+            human_sleep(2.0, 3.5)
+        else:
+            human_sleep(0.8, 1.6)
 
     return store.all(), bots
 
