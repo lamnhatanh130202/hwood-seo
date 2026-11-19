@@ -1,47 +1,47 @@
 {
   "_summary": {
     "total_keywords": 15,
-    "started_at": "08:59:52",
+    "started_at": "09:16:45",
     "status": "finished"
   },
   "bot_01": {
     "name": "Bot 1",
     "status": "done",
-    "detail": "Hoàn thành 3 từ khóa",
-    "processed": 3,
-    "found": 2,
-    "updated_at": "2026-11-19T09:03:58.338451"
+    "detail": "Hoàn thành 4 từ khóa",
+    "processed": 4,
+    "found": 0,
+    "updated_at": "2026-11-19T09:19:18.077407"
   },
   "bot_02": {
     "name": "Bot 2",
     "status": "done",
     "detail": "Hoàn thành 3 từ khóa",
     "processed": 3,
-    "found": 2,
-    "updated_at": "2026-11-19T09:03:45.089736"
+    "found": 0,
+    "updated_at": "2026-11-19T09:19:10.901058"
   },
   "bot_03": {
     "name": "Bot 3",
     "status": "done",
     "detail": "Hoàn thành 2 từ khóa",
     "processed": 2,
-    "found": 2,
-    "updated_at": "2026-11-19T09:03:27.701644"
+    "found": 0,
+    "updated_at": "2026-11-19T09:19:09.927110"
   },
   "bot_04": {
     "name": "Bot 4",
     "status": "done",
-    "detail": "Hoàn thành 4 từ khóa",
-    "processed": 4,
-    "found": 3,
-    "updated_at": "2026-11-19T09:04:11.900875"
+    "detail": "Hoàn thành 3 từ khóa",
+    "processed": 3,
+    "found": 0,
+    "updated_at": "2026-11-19T09:19:09.972445"
   },
   "bot_05": {
     "name": "Bot 5",
     "status": "done",
     "detail": "Hoàn thành 3 từ khóa",
     "processed": 3,
-    "found": 3,
-    "updated_at": "2026-11-19T09:04:49.810104"
+    "found": 0,
+    "updated_at": "2026-11-19T09:19:22.844188"
   }
 }
