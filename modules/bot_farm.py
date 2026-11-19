@@ -93,6 +93,26 @@ def xoa_live_logs():
 # Miền mục tiêu cần tìm trong kết quả Google
 TARGET_DOMAIN = "hwood.vn"
 
+def is_strict_hwood_url(url: str) -> bool:
+    """
+    Kiểm tra nghiêm ngặt 100%: URL phải thực sự thuộc domain chính hãng hwood.vn.
+    Loại trừ tuyệt đối tất cả đại lý (hoangangroup.com,...), sàn TMĐT, đối thủ (kosmos, haroma,...)
+    và các URL nội bộ của Google.
+    """
+    if not url:
+        return False
+    try:
+        from urllib.parse import urlparse
+        u = str(url).strip()
+        if not u.startswith(("http://", "https://")):
+            u = "https://" + u.lstrip("/")
+        parsed = urlparse(u)
+        host = (parsed.hostname or "").lower()
+        return host == "hwood.vn" or host == "www.hwood.vn" or host.endswith(".hwood.vn")
+    except Exception:
+        clean = str(url).lower().replace("https://", "").replace("http://", "").replace("www.", "")
+        return clean.startswith("hwood.vn/") or clean == "hwood.vn"
+
 # Pool User-Agent thật (Chrome trên Windows) - mỗi bot chọn ngẫu nhiên 1 cái
 USER_AGENTS = [
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
@@ -372,10 +392,32 @@ class BotWorker(threading.Thread):
                         } catch(e) {}
                     }
                 }
-                // 2. Giải mã các tham số chuyển hướng thông thường của Google (/url?q= hoặc /url?url=)
-                const m = u.match(/[?&](?:url|q|u|imgrefurl|source_url|ru)=([^&#]+)/i);
-                if (m && m[1]) {
-                    try { u = decodeURIComponent(m[1]); } catch(e) { u = m[1]; }
+                // 2. Tìm tham số chứa URL đích thực sự từ Google redirect (/url?)
+                if (u.includes('/url?') || u.includes('/url/')) {
+                    try {
+                        let parsedGoogle = new URL(u.startsWith('http') ? u : ('https://www.google.com' + (u.startsWith('/') ? '' : '/') + u));
+                        let targetParam = parsedGoogle.searchParams.get('url') 
+                                       || parsedGoogle.searchParams.get('ru') 
+                                       || parsedGoogle.searchParams.get('imgrefurl') 
+                                       || parsedGoogle.searchParams.get('source_url');
+                        if (!targetParam) {
+                            let qVal = parsedGoogle.searchParams.get('q');
+                            if (qVal && (qVal.startsWith('http://') || qVal.startsWith('https://'))) {
+                                targetParam = qVal;
+                            }
+                        }
+                        if (targetParam) u = targetParam;
+                    } catch(e) {
+                        const mUrl = u.match(/[?&](?:url|ru|imgrefurl)=([^&#]+)/i);
+                        if (mUrl && mUrl[1]) {
+                            try { u = decodeURIComponent(mUrl[1]); } catch(err) { u = mUrl[1]; }
+                        } else {
+                            const mQ = u.match(/[?&]q=(https?%3A%2F%2F[^&#]+|https?:\/\/[^&#]+)/i);
+                            if (mQ && mQ[1]) {
+                                try { u = decodeURIComponent(mQ[1]); } catch(err) { u = mQ[1]; }
+                            }
+                        }
+                    }
                 }
                 if (u.startsWith('//')) u = 'https:' + u;
                 return u.split('?')[0].split('#')[0].replace(/\/$/, '');
@@ -404,15 +446,29 @@ class BotWorker(threading.Thread):
                 const citeText = (citeEl ? citeEl.innerText : '').toLowerCase();
                 const imgAlt = Array.from(card.querySelectorAll('img')).map(i => (i.alt || i.title || '').toLowerCase()).join(' ');
 
+                // HÀM KIỂM TRA DOMAIN HWOOD CHÍNH HÃNG 100%:
+                function isStrictHwood(u) {
+                    if (!u) return false;
+                    try {
+                        let full = u.startsWith('http') ? u : ('https://' + u.replace(/^\/+/, ''));
+                        let parsed = new URL(full, 'https://www.google.com');
+                        let h = parsed.hostname.toLowerCase();
+                        return h === 'hwood.vn' || h === 'www.hwood.vn' || h.endsWith('.hwood.vn');
+                    } catch(e) {
+                        let clean = u.toLowerCase().replace(/^https?:\/\//, '').replace(/^www\./, '');
+                        return clean.startsWith('hwood.vn/') || clean === 'hwood.vn';
+                    }
+                }
+
                 // Hàm lọc URL HWOOD chuẩn: phân tách bài viết thật vs trang chủ
                 function isRealHwoodArticle(u) {
-                    if (!u || !u.toLowerCase().includes('hwood.vn')) return false;
+                    if (!isStrictHwood(u)) return false;
                     const clean = u.replace(/^https?:\/\//i, '').replace(/^www\./i, '').split('?')[0].split('#')[0].replace(/\/+$/, '');
                     return clean !== 'hwood.vn' && clean.length > 'hwood.vn'.length;
                 }
 
                 function isBareHwoodHome(u) {
-                    if (!u || !u.toLowerCase().includes('hwood.vn')) return false;
+                    if (!isStrictHwood(u)) return false;
                     const clean = u.replace(/^https?:\/\//i, '').replace(/^www\./i, '').split('?')[0].split('#')[0].replace(/\/+$/, '');
                     return clean === 'hwood.vn';
                 }
@@ -433,7 +489,7 @@ class BotWorker(threading.Thread):
                     }
                 }
 
-                if (headingUrl && headingUrl.toLowerCase().includes('hwood.vn')) {
+                if (headingUrl && isStrictHwood(headingUrl)) {
                     if (isRealHwoodArticle(headingUrl)) {
                         articleUrl = headingUrl;
                         articleAnchor = headingA;
@@ -443,10 +499,10 @@ class BotWorker(threading.Thread):
                     }
                 }
 
-                // 2. Quét qua các link khác nếu tiêu đề h3 chưa có link trực tiếp
-                if (!articleUrl && !homeUrl) {
-                    for (let a of links) {
-                        let u = cleanGoogleUrl(a.href || a.getAttribute('href') || a.getAttribute('data-url') || '');
+                // 2. Quét qua các link khác trong card nếu tiêu đề h3 chưa có link trực tiếp
+                for (let a of links) {
+                    let u = cleanGoogleUrl(a.href || a.getAttribute('href') || a.getAttribute('data-url') || '');
+                    if (isStrictHwood(u)) {
                         if (isRealHwoodArticle(u)) {
                             if (!articleUrl) {
                                 articleUrl = u;
@@ -461,54 +517,41 @@ class BotWorker(threading.Thread):
                     }
                 }
 
-                // Nhận diện HWOOD toàn diện: qua link, thẻ <cite>, tiêu đề/mô tả hoặc logo
-                const isCardHwood = Boolean(articleUrl || homeUrl)
-                    || citeText.includes('hwood.vn')
-                    || cardText.includes('hwood.vn')
-                    || cardText.includes('hwood việt nam')
-                    || cardText.includes('hwood')
-                    || imgAlt.includes('hwood');
+                // 3. Kiểm tra thẻ <cite> hiển thị breadcrumb Google
+                let citeClean = citeText.replace(/^https?:\/\//, '').replace(/^www\./, '').trim();
+                let citeIsHwood = citeClean.startsWith('hwood.vn/') || citeClean.startsWith('hwood.vn ') || citeClean === 'hwood.vn';
+
+                // CHỈ XÁC NHẬN LÀ HWOOD KHI CÓ LINK THẬT ĐẾN hwood.vn HOẶC CITE CHÍNH XÁC hwood.vn
+                // TUYỆT ĐỐI CẤM DÙNG cardText CHỨA 'hwood' VÌ ĐẠI LÝ (NGÂN HOÀNG AN,...) CŨNG CHỨA TỪ KHÓA NÀY!
+                const isCardHwood = Boolean(articleUrl || homeUrl) || citeIsHwood;
 
                 let bestLink = null;
                 let bestUrl = '';
                 let bestIsHwood = false;
 
                 if (isCardHwood) {
-                    bestIsHwood = true;
                     if (articleUrl) {
                         bestUrl = articleUrl;
                         bestLink = articleAnchor || (headingEl ? (headingEl.closest('a') || headingEl) : links[0]);
+                        bestIsHwood = true;
                     } else if (homeUrl) {
                         bestUrl = homeUrl;
                         bestLink = homeAnchor || links[0];
-                    } else {
-                        // Thử quét lại toàn bộ link thẻ a
-                        for (let a of links) {
-                            let u = cleanGoogleUrl(a.href || a.getAttribute('href') || a.getAttribute('data-url') || '');
-                            if (u && u.toLowerCase().includes('hwood.vn')) {
-                                if (isRealHwoodArticle(u)) {
-                                    bestUrl = u;
-                                    bestLink = a;
-                                    break;
-                                } else if (!bestUrl && isBareHwoodHome(u)) {
-                                    bestUrl = 'https://hwood.vn';
-                                    bestLink = a;
-                                }
-                            }
+                        bestIsHwood = true;
+                    } else if (citeIsHwood) {
+                        let citeMatch = citeClean.match(/^hwood\.vn(?:\s*[›>]\s*([a-z0-9-]+))?/i);
+                        if (citeMatch && citeMatch[1] && !['website', 'kiểm', 'duyệt', 'kiem-duyet'].some(x => citeMatch[1].includes(x))) {
+                            bestUrl = 'https://hwood.vn/' + citeMatch[1] + '/';
+                        } else {
+                            bestUrl = 'https://hwood.vn';
                         }
-                        // Nếu Google dùng mã hóa link (/goto?url=CAES...) nhưng thẻ chắc chắn là HWOOD:
-                        // Tuyệt đối KHÔNG bỏ qua! Gán bestLink vào tiêu đề bài viết và lấy URL từ cite hoặc fallback
-                        if (!bestUrl) {
-                            bestLink = (headingEl ? (headingEl.closest('a') || headingEl) : null) || links[0];
-                            let citeMatch = citeText.match(/hwood\.vn(?:\s*[›>]\s*([a-z0-9-]+))?/i);
-                            if (citeMatch && citeMatch[1] && !['website', 'kiểm', 'duyệt', 'kiem-duyet'].some(x => citeMatch[1].includes(x))) {
-                                bestUrl = 'https://hwood.vn/' + citeMatch[1] + '/';
-                            } else {
-                                bestUrl = 'https://hwood.vn';
-                            }
-                        }
+                        bestLink = (headingEl ? (headingEl.closest('a') || headingEl) : null) || links[0];
+                        bestIsHwood = true;
                     }
-                } else {
+                }
+
+                // Nếu không phải HWOOD (là trang đối thủ, đại lý, marketplace khác):
+                if (!bestIsHwood) {
                     for (let a of links) {
                         let u = cleanGoogleUrl(a.href || a.getAttribute('href') || '');
                         if (!u || !u.startsWith('http')) continue;
@@ -565,15 +608,18 @@ class BotWorker(threading.Thread):
                 });
             });
 
-            // 3. Quét dự phòng toàn bộ các liên kết hwood.vn còn lại trên trang (đảm bảo không bao giờ bỏ sót)
+            // 3. Quét dự phòng toàn bộ các liên kết hwood.vn còn lại trên trang (đảm bảo không bao giờ bỏ sót bài viết)
             document.querySelectorAll('a').forEach(a => {
                 let u = cleanGoogleUrl(a.href || a.getAttribute('href') || a.getAttribute('data-url') || '');
-                if (!u.toLowerCase().includes('hwood.vn')) return;
+                // CHỈ CHẤP NHẬN DOMAIN HWOOD CHÍNH HÃNG 100%, LOẠI BỎ TOÀN BỘ ĐẠI LÝ VÀ ĐỐI THỦ
+                if (!isStrictHwood(u)) return;
                 if (seenUrls.has(u)) return;
                 seenUrls.add(u);
                 pos += 1;
-                let title = (a.innerText || a.getAttribute('aria-label') || u).trim().split('\n')[0];
+                let headingInside = a.querySelector('h3, [role="heading"]');
+                let title = (headingInside ? headingInside.innerText : (a.innerText || a.getAttribute('aria-label') || u)).trim().split('\n')[0];
                 a.setAttribute('data-bot-fallback-link', 'true');
+                a.setAttribute('data-bot-hwood-target', 'true');
                 a.setAttribute('data-bot-url', u);
                 results.push({
                     position: pos,
@@ -594,8 +640,19 @@ class BotWorker(threading.Thread):
             return []
 
     def _find_hwood_results(self, serp: List[Dict]) -> List[Dict]:
-        """Lọc và ưu tiên sắp xếp: Nhận mọi kết quả được xác định là HWOOD."""
-        hwood = [r for r in serp if r.get("is_hwood") or TARGET_DOMAIN in r.get("url", "").lower()]
+        """
+        Lọc và ưu tiên sắp xếp: CHỈ nhận các kết quả có domain thực sự là hwood.vn (100% chính hãng).
+        Loại bỏ tuyệt đối tất cả các trang web đại lý (hoangangroup.com,...), sàn TMĐT hoặc đối thủ.
+        """
+        hwood = []
+        for r in serp:
+            url = r.get("url", "")
+            if is_strict_hwood_url(url):
+                r["is_hwood"] = True
+                hwood.append(r)
+            else:
+                r["is_hwood"] = False
+
         if not hwood:
             return []
 
@@ -789,9 +846,10 @@ class BotWorker(threading.Thread):
         if not target_url.startswith("http"):
             target_url = f"https://hwood.vn/{target_url.lstrip('/')}"
         
-        # Đảm bảo target_url thuộc domain hwood.vn và không dính badge "kiểm duyệt" của Google
-        if TARGET_DOMAIN not in target_url.lower() or any(x in target_url.lower() for x in ["kiểm", "duyệt", "kiem-duyet", "kiemduyet"]):
-            target_url = "https://hwood.vn"
+        # BẢO VỆ CẤP 1: Xác thực nghiêm ngặt 100% domain hwood.vn
+        if not is_strict_hwood_url(target_url):
+            self._log(f"🛡️ Từ chối truy cập URL không thuộc hwood.vn: {target_url[:60]}")
+            return
 
         clean_target = target_url.replace("https://", "").replace("http://", "").split("?")[0].rstrip("/")
         
@@ -815,19 +873,19 @@ class BotWorker(threading.Thread):
             except Exception:
                 pass
 
-            # 2. Tìm phần tử HWOOD trên DOM theo độ ưu tiên tuyệt đối:
+            # 2. Tìm phần tử HWOOD trên DOM theo độ ưu tiên tuyệt đối (CHỈ CHỌN PHẦN TỬ THỰC SỰ TRỎ ĐẾN HWOOD):
             target_locator = None
-            candidate_selectors = []
+            candidate_selectors = [
+                f"a[data-bot-url='{target_url}']",
+                f"h3[data-bot-url='{target_url}']",
+            ]
 
-            # Ưu tiên số 1: Tìm chính xác phần tử có slug hoặc data-bot-url của bài viết
             if slug:
                 candidate_selectors.extend([
                     f"a[data-bot-url*='{slug}']",
                     f"h3[data-bot-url*='{slug}']",
                     f"a[href*='{slug}']:has(h3)",
                     f"h3:has(a[href*='{slug}'])",
-                    f"div.MjjYud:has(a[href*='{slug}']) h3",
-                    f"div.g:has(a[href*='{slug}']) h3",
                     f"a[href*='{slug}']",
                 ])
             else:
@@ -835,17 +893,14 @@ class BotWorker(threading.Thread):
                     "a[data-bot-url='https://hwood.vn']",
                     "h3[data-bot-url='https://hwood.vn']",
                     "a:has(h3)[href*='hwood.vn']",
-                    "div.MjjYud:has-text('hwood.vn') a:has(h3)",
-                    "div.g:has-text('hwood.vn') a:has(h3)",
                 ])
 
-            # Ưu tiên số 2: Các thẻ đã được tag chính xác trong lượt quét
             candidate_selectors.extend([
-                f"a[data-bot-url='{target_url}']",
                 f"a[href*='{clean_target}']",
-                "[data-bot-hwood-target='true']:has(h3)",
+                "a[data-bot-hwood-target='true']",
                 "h3[data-bot-hwood-target='true']",
                 "[data-bot-hwood-target='true']",
+                "[data-bot-fallback-link='true']",
             ])
 
             for sel in candidate_selectors:
@@ -859,32 +914,39 @@ class BotWorker(threading.Thread):
 
             clicked = False
 
-            # 3. Nếu tìm thấy phần tử trên màn hình: Cuộn mượt tới, Highlight nổi bật rồi Click
+            # 3. Nếu tìm thấy phần tử: Xác thực an toàn trước khi bấm để TUYỆT ĐỐI KHÔNG CLICK NHẦM ĐỐI THỦ
+            if target_locator is not None:
+                try:
+                    # Kiểm tra thẻ a có thực sự chứa link hwood.vn hay không
+                    is_safe = page.evaluate("""(el) => {
+                        if (!el) return false;
+                        const a = el.closest('a') || el.querySelector('a') || el;
+                        let raw = a.href || a.getAttribute('href') || a.getAttribute('data-url') || a.getAttribute('data-bot-url') || '';
+                        let u = raw.toLowerCase();
+                        if (u.includes('hwood.vn')) return true;
+                        if (a.getAttribute('data-bot-hwood-target') === 'true' || a.getAttribute('data-bot-fallback-link') === 'true') return true;
+                        return false;
+                    }""", target_locator.element_handle())
+
+                    if not is_safe:
+                        self._log(f"🛡️ Phần tử không chứa domain hwood.vn, ngăn click nhầm vào đối thủ/đại lý!")
+                        target_locator = None
+                except Exception:
+                    pass
+
             if target_locator is not None:
                 try:
                     target_locator.scroll_into_view_if_needed(timeout=2500)
 
-                    # Tự động đọc URL thực tế từ thẻ liên kết chuẩn bị click để tránh bị kẹt ở trang chủ
+                    # Tự động đọc URL thực tế từ thẻ liên kết chuẩn bị click
                     try:
                         href_attr = page.evaluate("""(el) => {
                             if (!el) return '';
                             const a = el.closest('a') || el.querySelector('a') || el;
                             let raw = a.href || a.getAttribute('href') || a.getAttribute('data-url') || a.getAttribute('data-bot-url') || '';
-                            if (raw.includes('/goto?') || raw.includes('/goto/')) {
-                                const gm = raw.match(/[?&]url=([A-Za-z0-9_-]+)/i);
-                                if (gm && gm[1]) {
-                                    try {
-                                        let b64 = gm[1].replace(/-/g, '+').replace(/_/g, '/');
-                                        while (b64.length % 4 !== 0) b64 += '=';
-                                        const decoded = atob(b64);
-                                        const urlMatch = decoded.match(/https?:\\/\\/[^\\s\\x00-\\x1f\\x7f-\\xff]+/i);
-                                        if (urlMatch) return urlMatch[0];
-                                    } catch(e) {}
-                                }
-                            }
                             return raw;
                         }""", target_locator.element_handle())
-                        if href_attr and TARGET_DOMAIN in href_attr.lower():
+                        if href_attr and "hwood.vn" in href_attr.lower():
                             clean_href = href_attr.split('?')[0].split('#')[0].rstrip('/')
                             parsed_h = urlparse(clean_href)
                             if parsed_h.path.strip('/'):
@@ -924,7 +986,6 @@ class BotWorker(threading.Thread):
                             clicked = False
 
                     # Chờ hoàn tất chuyển hướng sang domain hwood.vn
-                    # Sử dụng wait_for_timeout để Playwright CDP event loop cập nhật URL và tab mới kịp thời
                     start_wait = time.time()
                     while time.time() - start_wait < 15.0:
                         try:
@@ -933,8 +994,8 @@ class BotWorker(threading.Thread):
                             time.sleep(0.4)
 
                         for p in page.context.pages:
-                            p_u = (p.url or "").lower()
-                            if TARGET_DOMAIN in p_u and not any(comp in p_u for comp in ["kosmos", "haroma", "anpro", "santot"]):
+                            p_u = p.url or ""
+                            if is_strict_hwood_url(p_u):
                                 active_page = p
                                 try:
                                     active_page.bring_to_front()
@@ -944,16 +1005,24 @@ class BotWorker(threading.Thread):
                                     opened_new_tab = True
                                 break
 
-                        curr_check = (active_page.url or "").lower()
-                        if TARGET_DOMAIN in curr_check:
+                        if is_strict_hwood_url(active_page.url or ""):
                             break
 
-                    curr_u = (active_page.url or "").lower()
-                    if TARGET_DOMAIN in curr_u:
+                    if is_strict_hwood_url(active_page.url or ""):
                         self._log(f"🎉 ĐÃ CLICK THÀNH CÔNG VÀO HWOOD TỪ GOOGLE: {active_page.url[:60]}")
                 except Exception as e_click:
                     self._log(f"   ⚠️ Thao tác click DOM ({str(e_click)[:40]}), chuyển sang mở trực tiếp...")
                     clicked = False
+
+            # BẢO VỆ CHỐNG NHẦM TRANG 100%: Đóng ngay bất kỳ tab nào không thuộc hwood.vn và Google
+            for p in list(page.context.pages):
+                p_url = p.url or ""
+                if not is_strict_hwood_url(p_url) and not any(g in p_url.lower() for g in ["google.", "gstatic."]):
+                    try:
+                        self._log(f"🛡️ Đóng ngay tab bên ngoài không thuộc hwood.vn: {p_url[:50]}")
+                        p.close()
+                    except Exception:
+                        pass
 
             # 4. Fallback an toàn & Đảm bảo giữ nguyên bài viết (TUYỆT ĐỐI CẤM REDIRECT RA TRANG CHỦ)
             try:
@@ -961,38 +1030,20 @@ class BotWorker(threading.Thread):
             except Exception:
                 pass
 
-            curr_url = (active_page.url or "").lower()
-
-            # BẢO VỆ CHẶN ĐỐI THỦ: Nếu mở nhầm trang khác (kosmos, haroma, anpro,...) -> đóng ngay lập tức!
-            if any(comp in curr_url for comp in ["kosmos", "haroma", "anpro", "santot"]):
-                self._log(f"⛔ Phát hiện mở nhầm trang đối thủ ({curr_url[:35]}), thoát ngay lập tức!")
+            curr_url = active_page.url or ""
+            if is_strict_hwood_url(curr_url):
+                self._log(f"✅ Đang đọc đúng bài viết mục tiêu: {active_page.url[:60]}")
+            else:
+                self._log(f"   ℹ️ Đang vào trực tiếp bài viết HWOOD: {target_url[:60]}")
                 try:
-                    if opened_new_tab and active_page != page:
-                        active_page.close()
-                        page.bring_to_front()
+                    active_page.goto(target_url, timeout=25000)
+                    active_page.wait_for_load_state("domcontentloaded", timeout=15000)
                 except Exception:
                     pass
-                return
-
-            if TARGET_DOMAIN in curr_url:
-                # ĐÃ Ở TRONG HWOOD (BÀI VIẾT, SẢN PHẨM HOẶC TRANG MỤC TIÊU):
-                # TUYỆT ĐỐI GIỮ NGUYÊN BÀI VIẾT, CẤM GỌI GOTO() HOẶC CHUYỂN HƯỚNG RA TRANG CHỦ!
-                self._log(f"✅ Đang đọc đúng bài viết mục tiêu: {active_page.url[:60]}")
-            elif TARGET_DOMAIN not in curr_url:
-                # Nếu sau 15s vẫn còn kẹt ở Google do click trượt -> mở trực tiếp target_url
-                if TARGET_DOMAIN in target_url.lower():
-                    self._log(f"   ℹ️ Đang vào trực tiếp bài viết HWOOD: {target_url[:60]}")
-                    try:
-                        active_page.goto(target_url, timeout=25000)
-                        active_page.wait_for_load_state("domcontentloaded", timeout=15000)
-                    except Exception:
-                        pass
-                else:
-                    return
 
         except Exception as e_visit:
             self._log(f"   ❌ Lỗi mở trang hwood: {str(e_visit)[:80]}")
-            if TARGET_DOMAIN not in (active_page.url or "").lower():
+            if not is_strict_hwood_url(active_page.url or ""):
                 try:
                     active_page.goto(target_url, timeout=30000)
                 except Exception:
@@ -1037,10 +1088,14 @@ class BotWorker(threading.Thread):
 
     def _click_zalo_conversion(self, active_page):
         """
-        Tìm và tương tác nút Zalo OA nếu có trên trang (chỉ bấm nếu mở tab mới hoặc popup,
+        Tìm và tương tác nút Zalo OA nếu có trên trang (chỉ bấm nếu trang hiện tại thuộc hwood.vn,
         tuyệt đối không điều hướng active_page ra khỏi bài viết đang đọc).
         """
         try:
+            if not is_strict_hwood_url(active_page.url or ""):
+                self._log("🛡️ Không phải trang hwood.vn, hủy tương tác Zalo!")
+                return
+
             self._log("💬 [ZALO TRAFFIC] Đang tìm nút liên hệ Zalo OA...")
             # Chỉ tìm các link chứa zalo.me hoặc oa.zalo.me thật, tuyệt đối không bấm link nội bộ
             cand_zalo = active_page.locator("a[href*='zalo.me'], a[href*='oa.zalo.me']").first
@@ -1057,17 +1112,20 @@ class BotWorker(threading.Thread):
                     prev_tabs = len(active_page.context.pages)
                     cand_zalo.click(timeout=2500)
                     human_sleep(2.0, 3.5)
-                    # Đóng tab zalo mới nếu vừa mở ra
-                    if len(active_page.context.pages) > prev_tabs:
-                        for p in active_page.context.pages:
-                            if p != active_page and "zalo" in (p.url or "").lower():
-                                try:
-                                    p.close()
-                                    active_page.bring_to_front()
-                                except Exception:
-                                    pass
-                                break
-                    self._log("   🎉 Đã tương tác Zalo OA thành công mà không rời khỏi bài viết!")
+
+                    # Tự động đóng tab Zalo mới mở sau khi gửi tương tác để trả lại không gian cho người dùng
+                    for p in list(active_page.context.pages):
+                        p_u = (p.url or "").lower()
+                        if p != active_page and ("zalo" in p_u or "chat.zalo.me" in p_u):
+                            try:
+                                p.close()
+                            except Exception:
+                                pass
+                    try:
+                        active_page.bring_to_front()
+                    except Exception:
+                        pass
+                    self._log("   🎉 Đã tương tác Zalo OA thành công và đóng tab phụ an toàn!")
             else:
                 self._log("   ℹ️ Trang không có nút Zalo OA trực tiếp, hoàn tất đọc bài tự nhiên.")
         except Exception as e_z:
@@ -1260,25 +1318,40 @@ class BotWorker(threading.Thread):
                                     self._log(f"   ✅ Trang {page_num}: thấy {len(hwood_hits)} kết quả hwood.vn")
                                     break
 
-                                # Nếu chưa thấy: cuộn thêm hoặc bấm chuyển trang nếu có nút Next
+                                # Nếu chưa thấy: cuộn thêm hoặc chuyển sang trang tiếp theo của Google
                                 if page_num < self.max_pages:
+                                    next_page = page_num + 1
+                                    self._log(f"   ➡️ Không thấy ở trang {page_num}, chuyển sang trang {next_page}...")
+                                    navigated_next = False
+                                    
+                                    # Phương án 1: Tìm và click nút Next / "Xem thêm kết quả"
                                     try:
-                                        page.mouse.wheel(0, 800)
+                                        page.evaluate("window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'});")
                                         human_sleep(1.0, 1.8)
-                                        next_btn = page.locator("#pnnext, a#pnnext, a[aria-label*='Next'], a[aria-label*='Tiếp'], [jsname='TeSSvd']")
-                                        if next_btn.count() > 0 and next_btn.first.is_visible():
-                                            next_btn.first.scroll_into_view_if_needed(timeout=3000)
-                                            human_sleep(0.8, 1.5)
-                                            next_btn.first.click(timeout=5000)
+                                        next_btn = page.locator("#pnnext, a#pnnext, a[aria-label*='Next'], a[aria-label*='Tiếp'], a[aria-label*='Trang tiếp'], button:has-text('Xem thêm kết quả'), a:has-text('Xem thêm kết quả'), [jsname='tJHJ8b'], [jsname='TeSSvd']").first
+                                        if next_btn.count() > 0 and next_btn.is_visible():
+                                            next_btn.scroll_into_view_if_needed(timeout=2500)
+                                            human_sleep(0.5, 1.0)
+                                            next_btn.click(timeout=4000)
                                             human_sleep(2.0, 3.5)
-                                            if not self._handle_captcha_if_needed(page, keyword):
-                                                break
-                                        else:
-                                            # Hỗ trợ giao diện cuộn vô tận của Google
-                                            page.mouse.wheel(0, 1000)
-                                            human_sleep(1.5, 2.5)
+                                            if not self._is_blocked(page):
+                                                navigated_next = True
                                     except Exception:
-                                        pass
+                                        navigated_next = False
+
+                                    # Phương án 2: Dùng tham số chuẩn start= của Google (100% chuẩn xác không phụ thuộc giao diện)
+                                    if not navigated_next:
+                                        start_idx = page_num * 10
+                                        next_url = f"https://www.google.com.vn/search?q={urllib.parse.quote_plus(keyword)}&start={start_idx}&hl=vi&gl=vn"
+                                        try:
+                                            page.goto(next_url, timeout=25000)
+                                            page.wait_for_load_state("domcontentloaded", timeout=15000)
+                                            human_sleep(1.5, 2.5)
+                                        except Exception:
+                                            pass
+
+                                    if not self._handle_captcha_if_needed(page, keyword):
+                                        break
 
                             record["ket_qua_hwood"] = all_hwood
                             if all_hwood:
