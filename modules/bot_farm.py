@@ -455,60 +455,55 @@ class BotWorker(threading.Thread):
                 if (seenElements.has(heading)) return;
                 seenElements.add(heading);
 
-                // Tìm thẻ liên kết a gắn liền trực tiếp với tiêu đề này (tuyệt đối không lấy nhầm a của kết quả khác)
-                const headingA = heading.closest('a') || (heading.parentElement ? heading.parentElement.querySelector('a') : null) || heading.querySelector('a');
-                
-                // Tìm cite thuộc riêng kết quả này
-                let citeEl = null;
-                if (headingA) {
-                    citeEl = headingA.querySelector('cite') || (headingA.parentElement ? headingA.parentElement.querySelector('cite') : null);
-                }
-                if (!citeEl && heading.parentElement) {
-                    citeEl = heading.parentElement.querySelector('cite');
-                }
-                let citeText = (citeEl ? citeEl.innerText : '').toLowerCase();
-                let citeIsHwood = citeText.includes('hwood.vn');
+                const card = heading.closest('div.MjjYud, div.g, div.tF2Cxc, [data-attrid*="overview"], .N54PNb, .c2xzTb, .xpdopen') || heading.parentElement;
+                const headingA = heading.closest('a') || (heading.parentElement ? heading.parentElement.querySelector('a') : null);
 
-                let linkUrl = '';
-                if (headingA) {
-                    let rawA = headingA.href || headingA.getAttribute('href') || headingA.getAttribute('data-url') || headingA.getAttribute('ping') || '';
-                    linkUrl = cleanGoogleUrl(rawA);
+                // Thu thập tất cả các thẻ a trong card/heading để bóc tách liên kết
+                let allA = [];
+                if (headingA) allA.push(headingA);
+                if (card) {
+                    card.querySelectorAll('a').forEach(a => {
+                        if (!allA.includes(a)) allA.push(a);
+                    });
                 }
 
                 let bestUrl = '';
+                let bestA = null;
                 let isHwood = false;
 
-                if (linkUrl && isStrictHwood(linkUrl)) {
-                    bestUrl = linkUrl;
-                    isHwood = true;
-                } else if (citeIsHwood) {
-                    // Nếu thẻ cite ghi rõ hwood.vn, tìm link hwood.vn ngay trong cụm của heading này
-                    let directParent = (headingA ? headingA.parentElement : heading.parentElement);
-                    if (directParent) {
-                        for (let a of directParent.querySelectorAll('a')) {
-                            let u = cleanGoogleUrl(a.href || a.getAttribute('href') || a.getAttribute('data-url') || '');
-                            if (isStrictHwood(u) && u.replace(/^https?:\/\//i, '').replace(/^www\./i, '').replace(/\/+$/, '') !== 'hwood.vn') {
-                                bestUrl = u;
-                                break;
-                            }
-                        }
+                // Tìm tất cả các ứng viên domain hwood.vn trong card này
+                let hwoodCandidates = [];
+                for (let a of allA) {
+                    let raw = a.href || a.getAttribute('href') || a.getAttribute('data-url') || a.getAttribute('ping') || '';
+                    let u = cleanGoogleUrl(raw);
+                    if (isStrictHwood(u)) {
+                        let path = '';
+                        try {
+                            path = new URL(u).pathname.replace(/^\/+/, '').replace(/\/+$/, '');
+                        } catch(e) {}
+                        hwoodCandidates.push({ a: a, url: u, path: path });
                     }
-                    if (!bestUrl && isStrictHwood(linkUrl)) {
-                        bestUrl = linkUrl;
-                    }
-                    if (!bestUrl) {
-                        bestUrl = 'https://hwood.vn';
+                }
+
+                if (hwoodCandidates.length > 0) {
+                    // ƯU TIÊN TUYỆT ĐỐI LINK BÀI VIẾT CHI TIẾT (path != '') TRƯỚC TRANG CHỦ (path == '')
+                    let deepArticles = hwoodCandidates.filter(x => x.path && x.path.length > 1);
+                    if (deepArticles.length > 0) {
+                        bestUrl = deepArticles[0].url;
+                        bestA = deepArticles[0].a;
+                    } else {
+                        bestUrl = hwoodCandidates[0].url;
+                        bestA = hwoodCandidates[0].a;
                     }
                     isHwood = true;
                 } else {
-                    if (linkUrl && linkUrl.startsWith('http') && !ignoreHosts.some(x => linkUrl.includes(x))) {
-                        bestUrl = linkUrl;
+                    // Không phải HWOOD
+                    let raw = headingA ? (headingA.href || headingA.getAttribute('href') || '') : '';
+                    let u = cleanGoogleUrl(raw);
+                    if (u && u.startsWith('http') && !ignoreHosts.some(x => u.includes(x))) {
+                        bestUrl = u;
                     }
-                    isHwood = false;
-                }
-
-                // NGUYÊN TẮC BẢO VỆ TUYỆT ĐỐI: Bất kể thế nào, nếu bestUrl không phải hwood.vn thì isHwood PHẢI LÀ FALSE!
-                if (!isStrictHwood(bestUrl)) {
+                    bestA = headingA;
                     isHwood = false;
                 }
 
@@ -517,7 +512,6 @@ class BotWorker(threading.Thread):
                 seenUrls.add(bestUrl);
                 pos += 1;
 
-                const card = heading.closest('div.MjjYud, div.g, div.tF2Cxc, [data-attrid*="overview"], .c2xzTb, .xpdopen') || heading.parentElement;
                 let sType = 'organic';
                 let sLabel = `Top ${pos}`;
                 if (card && (card.closest('[data-attrid*="overview"], [aria-label*="AI"]') || card.matches('[data-attrid*="overview"], [aria-label*="AI"]'))) {
@@ -528,13 +522,11 @@ class BotWorker(threading.Thread):
                     sLabel = '💎 Top 0 Featured';
                 }
 
-                // CHỈ gắn cờ target nếu thực sự là hwood.vn và link của headingA cũng dẫn tới hwood.vn
-                if (isHwood && isStrictHwood(bestUrl)) {
+                // CHỈ gắn cờ target nếu thực sự là hwood.vn
+                if (isHwood && bestA) {
                     if (card) card.setAttribute('data-bot-hwood-card', 'true');
-                    if (headingA) {
-                        headingA.setAttribute('data-bot-hwood-target', 'true');
-                        headingA.setAttribute('data-bot-url', bestUrl);
-                    }
+                    bestA.setAttribute('data-bot-hwood-link', 'true');
+                    bestA.setAttribute('data-bot-target-url', bestUrl);
                     heading.setAttribute('data-bot-hwood-target', 'true');
                     heading.setAttribute('data-bot-url', bestUrl);
                 }
@@ -817,12 +809,15 @@ class BotWorker(threading.Thread):
             # 2. Tìm phần tử HWOOD trên DOM theo độ ưu tiên tuyệt đối (CHỈ CHỌN PHẦN TỬ THỰC SỰ TRỎ ĐẾN HWOOD):
             target_locator = None
             candidate_selectors = [
+                f"a[data-bot-target-url='{target_url}']",
                 f"a[data-bot-url='{target_url}']",
                 f"h3[data-bot-url='{target_url}']",
+                "a[data-bot-hwood-link='true']",
             ]
 
             if slug:
                 candidate_selectors.extend([
+                    f"a[data-bot-target-url*='{slug}']",
                     f"a[data-bot-url*='{slug}']",
                     f"h3[data-bot-url*='{slug}']",
                     f"a[href*='hwood.vn'][href*='{slug}']",
@@ -830,6 +825,7 @@ class BotWorker(threading.Thread):
                 ])
             else:
                 candidate_selectors.extend([
+                    "a[data-bot-target-url='https://hwood.vn']",
                     "a[data-bot-url='https://hwood.vn']",
                     "h3[data-bot-url='https://hwood.vn']",
                     "a[href*='hwood.vn']:has(h3)",
@@ -860,9 +856,10 @@ class BotWorker(threading.Thread):
                     is_safe = page.evaluate("""(el) => {
                         if (!el) return false;
                         const a = el.closest('a') || el.querySelector('a') || el;
-                        let raw = a.href || a.getAttribute('href') || a.getAttribute('data-url') || a.getAttribute('data-bot-url') || '';
+                        let raw = a.href || a.getAttribute('href') || a.getAttribute('data-url') || a.getAttribute('data-bot-target-url') || a.getAttribute('data-bot-url') || '';
                         let u = raw.toLowerCase();
-                        if (!u.includes('hwood.vn')) return false;
+                        if (u.includes('hwood.vn')) return true;
+                        if (a.getAttribute('data-bot-hwood-link') === 'true' || a.getAttribute('data-bot-hwood-target') === 'true') return true;
                         // Kiểm tra không phải domain khác chứa từ khóa hwood trong slug (ví dụ: hoangangroup.com/...hwood...)
                         try {
                             let parsed = new URL(raw, 'https://www.google.com');
@@ -976,8 +973,10 @@ class BotWorker(threading.Thread):
             except Exception:
                 pass
 
-            curr_url = active_page.url or ""
-            if is_strict_hwood_url(curr_url):
+            curr_url = (active_page.url or "").rstrip("/")
+            is_bare_home = curr_url in ["https://hwood.vn", "http://hwood.vn", "https://www.hwood.vn"]
+
+            if is_strict_hwood_url(curr_url) and not (slug and is_bare_home):
                 self._log(f"✅ Đang đọc đúng bài viết mục tiêu: {active_page.url[:60]}")
             else:
                 self._log(f"   ℹ️ Đang vào trực tiếp bài viết HWOOD: {target_url[:60]}")
