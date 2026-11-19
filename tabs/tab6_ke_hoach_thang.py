@@ -217,8 +217,14 @@ def render_tab6(api_key, chon_model, ket_noi_wp, wp_site_url, royal_api_key, dan
                                     st.toast(f"🎉 Đã viết xong '{kw_bai}' và chuyển sang Tab 1!", icon="✅")
                                     st.rerun()
                                 except Exception as ex_w:
-                                    status_box.update(label=f"❌ Lỗi: {ex_w}", state="error")
-                                    st.error(f"Lỗi khi viết bài: {ex_w}")
+                                    err_str = str(ex_w)
+                                    if "402" in err_str or "insufficient_balance" in err_str.lower():
+                                        msg = "⚠️ Tài khoản DeepSeek đã hết số dư (Error 402: Insufficient Balance). Vui lòng nạp thêm tiền tại https://platform.deepseek.com hoặc đổi API Key mới!"
+                                        status_box.update(label=msg, state="error")
+                                        st.error(f"❌ **Hết số dư tài khoản DeepSeek (Error 402):** Tài khoản API của bạn đã hết tiền. Vui lòng nạp thêm tại [platform.deepseek.com](https://platform.deepseek.com) hoặc nhập API Key khác ở cột bên trái.")
+                                    else:
+                                        status_box.update(label=f"❌ Lỗi: {ex_w}", state="error")
+                                        st.error(f"Lỗi khi viết bài: {ex_w}")
 
                 with col_btn2:
                     new_status = "Đã hoàn thành" if not is_done else "Chưa viết"
