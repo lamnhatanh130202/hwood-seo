@@ -60,6 +60,10 @@ def render_tab9():
     with c_ctrl3:
         st.write("")
         if st.button("🔄 Làm mới số liệu", use_container_width=True, key="btn_refresh_full_ga4"):
+            try:
+                lay_toan_bo_du_lieu_traffic.clear()
+            except Exception:
+                pass
             st.toast("Đã cập nhật dữ liệu GA4 & Search Console mới nhất!", icon="🔄")
             st.rerun()
 
