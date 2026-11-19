@@ -376,12 +376,23 @@ class BotWorker(threading.Thread):
 
     def _extract_serp_results(self, page) -> List[Dict]:
         """Trích xuất toàn diện kết quả tìm kiếm Google: AI Overview, Featured Snippet, Cụm hình ảnh và Organic (bắt chính xác Top 1, 2, 3)."""
+        try:
+            curr_u = (page.url or "").lower()
+            if not any(g in curr_u for g in ["google.", "/search"]):
+                return []
+        except Exception:
+            return []
+
         js = r"""
         () => {
             const results = [];
             const seenUrls = new Set();
             const seenElements = new Set();
             const ignoreHosts = ['google.', 'gstatic.', 'youtube.com', 'schema.org', 'w3.org', 'support.google', 'policies.google'];
+
+            // Đảm bảo chỉ quét trên vùng kết quả tìm kiếm của Google
+            const searchContainer = document.querySelector('#search, #rso, #center_col');
+            if (!searchContainer) return [];
 
             function cleanGoogleUrl(raw) {
                 if (!raw) return '';
@@ -443,8 +454,7 @@ class BotWorker(threading.Thread):
             }
 
             // Quét trực tiếp qua tất cả các tiêu đề h3 của kết quả tìm kiếm trên Google
-            // Mỗi thẻ h3 tương ứng chính xác với 1 kết quả (Top 1, Top 2, Top 3,...)
-            const headings = Array.from(document.querySelectorAll('#search h3, #rso h3, div.g h3, div.MjjYud h3, [data-attrid*="overview"] h3, [role="heading"]'));
+            const headings = Array.from(searchContainer.querySelectorAll('h3, [role="heading"]'));
             let pos = 0;
 
             headings.forEach(heading => {
@@ -538,29 +548,6 @@ class BotWorker(threading.Thread):
                     source_type: sType,
                     source_label: sLabel,
                     is_hwood: isHwood
-                });
-            });
-
-            // 4. Quét dự phòng toàn bộ các liên kết hwood.vn còn lại trên trang (đảm bảo không bao giờ bỏ sót bất kỳ link nào)
-            document.querySelectorAll('a').forEach(a => {
-                let raw = a.href || a.getAttribute('href') || a.getAttribute('data-url') || a.getAttribute('ping') || '';
-                let u = cleanGoogleUrl(raw);
-                if (!isStrictHwood(u)) return;
-                if (seenUrls.has(u)) return;
-                seenUrls.add(u);
-                pos += 1;
-                let headingInside = a.querySelector('h3, [role="heading"]');
-                let title = (headingInside ? headingInside.innerText : (a.innerText || a.getAttribute('aria-label') || u)).trim().split('\n')[0];
-                a.setAttribute('data-bot-fallback-link', 'true');
-                a.setAttribute('data-bot-hwood-target', 'true');
-                a.setAttribute('data-bot-url', u);
-                results.push({
-                    position: pos,
-                    title: title || 'HWOOD Việt Nam',
-                    url: u,
-                    source_type: 'organic',
-                    source_label: `Top ${pos}`,
-                    is_hwood: true
                 });
             });
 
@@ -659,13 +646,13 @@ class BotWorker(threading.Thread):
             if self._is_403(page):
                 return True
             url = (page.url or "").lower()
-            if "sorry/index" in url or "google.com/sorry" in url:
+            if "sorry" in url or "recaptcha" in url:
                 return True
             title = (page.title() or "").lower()
-            if any(x in title for x in ["sorry...", "unusual traffic", "rất tiếc", "robot"]):
+            if any(x in title for x in ["sorry", "unusual traffic", "rất tiếc", "robot"]):
                 return True
-            # Chỉ kiểm tra form captcha nếu có dấu hiệu trang sorry
-            if ("sorry" in url or "sorry" in title) and page.locator("form#captcha-form, [action*='Sorry']").count() > 0:
+            # Bất kể URL nào, nếu có form captcha hoặc recaptcha xuất hiện trên DOM thì chắc chắn đang bị chặn
+            if page.locator("form#captcha-form, [action*='Sorry'], div#recaptcha, iframe[src*='recaptcha']").count() > 0:
                 return True
             return False
         except Exception:
@@ -1238,8 +1225,17 @@ class BotWorker(threading.Thread):
 
                             # Bước 2: Quét tìm kiếm trên trang kết quả Google (bắt ngay Top 1, 2, 3)
                             all_hwood = []
+                            captcha_failed = False
                             for page_num in range(1, self.max_pages + 1):
                                 self._write_progress("running", f"Đang tìm kiếm '{TARGET_DOMAIN}' trên Google (Trang {page_num})...")
+
+                                # Kiểm tra bảo vệ nếu trang bị chặn Captcha giữa chừng
+                                if self._is_blocked(page):
+                                    if not self._handle_captcha_if_needed(page, keyword):
+                                        record["trang_thai"] = "bi_chan_captcha"
+                                        self.errors.append(f"Google chặn Captcha tại '{keyword}'")
+                                        captcha_failed = True
+                                        break
 
                                 # 1. Cuộn mượt nhẹ để kích hoạt Google nạp đầy đủ (lazy-load) toàn bộ 10 kết quả trang
                                 for _ in range(2):
@@ -1251,6 +1247,16 @@ class BotWorker(threading.Thread):
 
                                 # Quét bắt ngay các kết quả
                                 serp = self._extract_serp_results(page)
+
+                                # Nếu không bắt được kết quả nào (do mạng lag hoặc vừa dính Captcha)
+                                if len(serp) == 0 and self._is_blocked(page):
+                                    if not self._handle_captcha_if_needed(page, keyword):
+                                        record["trang_thai"] = "bi_chan_captcha"
+                                        self.errors.append(f"Google chặn Captcha tại '{keyword}'")
+                                        captcha_failed = True
+                                        break
+                                    serp = self._extract_serp_results(page)
+
                                 hwood_hits = self._find_hwood_results(serp)
 
                                 # 2. Nếu chưa thấy ở nửa trên: Cuộn tiếp xuống sâu hơn để tìm tiếp
@@ -1307,6 +1313,10 @@ class BotWorker(threading.Thread):
 
                                     if not self._handle_captcha_if_needed(page, keyword):
                                         break
+
+                            if captcha_failed:
+                                self.result_store.add(record)
+                                continue
 
                             record["ket_qua_hwood"] = all_hwood
                             if all_hwood:
