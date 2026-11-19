@@ -3,37 +3,37 @@
     {
       "bot_id": "bot_01",
       "name": "Bot 1",
-      "proxy_server": "",
-      "proxy_username": "",
-      "proxy_password": ""
+      "proxy_server": "160.22.174.161:24618",
+      "proxy_username": "cLNHhR",
+      "proxy_password": "tJbThm"
     },
     {
       "bot_id": "bot_02",
       "name": "Bot 2",
-      "proxy_server": "",
-      "proxy_username": "",
-      "proxy_password": ""
+      "proxy_server": "160.187.120.113:19883",
+      "proxy_username": "cLNHhR",
+      "proxy_password": "tJbThm"
     },
     {
       "bot_id": "bot_03",
       "name": "Bot 3",
-      "proxy_server": "",
-      "proxy_username": "",
-      "proxy_password": ""
+      "proxy_server": "160.187.120.18:11298",
+      "proxy_username": "cLNHhR",
+      "proxy_password": "tJbThm"
     },
     {
       "bot_id": "bot_04",
       "name": "Bot 4",
-      "proxy_server": "",
-      "proxy_username": "",
-      "proxy_password": ""
+      "proxy_server": "203.175.96.242:31331",
+      "proxy_username": "cLNHhR",
+      "proxy_password": "tJbThm"
     },
     {
       "bot_id": "bot_05",
       "name": "Bot 5",
-      "proxy_server": "",
-      "proxy_username": "",
-      "proxy_password": ""
+      "proxy_server": "160.22.174.114:20352",
+      "proxy_username": "cLNHhR",
+      "proxy_password": "tJbThm"
     }
   ]
 }
