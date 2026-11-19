@@ -14230,5 +14230,53 @@
     "thoi_gian": "19/11/2026 10:35:55",
     "ket_qua_hwood": [],
     "trang_thai": "ngoai_top_50"
+  },
+  {
+    "tu_khoa": "trần nhựa nano giật cấp",
+    "bot_id": "bot_01",
+    "bot_name": "Bot 1",
+    "thoi_gian": "19/11/2026 10:45:08",
+    "ket_qua_hwood": [],
+    "trang_thai": "ngoai_top_50"
+  },
+  {
+    "tu_khoa": "tấm nhựa pvc vân đá tráng gương",
+    "bot_id": "bot_02",
+    "bot_name": "Bot 2",
+    "thoi_gian": "19/11/2026 10:45:09",
+    "ket_qua_hwood": [],
+    "trang_thai": "ngoai_top_50"
+  },
+  {
+    "tu_khoa": "tấm pvc vân đá",
+    "bot_id": "bot_04",
+    "bot_name": "Bot 4",
+    "thoi_gian": "19/11/2026 10:45:12",
+    "ket_qua_hwood": [],
+    "trang_thai": "ngoai_top_50"
+  },
+  {
+    "tu_khoa": "tấm nhựa ốp tường chống ẩm",
+    "bot_id": "bot_03",
+    "bot_name": "Bot 3",
+    "thoi_gian": "19/11/2026 10:45:10",
+    "ket_qua_hwood": [],
+    "trang_thai": "ngoai_top_50"
+  },
+  {
+    "tu_khoa": "báo giá tấm pvc vân đá",
+    "bot_id": "bot_05",
+    "bot_name": "Bot 5",
+    "thoi_gian": "19/11/2026 10:45:12",
+    "ket_qua_hwood": [],
+    "trang_thai": "ngoai_top_50"
+  },
+  {
+    "tu_khoa": "tấm nhựa giả đá hoa cương",
+    "bot_id": "bot_01",
+    "bot_name": "Bot 1",
+    "thoi_gian": "19/11/2026 10:45:59",
+    "ket_qua_hwood": [],
+    "trang_thai": "ngoai_top_50"
   }
 ]
