@@ -1,47 +1,47 @@
 {
   "_summary": {
-    "total_keywords": 15,
-    "started_at": "10:45:07",
-    "status": "running"
+    "total_keywords": 50,
+    "started_at": "13:17:14",
+    "status": "finished"
   },
   "bot_01": {
     "name": "Bot 1",
-    "status": "resting",
-    "detail": "Nghỉ an toàn 11.9s trước từ tiếp theo",
-    "processed": 2,
-    "found": 0,
-    "updated_at": "2026-11-19T10:48:54.650955"
+    "status": "done",
+    "detail": "Hoàn thành 9 từ khóa",
+    "processed": 9,
+    "found": 7,
+    "updated_at": "2026-11-19T13:31:42.825630"
   },
   "bot_02": {
     "name": "Bot 2",
-    "status": "running",
-    "detail": "Đang tìm kiếm 'hwood.vn' trên Google (Trang 3)...",
-    "processed": 2,
-    "found": 0,
-    "updated_at": "2026-11-19T10:49:01.536801"
+    "status": "done",
+    "detail": "Hoàn thành 10 từ khóa",
+    "processed": 10,
+    "found": 6,
+    "updated_at": "2026-11-19T13:32:03.167802"
   },
   "bot_03": {
     "name": "Bot 3",
-    "status": "running",
-    "detail": "Đang tìm kiếm 'hwood.vn' trên Google (Trang 3)...",
-    "processed": 2,
-    "found": 0,
-    "updated_at": "2026-11-19T10:49:00.129511"
+    "status": "done",
+    "detail": "Hoàn thành 10 từ khóa",
+    "processed": 10,
+    "found": 12,
+    "updated_at": "2026-11-19T13:32:33.646025"
   },
   "bot_04": {
     "name": "Bot 4",
-    "status": "running",
-    "detail": "Đang tìm kiếm 'hwood.vn' trên Google (Trang 3)...",
-    "processed": 2,
-    "found": 0,
-    "updated_at": "2026-11-19T10:48:58.104198"
+    "status": "done",
+    "detail": "Hoàn thành 10 từ khóa",
+    "processed": 10,
+    "found": 9,
+    "updated_at": "2026-11-19T13:32:30.139940"
   },
   "bot_05": {
     "name": "Bot 5",
-    "status": "running",
-    "detail": "Đang tìm kiếm 'hwood.vn' trên Google (Trang 1)...",
-    "processed": 2,
-    "found": 0,
-    "updated_at": "2026-11-19T10:48:39.888290"
+    "status": "done",
+    "detail": "Hoàn thành 11 từ khóa",
+    "processed": 11,
+    "found": 8,
+    "updated_at": "2026-11-19T13:32:03.241162"
   }
 }
