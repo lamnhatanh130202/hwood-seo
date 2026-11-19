@@ -528,7 +528,11 @@ def render_tab1(api_key, chon_model, ket_noi_wp, wp_site_url, royal_api_key, dan
                         st.rerun()
 
                     except Exception as e:
-                        st.error(f"❌ Đã xảy ra lỗi trong quá trình tạo bài viết: {e}")
+                        err_str = str(e)
+                        if "402" in err_str or "insufficient_balance" in err_str.lower():
+                            st.error("❌ **Hết số dư tài khoản DeepSeek (Error 402: Insufficient Balance):** Tài khoản API của bạn đã hết tiền. Vui lòng nạp thêm tiền tại [platform.deepseek.com](https://platform.deepseek.com) hoặc đổi API Key khác ở thanh bên trái!")
+                        else:
+                            st.error(f"❌ Đã xảy ra lỗi trong quá trình tạo bài viết: {e}")
 
         # Hiển thị bài viết nếu đã có nội dung
         if st.session_state.noi_dung_bai_viet:
