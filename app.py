@@ -211,14 +211,30 @@ with st.sidebar:
     st.title("HWOOD SEO Control")
 
     # 1. Nhập API Key DeepSeek & Chọn Model
-    DEFAULT_API_KEY = "sk-7f7be34ea9994037b607cd284b3471e6"
+    DEEPSEEK_KEY_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "deepseek_key.txt")
+    loaded_api_key = ""
+    if os.path.exists(DEEPSEEK_KEY_FILE):
+        try:
+            with open(DEEPSEEK_KEY_FILE, "r", encoding="utf-8") as f:
+                loaded_api_key = f.read().strip()
+        except Exception:
+            pass
+    if not loaded_api_key:
+        loaded_api_key = os.environ.get("DEEPSEEK_API_KEY", "")
+
     api_key = st.text_input(
         "DeepSeek API Key:",
-        value=DEFAULT_API_KEY,
+        value=loaded_api_key,
         type="password",
         placeholder="sk-...",
-        help="Đã điền sẵn mã API Key của bạn."
+        help="Nhập API Key DeepSeek của bạn. Key được lưu an toàn cục bộ trên máy và không bao giờ đồng bộ lên GitHub."
     )
+    if api_key and api_key != loaded_api_key:
+        try:
+            with open(DEEPSEEK_KEY_FILE, "w", encoding="utf-8") as f:
+                f.write(api_key.strip())
+        except Exception:
+            pass
 
     chon_model = st.selectbox(
         "Chọn Model DeepSeek:",
