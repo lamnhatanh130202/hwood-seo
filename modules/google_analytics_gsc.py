@@ -750,6 +750,9 @@ def lay_du_lieu_ga4_live(timeframe="28 ngày qua (Chuẩn)"):
         return None
 
 
+import streamlit as st
+
+@st.cache_data(ttl=300, show_spinner=False)
 def lay_toan_bo_du_lieu_traffic(timeframe="28 ngày qua (Chuẩn)"):
     """
     Lấy dữ liệu GA4 & GSC đầy đủ tính năng:
