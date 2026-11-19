@@ -12861,5 +12861,246 @@
       }
     ],
     "trang_thai": "ok"
+  },
+  {
+    "tu_khoa": "báo giá thi công gỗ nhựa ngoài trời",
+    "bot_id": "bot_02",
+    "bot_name": "Bot 2",
+    "thoi_gian": "19/11/2026 08:59:54",
+    "ket_qua_hwood": [],
+    "trang_thai": "ngoai_top_50"
+  },
+  {
+    "tu_khoa": "thanh lam hộp gỗ nhựa",
+    "bot_id": "bot_01",
+    "bot_name": "Bot 1",
+    "thoi_gian": "19/11/2026 08:59:53",
+    "ket_qua_hwood": [],
+    "trang_thai": "ngoai_top_50"
+  },
+  {
+    "tu_khoa": "thanh lam gỗ nhựa ngoài trời",
+    "bot_id": "bot_03",
+    "bot_name": "Bot 3",
+    "thoi_gian": "19/11/2026 08:59:55",
+    "ket_qua_hwood": [
+      {
+        "position": 1,
+        "title": "Thanh Lam Hộp Gỗ Nhựa Ngoài Trời Hwood HW60R40 ...",
+        "url": "https://hwood.vn",
+        "source_type": "organic",
+        "source_label": "Top 1",
+        "is_hwood": true,
+        "trang_google": 1
+      }
+    ],
+    "trang_thai": "ok"
+  },
+  {
+    "tu_khoa": "tấm ốp gỗ nhựa ngoài trời",
+    "bot_id": "bot_05",
+    "bot_name": "Bot 5",
+    "thoi_gian": "19/11/2026 08:59:57",
+    "ket_qua_hwood": [
+      {
+        "position": 1,
+        "title": "Video",
+        "url": "https://hwood.vn",
+        "source_type": "organic",
+        "source_label": "Top 1",
+        "is_hwood": true,
+        "trang_google": 1
+      }
+    ],
+    "trang_thai": "ok"
+  },
+  {
+    "tu_khoa": "vỉ gỗ nhựa ban công",
+    "bot_id": "bot_04",
+    "bot_name": "Bot 4",
+    "thoi_gian": "19/11/2026 08:59:56",
+    "ket_qua_hwood": [
+      {
+        "position": 1,
+        "title": "Video",
+        "url": "https://hwood.vn",
+        "source_type": "organic",
+        "source_label": "Top 1",
+        "is_hwood": true,
+        "trang_google": 1
+      }
+    ],
+    "trang_thai": "ok"
+  },
+  {
+    "tu_khoa": "gỗ nhựa ngoài trời",
+    "bot_id": "bot_04",
+    "bot_name": "Bot 4",
+    "thoi_gian": "19/11/2026 09:01:39",
+    "ket_qua_hwood": [],
+    "trang_thai": "loi",
+    "loi": "Page.goto: net::ERR_ABORTED at https://www.google.com.vn/search?q=g%E1%BB%97+nh%E1%BB%B1a+ngo%C3%A0i+tr%E1%BB%9Di&hl=vi&gl=vn\nCall log:\n  - navigating to \"https://www.google.com.vn/search?q=g%E1%BB%97"
+  },
+  {
+    "tu_khoa": "giàn hoa pergola ngoài trời",
+    "bot_id": "bot_02",
+    "bot_name": "Bot 2",
+    "thoi_gian": "19/11/2026 09:01:05",
+    "ket_qua_hwood": [
+      {
+        "position": 1,
+        "title": "Thi công dàn hoa pergola với gỗ nhựa ngoài trời HobiWood",
+        "url": "https://hwood.vn",
+        "source_type": "organic",
+        "source_label": "Top 1",
+        "is_hwood": true,
+        "trang_google": 1
+      }
+    ],
+    "trang_thai": "ok"
+  },
+  {
+    "tu_khoa": "thanh đa năng gỗ nhựa",
+    "bot_id": "bot_01",
+    "bot_name": "Bot 1",
+    "thoi_gian": "19/11/2026 09:01:14",
+    "ket_qua_hwood": [
+      {
+        "position": 1,
+        "title": "Ứng dụng thanh đa năng gỗ nhựa ngoài trời hiệu quả",
+        "url": "https://hwood.vn",
+        "source_type": "organic",
+        "source_label": "Top 1",
+        "is_hwood": true,
+        "trang_google": 1
+      }
+    ],
+    "trang_thai": "ok"
+  },
+  {
+    "tu_khoa": "gỗ nhựa composite ngoài trời",
+    "bot_id": "bot_05",
+    "bot_name": "Bot 5",
+    "thoi_gian": "19/11/2026 09:01:32",
+    "ket_qua_hwood": [
+      {
+        "position": 1,
+        "title": "Tổng kho gỗ nhựa composite ngoài trời | May Home",
+        "url": "https://hwood.vn",
+        "source_type": "organic",
+        "source_label": "Top 1",
+        "is_hwood": true,
+        "trang_google": 1
+      }
+    ],
+    "trang_thai": "ok"
+  },
+  {
+    "tu_khoa": "gỗ nhựa phủ asa",
+    "bot_id": "bot_04",
+    "bot_name": "Bot 4",
+    "thoi_gian": "19/11/2026 09:01:48",
+    "ket_qua_hwood": [
+      {
+        "position": 1,
+        "title": "Gỗ nhựa phủ ASA là gì? Đặc điểm và ứng dụng",
+        "url": "https://hwood.vn",
+        "source_type": "organic",
+        "source_label": "Top 1",
+        "is_hwood": true,
+        "trang_google": 1
+      }
+    ],
+    "trang_thai": "ok"
+  },
+  {
+    "tu_khoa": "sàn gỗ nhựa hồ bơi",
+    "bot_id": "bot_03",
+    "bot_name": "Bot 3",
+    "thoi_gian": "19/11/2026 09:01:28",
+    "ket_qua_hwood": [
+      {
+        "position": 1,
+        "title": "Sàn Hồ Bơi Gỗ Nhựa Ngoài Trời Hwood HW145Z25 Wood",
+        "url": "https://hwood.vn",
+        "source_type": "organic",
+        "source_label": "Top 1",
+        "is_hwood": true,
+        "trang_google": 1
+      }
+    ],
+    "trang_thai": "ok"
+  },
+  {
+    "tu_khoa": "cổng gỗ nhựa ngoài trời",
+    "bot_id": "bot_02",
+    "bot_name": "Bot 2",
+    "thoi_gian": "19/11/2026 09:02:31",
+    "ket_qua_hwood": [
+      {
+        "position": 1,
+        "title": "Cổng gỗ nhựa ngoài trời cao cấp | Bền đẹp, chống nước ...",
+        "url": "https://hwood.vn",
+        "source_type": "organic",
+        "source_label": "Top 1",
+        "is_hwood": true,
+        "trang_google": 2
+      }
+    ],
+    "trang_thai": "ok"
+  },
+  {
+    "tu_khoa": "báo giá sàn gỗ nhựa ngoài trời",
+    "bot_id": "bot_01",
+    "bot_name": "Bot 1",
+    "thoi_gian": "19/11/2026 09:02:35",
+    "ket_qua_hwood": [
+      {
+        "position": 1,
+        "title": "Báo giá sàn gỗ nhựa ngoài trời mới nhất 2026",
+        "url": "https://hwood.vn",
+        "source_type": "organic",
+        "source_label": "Top 1",
+        "is_hwood": true,
+        "trang_google": 1
+      }
+    ],
+    "trang_thai": "ok"
+  },
+  {
+    "tu_khoa": "sàn gỗ nhựa ngoài trời",
+    "bot_id": "bot_04",
+    "bot_name": "Bot 4",
+    "thoi_gian": "19/11/2026 09:03:20",
+    "ket_qua_hwood": [
+      {
+        "position": 1,
+        "title": "Sàn gỗ ngoài trời - Giải pháp trang trí hiện đại",
+        "url": "https://hwood.vn/g/",
+        "source_type": "organic",
+        "source_label": "Top 1",
+        "is_hwood": true,
+        "trang_google": 1
+      }
+    ],
+    "trang_thai": "ok"
+  },
+  {
+    "tu_khoa": "hàng rào gỗ nhựa",
+    "bot_id": "bot_05",
+    "bot_name": "Bot 5",
+    "thoi_gian": "19/11/2026 09:03:14",
+    "ket_qua_hwood": [
+      {
+        "position": 1,
+        "title": "Video",
+        "url": "https://hwood.vn",
+        "source_type": "organic",
+        "source_label": "Top 1",
+        "is_hwood": true,
+        "trang_google": 1
+      }
+    ],
+    "trang_thai": "ok"
   }
 ]
