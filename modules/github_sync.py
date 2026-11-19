@@ -18,6 +18,7 @@ BRANCH = "main"
 
 EXCLUDE_DIRS = {'.git', '__pycache__', '.user_uploaded', 'chrome_user_data', '.system_generated', 'hwood_chrome_extension'}
 EXCLUDE_EXTS = {'.pyc', '.mp4', '.zip', '.log', '.tmp'}
+EXCLUDE_FILES = {'github_token.txt', 'deepseek_key.txt', '.env', 'bot_proxies.json'}
 
 
 def doc_github_token():
@@ -117,7 +118,7 @@ def dong_bo_toan_bo_du_an(token=None, repo=REPO_NAME, branch=BRANCH):
         dirs[:] = [d for d in dirs if d not in EXCLUDE_DIRS and not d.startswith('.')]
         for file in files:
             ext = os.path.splitext(file)[1].lower()
-            if ext in EXCLUDE_EXTS or file in ["github_token.txt", "google_credentials.json", "hwood_seo_cloud_package.zip"] or file.startswith("gsc-keyword-report"):
+            if ext in EXCLUDE_EXTS or file in EXCLUDE_FILES or file in ["google_credentials.json", "hwood_seo_cloud_package.zip"] or file.startswith("gsc-keyword-report"):
                 continue
             full_path = os.path.join(root, file)
             rel_path = os.path.relpath(full_path, BASE_DIR).replace("\\", "/")
