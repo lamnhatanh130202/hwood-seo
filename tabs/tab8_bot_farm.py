@@ -144,18 +144,28 @@ def _render_dashboard_content(is_running: bool):
                 st.toast("Đã gửi lệnh dừng tất cả bot!", icon="⏹️")
                 st.rerun()
     elif all_done:
-        st.markdown("""
-        <div style="background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 8px; padding: 10px 14px; margin-bottom: 8px;">
-            <strong style="color: #166534; font-size: 0.95rem;">🎉 TẤT CẢ BOT ĐÃ HOÀN THÀNH QUÉT (100%)!</strong>
-            <div style="color: #15803d; font-size: 0.8rem;">Dữ liệu thứ hạng đã được lưu an toàn. Nhập thêm từ khóa mới để tiếp tục chạy đợt quét tiếp theo.</div>
-        </div>
-        """, unsafe_allow_html=True)
+        c_done1, c_done2 = st.columns([2.5, 1])
+        with c_done1:
+            st.markdown("""
+            <div style="background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 8px; padding: 10px 14px; margin-bottom: 8px;">
+                <strong style="color: #166534; font-size: 0.95rem;">🎉 TẤT CẢ BOT ĐÃ HOÀN THÀNH QUÉT (100%)!</strong>
+                <div style="color: #15803d; font-size: 0.8rem;">Dữ liệu thứ hạng đã được lưu an toàn. Bấm <strong>Làm mới (F5)</strong> để sẵn sàng chạy đợt quét tiếp theo.</div>
+            </div>
+            """, unsafe_allow_html=True)
+        with c_done2:
+            if st.button("🔄 Làm mới (F5)", key="btn_refresh_alldone", use_container_width=True, type="primary", help="Làm mới lại giao diện và bảng dữ liệu"):
+                st.rerun()
     else:
-        st.markdown("""
-        <div style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 8px 14px; margin-bottom: 8px;">
-            <span style="color: #475569; font-size: 0.88rem;">⚪ <strong>Trạng thái:</strong> Hệ thống sẵn sàng. Nhập từ khóa ở cột trái và bấm <strong>Bắt đầu chạy 5 Bot</strong>.</span>
-        </div>
-        """, unsafe_allow_html=True)
+        c_rdy1, c_rdy2 = st.columns([2.5, 1])
+        with c_rdy1:
+            st.markdown("""
+            <div style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 8px 14px; margin-bottom: 8px;">
+                <span style="color: #475569; font-size: 0.88rem;">⚪ <strong>Trạng thái:</strong> Hệ thống sẵn sàng. Nhập từ khóa ở cột trái và bấm <strong>Bắt đầu chạy 5 Bot</strong>.</span>
+            </div>
+            """, unsafe_allow_html=True)
+        with c_rdy2:
+            if st.button("🔄 Làm mới (F5)", key="btn_refresh_ready", use_container_width=True, help="Tải lại dữ liệu mới nhất"):
+                st.rerun()
         sys_log_file = os.path.join(BASE_DIR, "bot_farm_sys.log")
         if os.path.exists(sys_log_file):
             try:
@@ -527,8 +537,15 @@ def render_tab8():
 
         st.markdown("---")
         if not dang_chay():
-            btn_txt = "⚡ Bắt đầu quét nhanh (5-8s)" if fast_mode else "🚀 Bắt đầu chạy 5 Bot"
-            if st.button(btn_txt, type="primary", use_container_width=True):
+            col_b1, col_b2 = st.columns([2.2, 1])
+            with col_b1:
+                btn_txt = "⚡ Bắt đầu quét nhanh (5-8s)" if fast_mode else "🚀 Bắt đầu chạy 5 Bot"
+                run_clicked = st.button(btn_txt, type="primary", use_container_width=True)
+            with col_b2:
+                if st.button("🔄 Làm mới (F5)", key="btn_f5_col_cfg", use_container_width=True, help="Làm mới lại trang (F5)"):
+                    st.rerun()
+
+            if run_clicked:
                 if not keywords_text.strip():
                     st.error("❌ Chưa có từ khóa! Hãy nhập ít nhất 1 từ khóa.")
                 else:
@@ -549,7 +566,7 @@ def render_tab8():
                         )
                         RUNNING_PROC["popen"] = proc
                         RUNNING_PROC["started_at"] = datetime.now().strftime("%H:%M:%S")
-                        st.success(f"✅ Đã khởi động 5 bot lúc {RUNNING_PROC['started_at']}! Hệ thống đang quét thời gian thực.")
+                        st.toast(f"✅ Đã khởi động 5 bot lúc {RUNNING_PROC['started_at']}!", icon="🚀")
                         st.rerun()
                     except Exception as e:
                         st.error(f"❌ Lỗi khởi động: {e}")
