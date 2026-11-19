@@ -5,6 +5,6 @@
   "dwell_min": 30,
   "dwell_max": 60,
   "visit_pages": true,
-  "click_zalo": true,
+  "click_zalo": false,
   "headless": false
 }
