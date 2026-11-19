@@ -13523,5 +13523,712 @@
     "ket_qua_hwood": [],
     "trang_thai": "loi",
     "loi": "Page.goto: Timeout 30000ms exceeded.\nCall log:\n  - navigating to \"https://www.google.com.vn/search?q=ph%C3%A0o+ch%E1%BB%89+pvc+v%C3%A2n+%C4%91%C3%A1&hl=vi&gl=vn\", waiting until \"load\"\n"
+  },
+  {
+    "tu_khoa": "phào chỉ pvc vân đá",
+    "bot_id": "bot_02",
+    "bot_name": "Bot 2",
+    "thoi_gian": "19/11/2026 10:33:33",
+    "ket_qua_hwood": [],
+    "trang_thai": "ngoai_top_50"
+  },
+  {
+    "tu_khoa": "tấm ốp nano",
+    "bot_id": "bot_05",
+    "bot_name": "Bot 5",
+    "thoi_gian": "19/11/2026 10:33:36",
+    "ket_qua_hwood": [],
+    "trang_thai": "ngoai_top_50"
+  },
+  {
+    "tu_khoa": "tấm nhựa ốp tường chống ẩm",
+    "bot_id": "bot_04",
+    "bot_name": "Bot 4",
+    "thoi_gian": "19/11/2026 10:33:35",
+    "ket_qua_hwood": [],
+    "trang_thai": "ngoai_top_50"
+  },
+  {
+    "tu_khoa": "tấm nhựa ốp tường",
+    "bot_id": "bot_01",
+    "bot_name": "Bot 1",
+    "thoi_gian": "19/11/2026 10:33:32",
+    "ket_qua_hwood": [],
+    "trang_thai": "ngoai_top_50"
+  },
+  {
+    "tu_khoa": "tấm nhựa giả đá hoa cương",
+    "bot_id": "bot_02",
+    "bot_name": "Bot 2",
+    "thoi_gian": "19/11/2026 10:34:39",
+    "ket_qua_hwood": [],
+    "trang_thai": "ngoai_top_50"
+  },
+  {
+    "tu_khoa": "vách tivi pvc vân đá",
+    "bot_id": "bot_03",
+    "bot_name": "Bot 3",
+    "thoi_gian": "19/11/2026 10:33:34",
+    "ket_qua_hwood": [
+      {
+        "position": 1,
+        "title": "Chuyển đến nội dung",
+        "url": "https://hwood.vn/vach-tivi-van-da",
+        "source_type": "organic",
+        "source_label": "Top 1",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 3,
+        "title": "Giới thiệu",
+        "url": "https://hwood.vn/gioi-thieu",
+        "source_type": "organic",
+        "source_label": "Top 3",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 4,
+        "title": "HÀNG THANH LÝ",
+        "url": "https://hwood.vn/hang-thanh-ly",
+        "source_type": "organic",
+        "source_label": "Top 4",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 5,
+        "title": "Dự án",
+        "url": "https://hwood.vn/du-an",
+        "source_type": "organic",
+        "source_label": "Top 5",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 6,
+        "title": "Tin tức",
+        "url": "https://hwood.vn/tin-tuc",
+        "source_type": "organic",
+        "source_label": "Top 6",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 7,
+        "title": "Liên hệ",
+        "url": "https://hwood.vn/lien-he",
+        "source_type": "organic",
+        "source_label": "Top 7",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 8,
+        "title": "Tuyển dụng",
+        "url": "https://hwood.vn/tuyen-dung",
+        "source_type": "organic",
+        "source_label": "Top 8",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 9,
+        "title": "GỖ NHỰA",
+        "url": "https://hwood.vn/danh-muc-san-pham/go-nhua-ngoai-troi",
+        "source_type": "organic",
+        "source_label": "Top 9",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 10,
+        "title": "https://hwood.vn/danh-muc-san-pham/go-nhua-hwood",
+        "url": "https://hwood.vn/danh-muc-san-pham/go-nhua-hwood",
+        "source_type": "organic",
+        "source_label": "Top 10",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 11,
+        "title": "https://hwood.vn/danh-muc-san-pham/san-go-ngoai-troi-hwood",
+        "url": "https://hwood.vn/danh-muc-san-pham/san-go-ngoai-troi-hwood",
+        "source_type": "organic",
+        "source_label": "Top 11",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 12,
+        "title": "https://hwood.vn/danh-muc-san-pham/tam-op-ngoai-troi-hwood",
+        "url": "https://hwood.vn/danh-muc-san-pham/tam-op-ngoai-troi-hwood",
+        "source_type": "organic",
+        "source_label": "Top 12",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 13,
+        "title": "https://hwood.vn/danh-muc-san-pham/tam-op-asa",
+        "url": "https://hwood.vn/danh-muc-san-pham/tam-op-asa",
+        "source_type": "organic",
+        "source_label": "Top 13",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 14,
+        "title": "https://hwood.vn/danh-muc-san-pham/thanh-da-nang-ngoai-troi-hwood",
+        "url": "https://hwood.vn/danh-muc-san-pham/thanh-da-nang-ngoai-troi-hwood",
+        "source_type": "organic",
+        "source_label": "Top 14",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 15,
+        "title": "https://hwood.vn/danh-muc-san-pham/lam-tru-go-nhua-ngoai-troi-hwood",
+        "url": "https://hwood.vn/danh-muc-san-pham/lam-tru-go-nhua-ngoai-troi-hwood",
+        "source_type": "organic",
+        "source_label": "Top 15",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 16,
+        "title": "https://hwood.vn/danh-muc-san-pham/lam-tru-ngoai-troi-asa-hwood",
+        "url": "https://hwood.vn/danh-muc-san-pham/lam-tru-ngoai-troi-asa-hwood",
+        "source_type": "organic",
+        "source_label": "Top 16",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 17,
+        "title": "https://hwood.vn/danh-muc-san-pham/vi-go-ngoai-troi-hwood",
+        "url": "https://hwood.vn/danh-muc-san-pham/vi-go-ngoai-troi-hwood",
+        "source_type": "organic",
+        "source_label": "Top 17",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 18,
+        "title": "https://hwood.vn/danh-muc-san-pham/phu-kien-go-nhua-ngoai-troi-hwood",
+        "url": "https://hwood.vn/danh-muc-san-pham/phu-kien-go-nhua-ngoai-troi-hwood",
+        "source_type": "organic",
+        "source_label": "Top 18",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 19,
+        "title": "https://hwood.vn/danh-muc-san-pham/go-nhua-tenowood",
+        "url": "https://hwood.vn/danh-muc-san-pham/go-nhua-tenowood",
+        "source_type": "organic",
+        "source_label": "Top 19",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 20,
+        "title": "https://hwood.vn/danh-muc-san-pham/san-go-ngoai-troi-tenowood",
+        "url": "https://hwood.vn/danh-muc-san-pham/san-go-ngoai-troi-tenowood",
+        "source_type": "organic",
+        "source_label": "Top 20",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 21,
+        "title": "https://hwood.vn/danh-muc-san-pham/tam-op-ngoai-troi-tenowood",
+        "url": "https://hwood.vn/danh-muc-san-pham/tam-op-ngoai-troi-tenowood",
+        "source_type": "organic",
+        "source_label": "Top 21",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 22,
+        "title": "https://hwood.vn/danh-muc-san-pham/thanh-da-nang-ngoai-troi-tenowood",
+        "url": "https://hwood.vn/danh-muc-san-pham/thanh-da-nang-ngoai-troi-tenowood",
+        "source_type": "organic",
+        "source_label": "Top 22",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 23,
+        "title": "TẤM ỐP THAN TRE",
+        "url": "https://hwood.vn/danh-muc-san-pham/tam-op-than-tre",
+        "source_type": "organic",
+        "source_label": "Top 23",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 24,
+        "title": "https://hwood.vn/danh-muc-san-pham/tam-op-than-tre-hwood",
+        "url": "https://hwood.vn/danh-muc-san-pham/tam-op-than-tre-hwood",
+        "source_type": "organic",
+        "source_label": "Top 24",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 25,
+        "title": "https://hwood.vn/danh-muc-san-pham/lam-song-than-tre",
+        "url": "https://hwood.vn/danh-muc-san-pham/lam-song-than-tre",
+        "source_type": "organic",
+        "source_label": "Top 25",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 26,
+        "title": "https://hwood.vn/danh-muc-san-pham/phu-kien-tam-op-than-tre",
+        "url": "https://hwood.vn/danh-muc-san-pham/phu-kien-tam-op-than-tre",
+        "source_type": "organic",
+        "source_label": "Top 26",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 27,
+        "title": "PVC VÂN ĐÁ",
+        "url": "https://hwood.vn/danh-muc-san-pham/pvc-van-da",
+        "source_type": "organic",
+        "source_label": "Top 27",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 28,
+        "title": "https://hwood.vn/danh-muc-san-pham/pvc-van-da-hwood",
+        "url": "https://hwood.vn/danh-muc-san-pham/pvc-van-da-hwood",
+        "source_type": "organic",
+        "source_label": "Top 28",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 29,
+        "title": "https://hwood.vn/danh-muc-san-pham/pvc-van-da-tenowood",
+        "url": "https://hwood.vn/danh-muc-san-pham/pvc-van-da-tenowood",
+        "source_type": "organic",
+        "source_label": "Top 29",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 30,
+        "title": "https://hwood.vn/danh-muc-san-pham/phu-kien-pvc-van-da",
+        "url": "https://hwood.vn/danh-muc-san-pham/phu-kien-pvc-van-da",
+        "source_type": "organic",
+        "source_label": "Top 30",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 31,
+        "title": "TẤM ỐP NHỰA",
+        "url": "https://hwood.vn/danh-muc-san-pham/tam-op-nhua",
+        "source_type": "organic",
+        "source_label": "Top 31",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 32,
+        "title": "https://hwood.vn/danh-muc-san-pham/tam-op-nhua-noi-that-hwood",
+        "url": "https://hwood.vn/danh-muc-san-pham/tam-op-nhua-noi-that-hwood",
+        "source_type": "organic",
+        "source_label": "Top 32",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 33,
+        "title": "https://hwood.vn/danh-muc-san-pham/tam-op-nano-hwood",
+        "url": "https://hwood.vn/danh-muc-san-pham/tam-op-nano-hwood",
+        "source_type": "organic",
+        "source_label": "Top 33",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 34,
+        "title": "https://hwood.vn/danh-muc-san-pham/lam-song-hwood",
+        "url": "https://hwood.vn/danh-muc-san-pham/lam-song-hwood",
+        "source_type": "organic",
+        "source_label": "Top 34",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 35,
+        "title": "https://hwood.vn/danh-muc-san-pham/lam-treo-lam-hop-hwood",
+        "url": "https://hwood.vn/danh-muc-san-pham/lam-treo-lam-hop-hwood",
+        "source_type": "organic",
+        "source_label": "Top 35",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 36,
+        "title": "https://hwood.vn/danh-muc-san-pham/tam-op-nhua-noi-that-tenowood",
+        "url": "https://hwood.vn/danh-muc-san-pham/tam-op-nhua-noi-that-tenowood",
+        "source_type": "organic",
+        "source_label": "Top 36",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 37,
+        "title": "https://hwood.vn/danh-muc-san-pham/tap-op-nano-tenowood",
+        "url": "https://hwood.vn/danh-muc-san-pham/tap-op-nano-tenowood",
+        "source_type": "organic",
+        "source_label": "Top 37",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 38,
+        "title": "https://hwood.vn/danh-muc-san-pham/lam-song-tenowood",
+        "url": "https://hwood.vn/danh-muc-san-pham/lam-song-tenowood",
+        "source_type": "organic",
+        "source_label": "Top 38",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 39,
+        "title": "https://hwood.vn/danh-muc-san-pham/phu-kien-noi-that",
+        "url": "https://hwood.vn/danh-muc-san-pham/phu-kien-noi-that",
+        "source_type": "organic",
+        "source_label": "Top 39",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 40,
+        "title": "VÁCH NGĂN",
+        "url": "https://hwood.vn/danh-muc-san-pham/vach-ngan",
+        "source_type": "organic",
+        "source_label": "Top 40",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 41,
+        "title": "BẬC CẦU THANG",
+        "url": "https://hwood.vn/danh-muc-san-pham/bac-cau-thang",
+        "source_type": "organic",
+        "source_label": "Top 41",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 42,
+        "title": "https://hwood.vn/danh-muc-san-pham/san-nhua-gia-go",
+        "url": "https://hwood.vn/danh-muc-san-pham/san-nhua-gia-go",
+        "source_type": "organic",
+        "source_label": "Top 42",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 43,
+        "title": "https://hwood.vn/danh-muc-san-pham/san-chiu-luc",
+        "url": "https://hwood.vn/danh-muc-san-pham/san-chiu-luc",
+        "source_type": "organic",
+        "source_label": "Top 43",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 44,
+        "title": "https://hwood.vn/danh-muc-san-pham/san-go-cong-nghiep",
+        "url": "https://hwood.vn/danh-muc-san-pham/san-go-cong-nghiep",
+        "source_type": "organic",
+        "source_label": "Top 44",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 45,
+        "title": "KEO NỘI/NGOẠI THẤT",
+        "url": "https://hwood.vn/danh-muc-san-pham/keo-noi-ngoai-that",
+        "source_type": "organic",
+        "source_label": "Top 45",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 46,
+        "title": "BÀN GHẾ NGOÀI TRỜI",
+        "url": "https://hwood.vn/danh-muc-san-pham/ban-ghe-ngoai-troi",
+        "source_type": "organic",
+        "source_label": "Top 46",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 47,
+        "title": "https://hwood.vn/danh-muc-san-pham/bo-ban-ghe-ngoai-troi",
+        "url": "https://hwood.vn/danh-muc-san-pham/bo-ban-ghe-ngoai-troi",
+        "source_type": "organic",
+        "source_label": "Top 47",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 48,
+        "title": "https://hwood.vn/danh-muc-san-pham/ban-ngoai-troi",
+        "url": "https://hwood.vn/danh-muc-san-pham/ban-ngoai-troi",
+        "source_type": "organic",
+        "source_label": "Top 48",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 49,
+        "title": "https://hwood.vn/danh-muc-san-pham/ghe-ngoai-troi",
+        "url": "https://hwood.vn/danh-muc-san-pham/ghe-ngoai-troi",
+        "source_type": "organic",
+        "source_label": "Top 49",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 50,
+        "title": "BẢN TIN TẤM ỐP NHỰA NỘI THẤT",
+        "url": "https://hwood.vn/ban-tin-tam-op-nhua-noi-that",
+        "source_type": "organic",
+        "source_label": "Top 50",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 51,
+        "title": "Tấm Nhựa Nano Ốp Vách Tivi & Đầu Giường: Cách Phối & Dự Toán [2026]",
+        "url": "https://hwood.vn/tam-nhua-nano-op-vach-tivi-dau-giuong",
+        "source_type": "organic",
+        "source_label": "Top 51",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 52,
+        "title": "Top 9+ mẫu trần nhựa nano đẹp cho phòng khách 2026",
+        "url": "https://hwood.vn/top-mau-tran-nhua-nano-dep-cho-phong-khach",
+        "source_type": "organic",
+        "source_label": "Top 52",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 53,
+        "title": "Giá tấm nhựa PVC vân đá 2026: Báo giá chi tiết mới nhất",
+        "url": "https://hwood.vn/gia-tam-nhua-pvc",
+        "source_type": "organic",
+        "source_label": "Top 53",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 54,
+        "title": "Báo Giá Tấm Ốp Nano 2026: Giá Ốp Tường & Ốp Trần Theo m²",
+        "url": "https://hwood.vn/bao-gia-tam-op-nano",
+        "source_type": "organic",
+        "source_label": "Top 54",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 55,
+        "title": "Xả kho lam treo nội thất TENOWOOD – Giảm 50% chỉ từ 22k/m",
+        "url": "https://hwood.vn/xa-kho-lam-treo-noi-that-tenowood",
+        "source_type": "organic",
+        "source_label": "Top 55",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 56,
+        "title": "sales@hwood.vn",
+        "url": "mailto:sales@hwood.vn",
+        "source_type": "organic",
+        "source_label": "Top 56",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 57,
+        "title": "Chính sách đại lý",
+        "url": "https://hwood.vn/chinh-sach-dai-ly",
+        "source_type": "organic",
+        "source_label": "Top 57",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 58,
+        "title": "Hướng dẫn mua hàng",
+        "url": "https://hwood.vn/huong-dan-mua-hang",
+        "source_type": "organic",
+        "source_label": "Top 58",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 59,
+        "title": "Chính sách mua hàng",
+        "url": "https://hwood.vn/chinh-sach-ban-hang-va-quy-dinh-doi-tra-tai-hwood-viet-nam",
+        "source_type": "organic",
+        "source_label": "Top 59",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 60,
+        "title": "Chính sách kiểm hàng",
+        "url": "https://hwood.vn/chinh-sach-kiem-hang",
+        "source_type": "organic",
+        "source_label": "Top 60",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 61,
+        "title": "Chính sách đổi trả",
+        "url": "https://hwood.vn/chinh-sach-doi-tra",
+        "source_type": "organic",
+        "source_label": "Top 61",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 62,
+        "title": "Chính sách bảo hành",
+        "url": "https://hwood.vn/chinh-sach-bao-hanh",
+        "source_type": "organic",
+        "source_label": "Top 62",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 63,
+        "title": "Chính sách thanh toán",
+        "url": "https://hwood.vn/chinh-sach-thanh-toan",
+        "source_type": "organic",
+        "source_label": "Top 63",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 64,
+        "title": "Chính sách vận chuyển",
+        "url": "https://hwood.vn/chinh-sach-van-chuyen",
+        "source_type": "organic",
+        "source_label": "Top 64",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 65,
+        "title": "Câu hỏi thường gặp",
+        "url": "https://hwood.vn/cau-hoi-thuong-gap",
+        "source_type": "organic",
+        "source_label": "Top 65",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 2,
+        "title": "https://hwood.vn",
+        "url": "https://hwood.vn",
+        "source_type": "organic",
+        "source_label": "Top 2",
+        "is_hwood": true,
+        "trang_google": 1
+      }
+    ],
+    "trang_thai": "ok"
+  },
+  {
+    "tu_khoa": "tấm ốp tường nano phẳng",
+    "bot_id": "bot_01",
+    "bot_name": "Bot 1",
+    "thoi_gian": "19/11/2026 10:35:03",
+    "ket_qua_hwood": [],
+    "trang_thai": "bi_chan_captcha"
+  },
+  {
+    "tu_khoa": "tấm pvc vân đá",
+    "bot_id": "bot_03",
+    "bot_name": "Bot 3",
+    "thoi_gian": "19/11/2026 10:35:22",
+    "ket_qua_hwood": [],
+    "trang_thai": "loi",
+    "loi": "Page.goto: Target page, context or browser has been closed\nCall log:\n  - navigating to \"https://www.google.com.vn/search?q=t%E1%BA%A5m+pvc+v%C3%A2n+%C4%91%C3%A1&hl=vi&gl=vn\", waiting until \"load\"\n"
+  },
+  {
+    "tu_khoa": "tấm nhựa ốp tường phòng khách",
+    "bot_id": "bot_05",
+    "bot_name": "Bot 5",
+    "thoi_gian": "19/11/2026 10:34:59",
+    "ket_qua_hwood": [],
+    "trang_thai": "ngoai_top_50"
+  },
+  {
+    "tu_khoa": "trần nhựa nano giật cấp",
+    "bot_id": "bot_04",
+    "bot_name": "Bot 4",
+    "thoi_gian": "19/11/2026 10:35:05",
+    "ket_qua_hwood": [],
+    "trang_thai": "ngoai_top_50"
+  },
+  {
+    "tu_khoa": "tấm nhựa pvc vân đá tráng gương",
+    "bot_id": "bot_02",
+    "bot_name": "Bot 2",
+    "thoi_gian": "19/11/2026 10:35:10",
+    "ket_qua_hwood": [],
+    "trang_thai": "ngoai_top_50"
+  },
+  {
+    "tu_khoa": "keo dán pvc 3x-bond",
+    "bot_id": "bot_01",
+    "bot_name": "Bot 1",
+    "thoi_gian": "19/11/2026 10:35:34",
+    "ket_qua_hwood": [],
+    "trang_thai": "ngoai_top_50"
+  },
+  {
+    "tu_khoa": "báo giá thi công trần nhựa nano",
+    "bot_id": "bot_03",
+    "bot_name": "Bot 3",
+    "thoi_gian": "19/11/2026 10:35:37",
+    "ket_qua_hwood": [],
+    "trang_thai": "ngoai_top_50"
+  },
+  {
+    "tu_khoa": "báo giá tấm pvc vân đá",
+    "bot_id": "bot_05",
+    "bot_name": "Bot 5",
+    "thoi_gian": "19/11/2026 10:35:48",
+    "ket_qua_hwood": [],
+    "trang_thai": "ngoai_top_50"
+  },
+  {
+    "tu_khoa": "tấm ốp tường pvc nano",
+    "bot_id": "bot_04",
+    "bot_name": "Bot 4",
+    "thoi_gian": "19/11/2026 10:35:55",
+    "ket_qua_hwood": [],
+    "trang_thai": "ngoai_top_50"
   }
 ]
