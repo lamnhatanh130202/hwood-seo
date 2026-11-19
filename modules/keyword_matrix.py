@@ -97,6 +97,9 @@ DANH_SACH_SAN_PHAM_HWOOD = list(BO_32_CLUSTER_HWOOD.keys()) + [
     "lam sóng ốp tường", "lam sóng ốp trần", "tấm ốp lam sóng", "lam sóng 3 sóng", "lam sóng 4 sóng",
     "lam chắn nắng ngoài trời", "lam sóng nội thất", "vách tivi pvc vân đá", "vách tivi lam sóng",
     "keo dán pvc 3x-bond", "keo dán 3x-bond", "keo 3x-bond", "phào chỉ pvc", "phào chỉ vân đá",
+    "cửa sắt ốp nhựa giả gỗ", "tấm lót sàn ban công", "vách ngăn nhựa nano", "trần giật cấp nhựa nano",
+    "báo giá lam sóng gỗ nhựa", "la phông nhựa giả gỗ", "sàn nhựa ngoài trời", "nhựa giả gỗ ngoài trời",
+    "tấm nhựa giả gỗ", "tấm ốp pvc", "tấm giả đá", "nhựa vân đá", "tấm pvc tráng gương",
     "gỗ nhựa hwood", "hwood việt nam"
 ]
 DANH_SACH_SAN_PHAM_HWOOD = sorted(list(set(DANH_SACH_SAN_PHAM_HWOOD)), key=lambda x: len(x), reverse=True)
