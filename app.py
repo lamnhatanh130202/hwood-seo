@@ -210,6 +210,9 @@ with st.sidebar:
     st.image("https://img.icons8.com/fluency/96/wood.png", width=60)
     st.title("HWOOD SEO Control")
 
+    if st.button("🔄 Làm mới trang (F5)", key="sidebar_btn_f5", use_container_width=True, help="Tải lại toàn bộ ứng dụng và dữ liệu mới nhất (như phím F5 hoặc Ctrl+R)"):
+        st.rerun()
+
     # 1. Nhập API Key DeepSeek & Chọn Model
     DEEPSEEK_KEY_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "deepseek_key.txt")
     loaded_api_key = ""
