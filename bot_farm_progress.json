@@ -1,47 +1,47 @@
 {
   "_summary": {
     "total_keywords": 15,
-    "started_at": "10:33:32",
-    "status": "finished"
+    "started_at": "10:45:07",
+    "status": "running"
   },
   "bot_01": {
     "name": "Bot 1",
-    "status": "done",
-    "detail": "Hoàn thành 3 từ khóa",
-    "processed": 3,
+    "status": "resting",
+    "detail": "Nghỉ an toàn 11.9s trước từ tiếp theo",
+    "processed": 2,
     "found": 0,
-    "updated_at": "2026-11-19T10:37:47.197449"
+    "updated_at": "2026-11-19T10:48:54.650955"
   },
   "bot_02": {
     "name": "Bot 2",
-    "status": "done",
-    "detail": "Hoàn thành 3 từ khóa",
-    "processed": 3,
+    "status": "running",
+    "detail": "Đang tìm kiếm 'hwood.vn' trên Google (Trang 3)...",
+    "processed": 2,
     "found": 0,
-    "updated_at": "2026-11-19T10:36:09.472945"
+    "updated_at": "2026-11-19T10:49:01.536801"
   },
   "bot_03": {
     "name": "Bot 3",
-    "status": "done",
-    "detail": "Hoàn thành 3 từ khóa",
-    "processed": 3,
-    "found": 65,
-    "updated_at": "2026-11-19T10:37:52.213717"
+    "status": "running",
+    "detail": "Đang tìm kiếm 'hwood.vn' trên Google (Trang 3)...",
+    "processed": 2,
+    "found": 0,
+    "updated_at": "2026-11-19T10:49:00.129511"
   },
   "bot_04": {
     "name": "Bot 4",
-    "status": "done",
-    "detail": "Hoàn thành 3 từ khóa",
-    "processed": 3,
+    "status": "running",
+    "detail": "Đang tìm kiếm 'hwood.vn' trên Google (Trang 3)...",
+    "processed": 2,
     "found": 0,
-    "updated_at": "2026-11-19T10:37:53.045616"
+    "updated_at": "2026-11-19T10:48:58.104198"
   },
   "bot_05": {
     "name": "Bot 5",
-    "status": "done",
-    "detail": "Hoàn thành 3 từ khóa",
-    "processed": 3,
+    "status": "running",
+    "detail": "Đang tìm kiếm 'hwood.vn' trên Google (Trang 1)...",
+    "processed": 2,
     "found": 0,
-    "updated_at": "2026-11-19T10:37:52.878280"
+    "updated_at": "2026-11-19T10:48:39.888290"
   }
 }
