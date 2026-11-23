@@ -125,14 +125,21 @@ def main():
 
         # 2. Mở cửa sổ giao diện ứng dụng (Chrome / Edge App Mode)
         browser = find_browser()
+        profile_dir = os.path.join(BASE_DIR, ".app_profile")
+        os.makedirs(profile_dir, exist_ok=True)
+
         if browser:
             log(f"Opening browser App Mode: {browser}")
             app_args = [
                 browser,
-                f"--app={URL}"
+                f"--app={URL}",
+                f"--user-data-dir={profile_dir}",
+                "--window-size=1450,920",
+                "--window-position=40,20",
+                "--app-id=hwood-seo-assistant"
             ]
-            creationflags = 0x00000008 | 0x00000200 if os.name == 'nt' else 0
-            subprocess.Popen(app_args, creationflags=creationflags, close_fds=True)
+            # Không dùng cờ DETACHED_PROCESS cho trình duyệt để đảm bảo cửa sổ luôn nổi lên trên cùng (foreground)
+            subprocess.Popen(app_args, close_fds=True)
             log("Browser launched.")
         else:
             log("Opening default browser...")
