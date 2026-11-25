@@ -207,12 +207,8 @@ def render_tab3(api_key, chon_model, ket_noi_wp, wp_site_url, royal_api_key, dan
             
             btn_run_kw_gap = st.button("🚀 Bắt Đầu Quét Lỗ Hổng Từ Khóa Bằng DeepSeek", type="primary", use_container_width=True)
             if btn_run_kw_gap:
-                if not api_key:
-                    st.error("Vui lòng nhập DeepSeek API Key ở thanh điều hướng bên trái!")
-                else:
-                    client_kw = OpenAI(api_key=api_key, base_url="https://api.deepseek.com")
-                    sample_covered_keys = sorted(list(unique_focus))[:60]
-                    prompt_gap = f"""Bạn là Chuyên gia Chiến lược SEO hàng đầu của thương hiệu HWOOD VIỆT NAM.
+                sample_covered_keys = sorted(list(unique_focus))[:60]
+                prompt_gap = f"""Bạn là Chuyên gia Chiến lược SEO hàng đầu của thương hiệu HWOOD VIỆT NAM.
 
 DANH SÁCH CÁC TỪ KHÓA CHÍNH HIỆN ĐANG ĐƯỢC PHỦ TRÊN WEBSITE HWOOD.VN:
 {sample_covered_keys}
@@ -232,6 +228,13 @@ NHIỆM VỤ CỦA BẠN (KEYWORD GAP ANALYSIS & EXPANSION CHO NĂM 2026):
 
 Hãy trình bày rõ ràng, súc tích bằng markdown."""
 
+                from modules.antigravity_bridge import is_antigravity_mode, save_antigravity_prompt
+                if is_antigravity_mode(api_key):
+                    save_antigravity_prompt("keyword_gap", "Phân tích lỗ hổng từ khóa HWOOD", prompt_gap)
+                    st.session_state["ag_tab3_prompt"] = prompt_gap
+                else:
+                    client_kw = OpenAI(api_key=api_key, base_url="https://api.deepseek.com")
+
                     with st.spinner("🤖 DeepSeek đang phân tích khoảng trống từ khóa (Keyword Gap)... Vui lòng chờ vài giây!"):
                         try:
                             from modules.ai_engine import goi_chat_completion_an_toan
@@ -246,6 +249,20 @@ Hãy trình bày rõ ràng, súc tích bằng markdown."""
                             st.success("🎉 Đã phân tích xong khoảng trống từ khóa!")
                         except Exception as ex_gap:
                             st.error(f"Lỗi phân tích AI: {ex_gap}")
+
+            if st.session_state.get("ag_tab3_prompt"):
+                from modules.antigravity_bridge import render_antigravity_panel
+                pasted_gap = render_antigravity_panel(
+                    task_key="tab3_gap",
+                    title="Phân tích lỗ hổng từ khóa (Keyword Gap)",
+                    prompt_text=st.session_state["ag_tab3_prompt"],
+                    paste_label="📥 Dán kết quả phân tích từ khóa từ Antigravity vào đây:",
+                    apply_label="✅ Hiển thị kết quả phân tích",
+                )
+                if pasted_gap:
+                    st.session_state.kw_ai_suggestions = pasted_gap
+                    st.session_state["ag_tab3_prompt"] = ""
+                    st.rerun()
 
             if st.session_state.kw_ai_suggestions:
                 st.markdown("---")
