@@ -521,6 +521,11 @@ def render_tab8():
             dwell_min = st.number_input("Thời gian đọc trang tối thiểu (giây):", 1, 300, def_dwell_min)
             dwell_max = st.number_input("Thời gian đọc trang tối đa (giây):", 2, 600, def_dwell_max)
             visit_pages = st.checkbox("Vào trang hwood.vn đọc nội dung khi thấy", value=def_visit)
+            deep_browse = st.checkbox(
+                "🛒 Tương tác sâu như khách thật (Bấm xem thêm sản phẩm, menu nav, bài viết liên quan)",
+                value=True,
+                help="Trong thời gian ở lại trang (60-90s), bot sẽ cuộn đọc bài viết đầu tiên ~30s, sau đó tự động tìm và bấm vào menu sản phẩm trên thanh nav hoặc các sản phẩm tương tự trên hwood.vn như người dùng thật trước khi chuyển từ khóa khác. Giúp giảm Bounce Rate về 0% và tăng Pageviews/Session trên Google Analytics!"
+            )
             click_zalo = st.checkbox("💬 Bấm nút/icon Zalo OA sau khi đọc bài (Tăng traffic Zalo)", value=False, help="Sau khi đọc bài xong đủ thời gian dwell time, bot sẽ tìm nút Zalo trong bài viết hoặc icon Zalo nổi ở góc phải để bấm vào, giúp tăng chuyển đổi và traffic Zalo OA.")
             headless = st.checkbox("Chạy ẩn (Bỏ chọn để hiện cửa sổ trình duyệt trên màn hình)", value=False)
 
@@ -531,6 +536,7 @@ def render_tab8():
             "dwell_min": int(dwell_min),
             "dwell_max": int(dwell_max),
             "visit_pages": bool(visit_pages),
+            "deep_browse": bool(deep_browse),
             "click_zalo": bool(click_zalo),
             "headless": bool(headless),
         }
