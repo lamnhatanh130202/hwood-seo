@@ -207,7 +207,11 @@ KHO_TRI_THUC, so_luong_file, ds_file = nạp_tri_thuc()
 # 4. THANH ĐIỀU HƯỚNG BÊN TRÁI (SIDEBAR)
 # ==============================================================================
 with st.sidebar:
-    st.image("https://img.icons8.com/fluency/96/wood.png", width=60)
+    logo_path = os.path.join(os.path.dirname(__file__), "hwood_app_icon.png")
+    if os.path.exists(logo_path):
+        st.image(logo_path, width=70)
+    else:
+        st.image("https://img.icons8.com/fluency/96/wood.png", width=60)
     st.title("HWOOD SEO Control")
 
     if st.button("🔄 Làm mới trang (F5)", key="sidebar_btn_f5", use_container_width=True, help="Tải lại toàn bộ ứng dụng và dữ liệu mới nhất (như phím F5 hoặc Ctrl+R)"):
