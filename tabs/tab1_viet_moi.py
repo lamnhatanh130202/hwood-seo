@@ -10,7 +10,14 @@ from modules.ai_engine import (
     goi_ai_tao_va_noi_bai,
     viet_tiep_bai_dang_do,
     thuc_hien_tinh_chinh_ai,
-    tao_bai_viet_hwood_chuan_seo
+    tao_bai_viet_hwood_chuan_seo,
+    tao_prompt_bai_viet_hwood,
+    chuan_hoa_ket_qua_bai_viet,
+)
+from modules.antigravity_bridge import (
+    is_antigravity_mode,
+    save_antigravity_prompt,
+    render_antigravity_panel,
 )
 from modules.file_handler import (
     doc_noi_dung_file_dinh_kem, 
@@ -487,10 +494,28 @@ def render_tab1(api_key, chon_model, ket_noi_wp, wp_site_url, royal_api_key, dan
                     st.rerun()
 
         if nut_viet_bai:
-            if not api_key:
-                st.error("⚠️ Vui lòng nhập DeepSeek API Key ở thanh bên trái trước khi bắt đầu!")
-            elif not tu_khoa.strip():
+            if not tu_khoa.strip():
                 st.warning("⚠️ Vui lòng nhập từ khóa hoặc chủ đề cần viết bài!")
+            elif is_antigravity_mode(api_key):
+                kh_item = st.session_state.get("ke_hoach_item_dang_viet") or {}
+                tieu_de_kh = kh_item.get("tieu_de", "") or st.session_state.get("bai_duoc_chuyen_sang_tab1", "")
+                sys_p, usr_p = tao_prompt_bai_viet_hwood(
+                    tu_khoa=tu_khoa.strip(),
+                    the_loai_bai=the_loai_bai,
+                    do_dai_bai=do_dai_bai,
+                    danh_sach_bai_viet_wp=danh_sach_bai_viet_wp,
+                    tieu_de=tieu_de_kh,
+                    tu_khoa_phu=kh_item.get("tu_khoa_phu", []),
+                    ghi_chu_chien_luoc=kh_item.get("ghi_chu", ""),
+                    search_intent=kh_item.get("search_intent", ""),
+                    cum_chu_de=kh_item.get("cum_chu_de", ""),
+                    toi_uu_token=toi_uu_token,
+                )
+                full_prompt = f"{sys_p}\n\n---\nYÊU CẦU CỤ THỂ:\n{usr_p}"
+                save_antigravity_prompt("viet_bai", tu_khoa.strip(), full_prompt, {"tieu_de": tieu_de_kh})
+                st.session_state["ag_tab1_prompt"] = full_prompt
+                st.session_state["ag_tab1_kw"] = tu_khoa.strip()
+                st.session_state["ag_tab1_title"] = tieu_de_kh
             else:
                 with st.spinner("🤖 Trợ lý AI đang nghiên cứu dữ liệu chuyên sâu HWOOD và viết bài (Tự động nối tiếp nếu bài dài)..."):
                     try:
@@ -533,6 +558,27 @@ def render_tab1(api_key, chon_model, ket_noi_wp, wp_site_url, royal_api_key, dan
                             st.error("❌ **Hết số dư tài khoản DeepSeek (Error 402: Insufficient Balance):** Tài khoản API của bạn đã hết tiền. Vui lòng nạp thêm tiền tại [platform.deepseek.com](https://platform.deepseek.com) hoặc đổi API Key khác ở thanh bên trái!")
                         else:
                             st.error(f"❌ Đã xảy ra lỗi trong quá trình tạo bài viết: {e}")
+
+        if st.session_state.get("ag_tab1_prompt"):
+            pasted_ag_html = render_antigravity_panel(
+                task_key="tab1_write",
+                title=f"Viết bài SEO cho từ khóa '{st.session_state.get('ag_tab1_kw', '')}'",
+                prompt_text=st.session_state["ag_tab1_prompt"],
+                paste_label="📥 Dán mã HTML bài viết Antigravity vừa tạo vào đây:",
+                apply_label="✅ Nạp Bài Viết Chuẩn Hóa & Xem Trước",
+            )
+            if pasted_ag_html:
+                ag_kw = st.session_state.get("ag_tab1_kw", tu_khoa.strip() or "hwood")
+                ag_title = st.session_state.get("ag_tab1_title", "")
+                bv_done, mt_done, md_done = chuan_hoa_ket_qua_bai_viet(pasted_ag_html, ag_kw, tieu_de=ag_title)
+                st.session_state.noi_dung_bai_viet = bv_done
+                st.session_state.tu_khoa_hien_tai = ag_kw
+                st.session_state.meta_title = mt_done
+                st.session_state.meta_desc = md_done
+                st.session_state.bai_duoc_chuyen_sang_tab1 = None
+                st.session_state["ag_tab1_prompt"] = ""
+                st.success("🎉 Đã chuẩn hóa HTML, tạo Meta Yoast SEO và nạp bài viết thành công!")
+                st.rerun()
 
         # Hiển thị bài viết nếu đã có nội dung
         if st.session_state.noi_dung_bai_viet:
@@ -875,8 +921,18 @@ def render_tab1(api_key, chon_model, ket_noi_wp, wp_site_url, royal_api_key, dan
             if nut_sua_bai:
                 if not gop_y_text.strip() and not file_dinh_kem_tab1:
                     st.warning("⚠️ Vui lòng nhập nội dung góp ý hoặc đính kèm file/ảnh trước khi bấm sửa!")
-                elif not api_key:
-                    st.error("⚠️ Thiếu DeepSeek API Key trong thanh điều hướng bên trái!")
+                elif is_antigravity_mode(api_key):
+                    f_tab1_text, _, _ = doc_noi_dung_file_dinh_kem(file_dinh_kem_tab1) if file_dinh_kem_tab1 else ("", "", None)
+                    edit_prompt = (
+                        f"Bạn là Chuyên gia Biên tập SEO HWOOD VIỆT NAM.\n"
+                        f"Từ khóa bài viết: {tu_khoa_goc}\n"
+                        f"Chế độ sửa: {che_do_param_tab1}\n\n"
+                        f"YÊU CẦU GÓP Ý CẦN CHỈNH SỬA:\n{gop_y_text}\n{f_tab1_text}\n\n"
+                        f"MÃ HTML BÀI VIẾT HIỆN TẠI:\n{st.session_state.noi_dung_bai_viet}\n\n"
+                        f"Hãy trả về toàn bộ mã HTML bài viết sau khi đã chỉnh sửa chuẩn HWOOD (giữ #2e7d32, VAT 8%, Hotline 0912 565 353, không dùng thẻ H1)."
+                    )
+                    save_antigravity_prompt("sua_bai", tu_khoa_goc, edit_prompt)
+                    st.session_state["ag_tab1_edit_prompt"] = edit_prompt
                 else:
                     with st.spinner("🤖 Đang đọc góp ý, phân tích tài liệu và xử lý..."):
                         try:
@@ -901,6 +957,22 @@ def render_tab1(api_key, chon_model, ket_noi_wp, wp_site_url, royal_api_key, dan
                                 st.warning(msg_edit)
                         except Exception as ex_edit:
                             st.error(f"Lỗi khi tinh chỉnh bài viết: {ex_edit}")
+
+            if st.session_state.get("ag_tab1_edit_prompt"):
+                pasted_edit = render_antigravity_panel(
+                    task_key="tab1_edit",
+                    title=f"Tinh chỉnh bài viết '{tu_khoa_goc}'",
+                    prompt_text=st.session_state["ag_tab1_edit_prompt"],
+                    paste_label="📥 Dán mã HTML đã tinh chỉnh từ Antigravity vào đây:",
+                    apply_label="✅ Cập nhật Bài Viết",
+                )
+                if pasted_edit:
+                    bv_ed = chuan_hoa_bang_html_hwood(pasted_edit)
+                    st.session_state.noi_dung_bai_viet = bv_ed
+                    luu_bai_viet_lich_su(tu_khoa_goc, bv_ed, st.session_state.meta_title, st.session_state.meta_desc, gop_y_note="Tinh chỉnh qua Antigravity")
+                    st.session_state["ag_tab1_edit_prompt"] = ""
+                    st.success("🎉 Đã cập nhật bài viết sau tinh chỉnh!")
+                    st.rerun()
 
 
     with tab_manual_writer:
