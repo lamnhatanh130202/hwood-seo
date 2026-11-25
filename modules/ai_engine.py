@@ -343,36 +343,19 @@ LƯU Ý QUAN TRỌNG:
         return patched_html, ok, msg
 
 
-def tao_bai_viet_hwood_chuan_seo(
-    tu_khoa, 
-    the_loai_bai="🤖 Tự động nhận diện theo từ khóa (Mặc định)", 
-    do_dai_bai="Tiêu chuẩn SEO (1.300 - 1.600 từ)", 
-    api_key="", 
-    chon_model="deepseek-flash", 
+def tao_prompt_bai_viet_hwood(
+    tu_khoa,
+    the_loai_bai="🤖 Tự động nhận diện theo từ khóa (Mặc định)",
+    do_dai_bai="Tiêu chuẩn SEO (1.300 - 1.600 từ)",
     danh_sach_bai_viet_wp=None,
     tieu_de="",
     tu_khoa_phu=None,
     ghi_chu_chien_luoc="",
     search_intent="",
     cum_chu_de="",
-    toi_uu_token=True
+    toi_uu_token=True,
 ):
-    """
-    Hàm tạo bài viết SEO chuẩn toàn diện của HWOOD VIỆT NAM:
-    - Tích hợp Skill Tiết Kiệm Token (Knowledge Graph Prompt Optimizer): Giảm 50% - 70% token đầu vào
-    - Vận hành qua Hội đồng 5 Bot phản biện độc lập
-    - Tuân thủ nghiêm ngặt 3 Phần Quy Chuẩn (Kỹ thuật/Thương hiệu, Yoast SEO/GEO, Giao diện HTML #2e7d32)
-    - Tự động nối tiếp nếu bài dài (Auto-Continuation)
-    - Chuẩn hóa bảng HTML HWOOD (#2e7d32, chữ trắng, viền #cccccc, cột đầu tiên #1a2e22 bold, ĐIỀN ĐỦ RUỘT)
-    - Tự động tạo Meta Title & Meta Description đạt chuẩn Yoast SEO
-    - Tự động lưu vào lịch sử bài viết
-    """
-    if not api_key:
-        raise ValueError("Thiếu API Key để tạo bài viết!")
-    if not tu_khoa or not tu_khoa.strip():
-        raise ValueError("Thiếu từ khóa SEO!")
-        
-    client = OpenAI(api_key=api_key, base_url="https://api.deepseek.com", timeout=90.0)
+    """Tạo (system_prompt, user_msg) chuẩn HWOOD dùng chung cho cả DeepSeek API và Antigravity Bridge."""
     clean_kw = tu_khoa.strip()
 
     internal_links_context = ""
@@ -382,7 +365,6 @@ def tao_bai_viet_hwood_chuan_seo(
             "(CHỌN 1-2 BÀI LIÊN QUAN ĐỂ CHÈN INTERNAL LINK CHUẨN: "
             "'Xem chi tiết quy cách & báo giá tại → <a href=\"...\">[Tên sản phẩm]</a>'):\n"
         )
-        # Nếu bật tối ưu token: chỉ lấy 4 bài liên quan nhất thay vì 8
         limit_links = 4 if toi_uu_token else 8
         filtered_links = []
         kw_lower = clean_kw.lower()
@@ -395,7 +377,6 @@ def tao_bai_viet_hwood_chuan_seo(
         for _, t, l in filtered_links[:limit_links]:
             internal_links_context += f"- {t}: {l}\n"
 
-    # Trích xuất tri thức chuyên sâu (ưu tiên tri thức tinh gọn nếu bật tối ưu token)
     if toi_uu_token:
         tri_thuc_chuyen_sau = lay_tri_thuc_tinh_gon(clean_kw)
         if not tri_thuc_chuyen_sau:
@@ -559,18 +540,12 @@ THÔNG TIN BÀI VIẾT CẦN TẠO:
     if ghi_chu_chien_luoc:
         user_msg += f" Định hướng chiến lược bắt buộc: '{ghi_chu_chien_luoc}'."
     user_msg += f" Định dạng thể loại: {the_loai_bai}. YÊU CẦU ĐỘ DÀI: {do_dai_bai}. BẮT BUỘC khống chế độ dài bài viết đúng trong khoảng {do_dai_bai} (khoảng 5 - 6 mục H2 trọng tâm, không viết lan man quá dài). BẮT BUỘC viết đầy đủ trọn vẹn từ Mục lục, Khối trả lời nhanh, Nội dung, Bảng CÓ ĐẦY ĐỦ RUỘT VÀ SỐ LIỆU (TUYỆT ĐỐI KHÔNG ĐỂ TRỐNG BẢNG), FAQ có JSON-LD Schema đến Khối CTA Zalo OA 0912 565 353 cuối bài. CHỈ xuất mã HTML sạch, không viết lời thoại mở đầu hay kết thúc. BẮT BUỘC BỎ HOÀN TOÀN gợi ý vị trí chèn ảnh hoặc placeholder hình ảnh để tiết kiệm tối đa token out."
+    return system_prompt, user_msg
 
-    noi_dung_bai = goi_ai_tao_va_noi_bai(
-        client=client,
-        model=chon_model,
-        messages=[
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": user_msg}
-        ],
-        max_tokens=8192
-    )
 
-    clean_html, _, _ = parse_and_apply_patch("", noi_dung_bai)
+def chuan_hoa_ket_qua_bai_viet(raw_html, clean_kw, tieu_de=""):
+    """Chuẩn hóa HTML, tạo Meta Title/Desc và lưu vào lịch sử bài viết."""
+    clean_html, _, _ = parse_and_apply_patch("", raw_html)
     from modules.media_planner import xoa_hop_placeholder_anh
     clean_html = xoa_hop_placeholder_anh(clean_html)
 
@@ -578,7 +553,6 @@ THÔNG TIN BÀI VIẾT CẦN TẠO:
     from modules.knowledge import viet_hoa_tieu_de
     from modules.history_manager import luu_bai_viet_lich_su
 
-    # Tự động chuẩn hóa toàn bộ các bảng trong bài theo chuẩn giao diện HWOOD
     noi_dung_bai = chuan_hoa_bang_html_hwood(clean_html)
 
     if tieu_de:
@@ -597,3 +571,50 @@ THÔNG TIN BÀI VIẾT CẦN TẠO:
 
     luu_bai_viet_lich_su(clean_kw, noi_dung_bai, meta_title, meta_desc)
     return noi_dung_bai, meta_title, meta_desc
+
+
+def tao_bai_viet_hwood_chuan_seo(
+    tu_khoa,
+    the_loai_bai="🤖 Tự động nhận diện theo từ khóa (Mặc định)",
+    do_dai_bai="Tiêu chuẩn SEO (1.300 - 1.600 từ)",
+    api_key="",
+    chon_model="deepseek-flash",
+    danh_sach_bai_viet_wp=None,
+    tieu_de="",
+    tu_khoa_phu=None,
+    ghi_chu_chien_luoc="",
+    search_intent="",
+    cum_chu_de="",
+    toi_uu_token=True,
+):
+    """Tạo bài viết SEO chuẩn HWOOD qua DeepSeek API."""
+    if not api_key:
+        raise ValueError("Thiếu API Key để tạo bài viết!")
+    if not tu_khoa or not tu_khoa.strip():
+        raise ValueError("Thiếu từ khóa SEO!")
+
+    client = OpenAI(api_key=api_key, base_url="https://api.deepseek.com", timeout=90.0)
+    clean_kw = tu_khoa.strip()
+    system_prompt, user_msg = tao_prompt_bai_viet_hwood(
+        tu_khoa=clean_kw,
+        the_loai_bai=the_loai_bai,
+        do_dai_bai=do_dai_bai,
+        danh_sach_bai_viet_wp=danh_sach_bai_viet_wp,
+        tieu_de=tieu_de,
+        tu_khoa_phu=tu_khoa_phu,
+        ghi_chu_chien_luoc=ghi_chu_chien_luoc,
+        search_intent=search_intent,
+        cum_chu_de=cum_chu_de,
+        toi_uu_token=toi_uu_token,
+    )
+
+    noi_dung_bai = goi_ai_tao_va_noi_bai(
+        client=client,
+        model=chon_model,
+        messages=[
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": user_msg},
+        ],
+        max_tokens=8192,
+    )
+    return chuan_hoa_ket_qua_bai_viet(noi_dung_bai, clean_kw, tieu_de=tieu_de)
