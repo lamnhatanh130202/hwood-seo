@@ -383,6 +383,19 @@ class BotWorker(threading.Thread):
                 return u.split('?')[0].split('#')[0].replace(/\/$/, '');
             }
 
+            // Hàm kiểm tra domain thực sự có phải hwood.vn không (tránh bắt nhầm đối thủ)
+            function isHwoodHost(u) {
+                if (!u) return false;
+                try {
+                    const parsed = new URL(u.startsWith('http') ? u : 'https://' + u.replace(/^\/+/, ''));
+                    const host = parsed.hostname.toLowerCase().replace(/^www\./, '');
+                    return host === 'hwood.vn' || host.endsWith('.hwood.vn');
+                } catch(e) {
+                    const m = u.toLowerCase().match(/^(?:https?:\/\/)?(?:www\.)?([^\/:?#]+)/);
+                    return m ? (m[1] === 'hwood.vn' || m[1].endsWith('.hwood.vn')) : false;
+                }
+            }
+
             // Quét tất cả các khối kết quả xuất hiện trên trang, lọc sạch để tránh trùng lặp giữa card cha và con
             const rawCards = Array.from(document.querySelectorAll('[data-attrid*="overview"], [aria-label*="AI"], .c2xzTb, .xpdopen, div.MjjYud, div.g, div.tF2Cxc'));
             const cards = [];
@@ -393,28 +406,29 @@ class BotWorker(threading.Thread):
 
             let pos = 0;
             cards.forEach(card => {
-                // Bỏ qua các khối ô tìm kiếm, form nhập liệu hoặc voice search prompt của Google
+                // Bỏ qua các khối ô tìm kiếm, form nhập liệu, quảng cáo (Sponsored) hoặc People Also Ask
                 if (card.querySelector('input, textarea, form, [role="search"]')) return;
+                if (card.closest('#tads, #bottomads, [data-text-ad], [aria-label="Ads"]') || card.matches('[data-text-ad]')) return;
+                if (card.closest('.related-question-pair, [data-initq]') || card.matches('.related-question-pair')) return;
                 const cardTextRaw = (card.innerText || '').trim();
                 if (cardTextRaw.startsWith('Bạn nói:') || cardTextRaw.includes('Tìm kiếm có liên quan')) return;
+                if (/^(Được tài trợ|Sponsored|Quảng cáo)\b/i.test(cardTextRaw)) return;
 
                 const links = Array.from(card.querySelectorAll('a'));
                 if (links.length === 0) return;
 
-                const cardText = cardTextRaw.toLowerCase();
                 const citeEl = card.querySelector('cite');
                 const citeText = (citeEl ? citeEl.innerText : '').toLowerCase();
-                const imgAlt = Array.from(card.querySelectorAll('img')).map(i => (i.alt || i.title || '').toLowerCase()).join(' ');
 
                 // Hàm lọc URL HWOOD chuẩn: phân tách bài viết thật vs trang chủ
                 function isRealHwoodArticle(u) {
-                    if (!u || !u.toLowerCase().includes('hwood.vn')) return false;
+                    if (!isHwoodHost(u)) return false;
                     const clean = u.replace(/^https?:\/\//i, '').replace(/^www\./i, '').split('?')[0].split('#')[0].replace(/\/+$/, '');
                     return clean !== 'hwood.vn' && clean.length > 'hwood.vn'.length;
                 }
 
                 function isBareHwoodHome(u) {
-                    if (!u || !u.toLowerCase().includes('hwood.vn')) return false;
+                    if (!isHwoodHost(u)) return false;
                     const clean = u.replace(/^https?:\/\//i, '').replace(/^www\./i, '').split('?')[0].split('#')[0].replace(/\/+$/, '');
                     return clean === 'hwood.vn';
                 }
@@ -463,13 +477,9 @@ class BotWorker(threading.Thread):
                     }
                 }
 
-                // Nhận diện HWOOD toàn diện: qua link, thẻ <cite>, tiêu đề/mô tả hoặc logo
+                // Nhận diện HWOOD chính xác theo domain URL hoặc thẻ <cite> (không bắt theo chữ 'hwood' trong văn bản của đối thủ)
                 const isCardHwood = Boolean(articleUrl || homeUrl)
-                    || citeText.includes('hwood.vn')
-                    || cardText.includes('hwood.vn')
-                    || cardText.includes('hwood việt nam')
-                    || cardText.includes('hwood')
-                    || imgAlt.includes('hwood');
+                    || /(?:^|[\s\/.])hwood\.vn\b/i.test(citeText);
 
                 let bestLink = null;
                 let bestUrl = '';
@@ -487,7 +497,7 @@ class BotWorker(threading.Thread):
                         // Thử quét lại toàn bộ link thẻ a
                         for (let a of links) {
                             let u = cleanGoogleUrl(a.href || a.getAttribute('href') || a.getAttribute('data-url') || '');
-                            if (u && u.toLowerCase().includes('hwood.vn')) {
+                            if (isHwoodHost(u)) {
                                 if (isRealHwoodArticle(u)) {
                                     bestUrl = u;
                                     bestLink = a;
@@ -567,10 +577,11 @@ class BotWorker(threading.Thread):
                 });
             });
 
-            // 3. Quét dự phòng toàn bộ các liên kết hwood.vn còn lại trên trang (đảm bảo không bao giờ bỏ sót)
+            // 3. Quét dự phòng toàn bộ các liên kết hwood.vn còn lại trên trang (đảm bảo không bao giờ bỏ sót, trừ quảng cáo)
             document.querySelectorAll('a').forEach(a => {
+                if (a.closest('#tads, #bottomads, [data-text-ad], [aria-label="Ads"]')) return;
                 let u = cleanGoogleUrl(a.href || a.getAttribute('href') || a.getAttribute('data-url') || '');
-                if (!u.toLowerCase().includes('hwood.vn')) return;
+                if (!isHwoodHost(u)) return;
                 if (seenUrls.has(u)) return;
                 seenUrls.add(u);
                 pos += 1;
@@ -910,20 +921,24 @@ class BotWorker(threading.Thread):
                     self._log(f"🎯 Đã khóa vị trí bài viết HWOOD ({source_label}), chuẩn bị click vào trang...")
                     human_sleep(1.2, 2.0)
 
-                    # Bấm chuẩn xác vào thẻ <a> liên kết (hoặc chính nó)
+                    # Bấm chuẩn xác bằng click chuột thật của Playwright trước, fallback sang JS click nếu bị che
                     try:
-                        page.evaluate("""(el) => {
-                            if (!el) return;
-                            const a = el.closest('a') || el.querySelector('a') || el;
-                            a.click();
-                        }""", target_locator.element_handle())
+                        target_locator.click(timeout=3500)
                         clicked = True
                     except Exception:
                         try:
-                            target_locator.click(force=True, timeout=2500)
+                            page.evaluate("""(el) => {
+                                if (!el) return;
+                                const a = el.closest('a') || el.querySelector('a') || el;
+                                a.click();
+                            }""", target_locator.element_handle())
                             clicked = True
                         except Exception:
-                            clicked = False
+                            try:
+                                target_locator.click(force=True, timeout=2500)
+                                clicked = True
+                            except Exception:
+                                clicked = False
 
                     # Chờ hoàn tất chuyển hướng sang domain hwood.vn
                     # Sử dụng wait_for_timeout để Playwright CDP event loop cập nhật URL và tab mới kịp thời
