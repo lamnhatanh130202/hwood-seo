@@ -215,6 +215,13 @@ with st.sidebar:
     st.title("HWOOD SEO Control")
 
     if st.button("🔄 Làm mới trang (F5)", key="sidebar_btn_f5", use_container_width=True, help="Tải lại toàn bộ ứng dụng và dữ liệu mới nhất (như phím F5 hoặc Ctrl+R)"):
+        import importlib, sys as _sys_reload
+        for _mod_name in list(_sys_reload.modules.keys()):
+            if _mod_name.startswith("tabs.") or _mod_name.startswith("modules."):
+                try:
+                    importlib.reload(_sys_reload.modules[_mod_name])
+                except Exception:
+                    pass
         st.rerun()
 
     # 1. Chọn nguồn AI: Antigravity (Miễn phí) hoặc DeepSeek API Key
