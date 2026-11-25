@@ -100,8 +100,15 @@ def render_tab5(api_key, chon_model, ket_noi_wp, wp_site_url, royal_api_key, wp_
                         st.rerun()
                 with c_act2b:
                     if st.button("⏩ Viết tiếp bài này", key=f"cont_history_{item_id}", use_container_width=True, help="Nếu bài viết này bị dừng giữa chừng, bấm để AI viết tiếp liền mạch đến hết bài!"):
-                        if not api_key:
-                            st.error("Thiếu DeepSeek API Key!")
+                        from modules.antigravity_bridge import is_antigravity_mode, save_antigravity_prompt
+                        if is_antigravity_mode(api_key):
+                            cont_prompt = (
+                                f"Bạn là Chuyên gia Biên tập HWOOD VIỆT NAM.\n"
+                                f"Bài viết về '{tieu_de_bai}' đang bị ngắt giữa chừng. Hãy viết tiếp liền mạch từ đoạn cuối dưới đây cho đến hết bài (kèm FAQ JSON-LD Schema và CTA Hotline 0912 565 353):\n\n"
+                                f"{noi_dung_bai[-1500:]}"
+                            )
+                            save_antigravity_prompt("viet_tiep_lich_su", tieu_de_bai, cont_prompt)
+                            st.info("🚀 Đã lưu Prompt viết tiếp vào `ai_requests/latest_prompt.md`! Nhắn Antigravity xử lý rồi dán vào Tab 1 để lưu.")
                         else:
                             with st.spinner("🤖 Đang viết tiếp phần còn thiếu và nối liền mạch... Vui lòng đợi vài giây!"):
                                 try:
@@ -441,10 +448,17 @@ def render_tab5(api_key, chon_model, ket_noi_wp, wp_site_url, royal_api_key, wp_
 
                     btn_do_fb = st.button("🚀 Gửi Góp Ý & Cập Nhật Lại Bài Viết Bằng AI", key=f"btn_apply_fb_{item_id}", type="primary", use_container_width=True)
                     if btn_do_fb:
+                        from modules.antigravity_bridge import is_antigravity_mode, save_antigravity_prompt
                         if not fb_text.strip() and not fb_file:
                             st.warning("⚠️ Vui lòng nhập nội dung góp ý hoặc đính kèm file/ảnh trước khi bấm sửa!")
-                        elif not api_key:
-                            st.error("⚠️ Thiếu DeepSeek API Key trong thanh điều hướng bên trái!")
+                        elif is_antigravity_mode(api_key):
+                            f_text, _, _ = doc_noi_dung_file_dinh_kem(fb_file) if fb_file else ("", "", None)
+                            fb_prompt = (
+                                f"Chỉnh sửa bài viết HWOOD '{tieu_de_bai}' theo góp ý:\n{fb_text}\n{f_text}\n\n"
+                                f"HTML HIỆN TẠI:\n{noi_dung_bai}"
+                            )
+                            save_antigravity_prompt("sua_bai_lich_su", tieu_de_bai, fb_prompt)
+                            st.info("🚀 Đã lưu Prompt chỉnh sửa vào `ai_requests/latest_prompt.md`! Nhắn Antigravity xử lý rồi chuyển sang Tab 1 để dán HTML mới.")
                         else:
                             with st.spinner("🤖 Đang đọc góp ý, phân tích tài liệu và xử lý..."):
                                 try:
