@@ -342,22 +342,18 @@ def render_tab2(api_key, chon_model, ket_noi_wp, wp_site_url, royal_api_key, kho
                     st.session_state["toi_uu_token_tab2"] = toi_uu_token_tab2
                 
                 if btn_audit:
-                    if not api_key:
-                        st.error("Vui lòng nhập DeepSeek API Key!")
-                    else:
-                        client = OpenAI(api_key=api_key, base_url="https://api.deepseek.com")
-                        f_aud_content = ""
-                        if file_audit_tab2:
-                            f_aud_content, _, _ = doc_noi_dung_file_dinh_kem(file_audit_tab2)
-                        
-                        if toi_uu_token_tab2:
-                            tri_thuc_tab2 = lay_tri_thuc_tinh_gon(item_dang_chon['title'])
-                            if not tri_thuc_tab2:
-                                tri_thuc_tab2 = lay_tri_thuc_phu_hop(item_dang_chon['title'])
-                        else:
+                    f_aud_content = ""
+                    if file_audit_tab2:
+                        f_aud_content, _, _ = doc_noi_dung_file_dinh_kem(file_audit_tab2)
+
+                    if toi_uu_token_tab2:
+                        tri_thuc_tab2 = lay_tri_thuc_tinh_gon(item_dang_chon['title'])
+                        if not tri_thuc_tab2:
                             tri_thuc_tab2 = lay_tri_thuc_phu_hop(item_dang_chon['title'])
-                        
-                        prompt_audit = f"""Bạn là Giám đốc SEO và Chuyên gia Kiểm toán Nội dung cao cấp của HWOOD VIỆT NAM.
+                    else:
+                        tri_thuc_tab2 = lay_tri_thuc_phu_hop(item_dang_chon['title'])
+
+                    prompt_audit = f"""Bạn là Giám đốc SEO và Chuyên gia Kiểm toán Nội dung cao cấp của HWOOD VIỆT NAM.
 
 DƯỚI ĐÂY LÀ NỘI DUNG ĐANG CÓ TRÊN WEBSITE HWOOD.VN:
 Tiêu đề: {item_dang_chon['title']}
@@ -386,6 +382,13 @@ NHIỆM VỤ CỦA BẠN (CONTENT AUDIT & REFRESH THEO CHUẨN 2026):
    - KHÔNG bọc mã trong markdown ```html, hãy trả về trực tiếp.
 
 Hãy trình bày phần 1 bên trong thẻ <!-- AUDIT_REPORT -->...<!-- END_AUDIT_REPORT --> và phần 2 là mã HTML bài viết mới."""
+
+                    from modules.antigravity_bridge import is_antigravity_mode, save_antigravity_prompt
+                    if is_antigravity_mode(api_key):
+                        save_antigravity_prompt("kham_bai", item_dang_chon['title'], prompt_audit)
+                        st.session_state["ag_tab2_prompt"] = prompt_audit
+                    else:
+                        client = OpenAI(api_key=api_key, base_url="https://api.deepseek.com")
 
                         with st.spinner("🤖 AI đang phân tích bài cũ và tái cấu trúc nội dung chuẩn SEO HWOOD... Vui lòng chờ vài giây!"):
                             try:
@@ -421,6 +424,33 @@ Hãy trình bày phần 1 bên trong thẻ <!-- AUDIT_REPORT -->...<!-- END_AUDI
 
                             except Exception as ex_audit:
                                 st.error(f"Lỗi phân tích: {ex_audit}")
+
+                if st.session_state.get("ag_tab2_prompt"):
+                    from modules.antigravity_bridge import render_antigravity_panel
+                    pasted_aud = render_antigravity_panel(
+                        task_key="tab2_audit",
+                        title=f"Kiểm toán & nâng cấp bài '{item_dang_chon['title'][:45]}'",
+                        prompt_text=st.session_state["ag_tab2_prompt"],
+                        paste_label="📥 Dán kết quả Kiểm toán + HTML mới từ Antigravity vào đây:",
+                        apply_label="✅ Nạp Bản Nâng Cấp & Xem Trước",
+                    )
+                    if pasted_aud:
+                        bao_cao = ""
+                        noi_dung_moi = pasted_aud
+                        if "<!-- AUDIT_REPORT -->" in pasted_aud and "<!-- END_AUDIT_REPORT -->" in pasted_aud:
+                            parts = pasted_aud.split("<!-- END_AUDIT_REPORT -->")
+                            bao_cao = parts[0].replace("<!-- AUDIT_REPORT -->", "").strip()
+                            noi_dung_moi = parts[1].strip()
+                        if noi_dung_moi.startswith("```"):
+                            lines_m = noi_dung_moi.splitlines()
+                            if lines_m[0].startswith("```"): lines_m = lines_m[1:]
+                            if lines_m and lines_m[-1].strip() == "```": lines_m = lines_m[:-1]
+                            noi_dung_moi = "\n".join(lines_m).strip()
+                        st.session_state.bao_cao_audit = bao_cao
+                        st.session_state.noi_dung_toi_uu = noi_dung_moi
+                        st.session_state["ag_tab2_prompt"] = ""
+                        st.success("🎉 Đã nạp báo cáo kiểm toán & mã HTML nâng cấp!")
+                        st.rerun()
 
                 # Hiển thị kết quả tối ưu từ AI
                 if st.session_state.noi_dung_toi_uu:
