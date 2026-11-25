@@ -507,7 +507,7 @@ def render_tab8():
             def_visit = False
             def_pages = 3
         else:
-            def_dwell_min, def_dwell_max = 30, 60
+            def_dwell_min, def_dwell_max = 60, 90
             def_delay_min, def_delay_max = 8, 15
             def_visit = True
             def_pages = 5
