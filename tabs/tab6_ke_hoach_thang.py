@@ -47,20 +47,41 @@ def render_tab6(api_key, chon_model, ket_noi_wp, wp_site_url, royal_api_key, dan
 
     # Xử lý khi bấm nút tạo plan bằng AI
     if btn_tao_plan:
-        if not api_key:
-            st.error("Vui lòng nhập DeepSeek API Key ở thanh điều hướng bên trái!")
+        so_bai_int = 3
+        if "4 bài" in so_bai_tuan:
+            so_bai_int = 4
+        elif "5 bài" in so_bai_tuan:
+            so_bai_int = 5
+        elif "2 bài" in so_bai_tuan:
+            so_bai_int = 2
+
+        from modules.antigravity_bridge import is_antigravity_mode, save_antigravity_prompt
+        if is_antigravity_mode(api_key):
+            ds_da_co = [b.get("title", {}).get("rendered", "") for b in (danh_sach_bai_viet_wp or [])][:40]
+            plan_prompt = (
+                f"Bạn là Giám đốc Chiến lược SEO HWOOD VIỆT NAM.\n"
+                f"Hãy lập Kế hoạch Nội dung tháng {thang_chon} ({so_bai_int} bài/tuần = {so_bai_int * 4} bài trong 4 tuần).\n"
+                f"Chủ đề trọng tâm: {chu_de_trong_tam}\n"
+                f"Các bài đã có trên hwood.vn (tránh trùng): {ds_da_co}\n\n"
+                f"TRI THỨC HWOOD:\n{kho_tri_thuc[:4000]}\n\n"
+                f"CHỈ TRẢ VỀ 1 MẢNG JSON HỢP LỆ (không thêm giải thích), mỗi phần tử gồm các key:\n"
+                f"tuan (VD: 'Tuần 1 - Thứ 2'), cum_chu_de, tu_khoa_chinh, tu_khoa_phu (mảng 3-4 từ), "
+                f"tieu_de, the_loai, search_intent, ghi_chu, trang_thai ('Chưa viết')."
+            )
+            save_antigravity_prompt("ke_hoach_thang", f"Kế hoạch {thang_chon}", plan_prompt)
+            st.session_state["ag_tab6_plan_prompt"] = plan_prompt
         else:
             with st.spinner(f"🤖 DeepSeek đang nghiên cứu ma trận từ khóa website và lập kế hoạch {thang_chon}... Vui lòng chờ vài giây!"):
                 try:
-                    so_bai_int = 3
-                    if "4 bài" in so_bai_tuan:
-                        so_bai_int = 4
-                    elif "5 bài" in so_bai_tuan:
-                        so_bai_int = 5
-                    elif "2 bài" in so_bai_tuan:
-                        so_bai_int = 2
-
                     plan_moi = tao_ke_hoach_thang_ai(
+                        api_key=api_key,
+                        model=chon_model,
+                        thang_nam=thang_chon,
+                        so_bai_int=so_bai_int,
+                        chu_de_trong_tam=chu_de_trong_tam,
+                        ds_wp=danh_sach_bai_viet_wp,
+                        kho_tri_thuc=kho_tri_thuc
+                    ) if False else tao_ke_hoach_thang_ai(
                         api_key=api_key,
                         model=chon_model,
                         thang_nam=thang_chon,
@@ -74,6 +95,35 @@ def render_tab6(api_key, chon_model, ket_noi_wp, wp_site_url, royal_api_key, dan
                     st.rerun()
                 except Exception as ex:
                     st.error(f"Lỗi khi lập kế hoạch AI: {ex}")
+
+    if st.session_state.get("ag_tab6_plan_prompt"):
+        from modules.antigravity_bridge import render_antigravity_panel
+        import json as _json_t6
+        pasted_plan = render_antigravity_panel(
+            task_key="tab6_plan",
+            title=f"Lập Kế hoạch Nội dung {thang_chon}",
+            prompt_text=st.session_state["ag_tab6_plan_prompt"],
+            paste_label="📥 Dán mảng JSON kế hoạch từ Antigravity vào đây:",
+            apply_label="✅ Lưu Kế Hoạch Tháng",
+        )
+        if pasted_plan:
+            try:
+                raw_j = pasted_plan.strip()
+                if "```" in raw_j:
+                    raw_j = raw_j.split("```")[1]
+                    if raw_j.startswith("json"):
+                        raw_j = raw_j[4:]
+                    raw_j = raw_j.strip()
+                plan_moi = _json_t6.loads(raw_j)
+                if isinstance(plan_moi, list) and len(plan_moi) > 0:
+                    luu_ke_hoach_thang(thang_chon, plan_moi)
+                    st.session_state["ag_tab6_plan_prompt"] = ""
+                    st.success(f"🎉 Đã lưu thành công Kế Hoạch {thang_chon} với {len(plan_moi)} bài viết!")
+                    st.rerun()
+                else:
+                    st.error("Dữ liệu JSON phải là một danh sách (array) các bài viết!")
+            except Exception as ex_j:
+                st.error(f"Lỗi đọc JSON kế hoạch: {ex_j}")
 
     st.markdown("---")
 
@@ -175,11 +225,33 @@ def render_tab6(api_key, chon_model, ket_noi_wp, wp_site_url, royal_api_key, dan
                         type="primary" if not is_done else "secondary"
                     )
                     if btn_write_now:
-                        if not api_key:
-                            st.error("⚠️ Vui lòng nhập DeepSeek API Key ở thanh bên trái!")
+                        kw_bai = item.get("tu_khoa_chinh", "")
+                        the_loai_bai = item.get("the_loai", "🤖 Tự động nhận diện theo từ khóa (Mặc định)")
+                        from modules.antigravity_bridge import is_antigravity_mode, save_antigravity_prompt
+                        from modules.ai_engine import tao_prompt_bai_viet_hwood
+                        if is_antigravity_mode(api_key):
+                            tieu_de_bai = item.get("tieu_de", "")
+                            sys_p, usr_p = tao_prompt_bai_viet_hwood(
+                                tu_khoa=kw_bai,
+                                the_loai_bai=the_loai_bai,
+                                do_dai_bai="Tiêu chuẩn SEO (1.300 - 1.600 từ)",
+                                danh_sach_bai_viet_wp=danh_sach_bai_viet_wp,
+                                tieu_de=tieu_de_bai,
+                                tu_khoa_phu=item.get("tu_khoa_phu", []),
+                                ghi_chu_chien_luoc=item.get("ghi_chu", ""),
+                                search_intent=item.get("search_intent", ""),
+                                cum_chu_de=item.get("cum_chu_de", ""),
+                                toi_uu_token=True,
+                            )
+                            full_p = f"{sys_p}\n\n---\nYÊU CẦU CỤ THỂ:\n{usr_p}"
+                            save_antigravity_prompt("viet_bai", kw_bai, full_p, {"tieu_de": tieu_de_bai})
+                            st.session_state["ag_tab1_prompt"] = full_p
+                            st.session_state["ag_tab1_kw"] = kw_bai
+                            st.session_state["ag_tab1_title"] = tieu_de_bai
+                            st.session_state.tu_khoa_hien_tai = kw_bai
+                            st.session_state.ke_hoach_item_dang_viet = item
+                            st.success(f"🚀 Đã tạo Prompt cho bài '{kw_bai}'! Hãy chuyển sang **Tab 1 (Viết bài mới)** để Copy Prompt & dán kết quả từ Antigravity.")
                         else:
-                            kw_bai = item.get("tu_khoa_chinh", "")
-                            the_loai_bai = item.get("the_loai", "🤖 Tự động nhận diện theo từ khóa (Mặc định)")
                             with st.status(f"🤖 Đang tạo bài viết: '{kw_bai}'...", expanded=True) as status_box:
                                 st.write("⏳ Đang nạp tri thức HWOOD và gửi yêu cầu tới DeepSeek AI...")
                                 try:
