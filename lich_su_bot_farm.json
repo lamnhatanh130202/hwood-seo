@@ -23866,5 +23866,560 @@
       }
     ],
     "trang_thai": "ok"
+  },
+  {
+    "tu_khoa": "vách tivi ốp nhựa giả đá",
+    "bot_id": "bot_02",
+    "bot_name": "Bot 2",
+    "thoi_gian": "25/11/2026 10:06:49",
+    "ket_qua_hwood": [],
+    "trang_thai": "ngoai_top_50"
+  },
+  {
+    "tu_khoa": "báo giá sàn gỗ nhựa ngoài trời",
+    "bot_id": "bot_04",
+    "bot_name": "Bot 4",
+    "thoi_gian": "25/11/2026 10:06:52",
+    "ket_qua_hwood": [],
+    "trang_thai": "ngoai_top_50"
+  },
+  {
+    "tu_khoa": "gỗ nhựa 1 lớp vs polymer vs asa",
+    "bot_id": "bot_03",
+    "bot_name": "Bot 3",
+    "thoi_gian": "25/11/2026 10:06:50",
+    "ket_qua_hwood": [
+      {
+        "position": 1,
+        "title": "Cấu Tạo Tấm Ốp Ngoài Trời: 1 Lớp Và 2 Lớp Polymer ...",
+        "url": "https://hwood.vn",
+        "source_type": "organic",
+        "source_label": "Top 1",
+        "is_hwood": true,
+        "trang_google": 1
+      }
+    ],
+    "trang_thai": "ok"
+  },
+  {
+    "tu_khoa": "ốp trần mái hiên bằng gì",
+    "bot_id": "bot_05",
+    "bot_name": "Bot 5",
+    "thoi_gian": "25/11/2026 10:06:53",
+    "ket_qua_hwood": [
+      {
+        "position": 1,
+        "title": "Tấm Ốp ASA Ngoài Trời: Giải Pháp Trần, Mái Hiên, Cổng",
+        "url": "https://hwood.vn",
+        "source_type": "organic",
+        "source_label": "Top 1",
+        "is_hwood": true,
+        "trang_google": 1
+      }
+    ],
+    "trang_thai": "ok"
+  },
+  {
+    "tu_khoa": "nên lát sân vườn bằng gì",
+    "bot_id": "bot_01",
+    "bot_name": "Bot 1",
+    "thoi_gian": "25/11/2026 10:06:48",
+    "ket_qua_hwood": [
+      {
+        "position": 1,
+        "title": "Nên Lát Sân Vườn Bằng Gì? So Sánh 4 Vật Liệu Tốt Nhất",
+        "url": "https://hwood.vn",
+        "source_type": "organic",
+        "source_label": "Top 1",
+        "is_hwood": true,
+        "trang_google": 1
+      }
+    ],
+    "trang_thai": "ok"
+  },
+  {
+    "tu_khoa": "so sánh tấm nano vs pvc vân đá vs đá thật",
+    "bot_id": "bot_04",
+    "bot_name": "Bot 4",
+    "thoi_gian": "25/11/2026 10:08:01",
+    "ket_qua_hwood": [],
+    "trang_thai": "ngoai_top_50"
+  },
+  {
+    "tu_khoa": "bàn ghế nhôm đúc ngoài trời có tốt không",
+    "bot_id": "bot_02",
+    "bot_name": "Bot 2",
+    "thoi_gian": "25/11/2026 10:07:56",
+    "ket_qua_hwood": [
+      {
+        "position": 1,
+        "title": "Bàn ghế nhôm đúc ngoài trời: Vì sao nên chọn chất liệu này?",
+        "url": "https://hwood.vn",
+        "source_type": "organic",
+        "source_label": "Top 1",
+        "is_hwood": true,
+        "trang_google": 1
+      }
+    ],
+    "trang_thai": "ok"
+  },
+  {
+    "tu_khoa": "báo giá bàn ghế ngoài trời polywood",
+    "bot_id": "bot_05",
+    "bot_name": "Bot 5",
+    "thoi_gian": "25/11/2026 10:08:06",
+    "ket_qua_hwood": [
+      {
+        "position": 2,
+        "title": "Bàn ghế ngoài trời Polywood",
+        "url": "https://hwood.vn/ban-ghe-ngoai-troi/",
+        "source_type": "organic",
+        "source_label": "Top 2",
+        "is_hwood": true,
+        "trang_google": 1
+      },
+      {
+        "position": 1,
+        "title": "Bàn Ghế Sân Vườn HWOOD – Bảng Giá 2026, Bền Trên ...",
+        "url": "https://hwood.vn",
+        "source_type": "organic",
+        "source_label": "Top 1",
+        "is_hwood": true,
+        "trang_google": 1
+      }
+    ],
+    "trang_thai": "ok"
+  },
+  {
+    "tu_khoa": "keo dán gỗ nhựa loại nào tốt",
+    "bot_id": "bot_01",
+    "bot_name": "Bot 1",
+    "thoi_gian": "25/11/2026 10:08:10",
+    "ket_qua_hwood": [
+      {
+        "position": 1,
+        "title": "Keo Dán Gỗ Nhựa Loại Nào Tốt? Review 4 Keo 3X-BOND ...",
+        "url": "https://hwood.vn",
+        "source_type": "organic",
+        "source_label": "Top 1",
+        "is_hwood": true,
+        "trang_google": 1
+      }
+    ],
+    "trang_thai": "ok"
+  },
+  {
+    "tu_khoa": "trần nano là gì",
+    "bot_id": "bot_03",
+    "bot_name": "Bot 3",
+    "thoi_gian": "25/11/2026 10:08:02",
+    "ket_qua_hwood": [
+      {
+        "position": 1,
+        "title": "Trần nhựa nano: Giải pháp tối ưu cho ngôi nhà hiện đại",
+        "url": "https://hwood.vn",
+        "source_type": "organic",
+        "source_label": "Top 1",
+        "is_hwood": true,
+        "trang_google": 1
+      }
+    ],
+    "trang_thai": "ok"
+  },
+  {
+    "tu_khoa": "gỗ nhựa ngoài trời",
+    "bot_id": "bot_04",
+    "bot_name": "Bot 4",
+    "thoi_gian": "25/11/2026 10:09:15",
+    "ket_qua_hwood": [
+      {
+        "position": 1,
+        "title": "Phụ kiện gỗ nhựa ngoài trời HWOOD",
+        "url": "https://hwood.vn/g/",
+        "source_type": "organic",
+        "source_label": "Top 1",
+        "is_hwood": true,
+        "trang_google": 2
+      }
+    ],
+    "trang_thai": "ok"
+  },
+  {
+    "tu_khoa": "mẫu trần nano đẹp",
+    "bot_id": "bot_05",
+    "bot_name": "Bot 5",
+    "thoi_gian": "25/11/2026 10:09:46",
+    "ket_qua_hwood": [
+      {
+        "position": 1,
+        "title": "Top 9+ mẫu trần nhựa nano đẹp cho phòng khách 2026",
+        "url": "https://hwood.vn",
+        "source_type": "organic",
+        "source_label": "Top 1",
+        "is_hwood": true,
+        "trang_google": 1
+      }
+    ],
+    "trang_thai": "ok"
+  },
+  {
+    "tu_khoa": "báo giá tấm pvc vân đá ốp tường",
+    "bot_id": "bot_02",
+    "bot_name": "Bot 2",
+    "thoi_gian": "25/11/2026 10:09:29",
+    "ket_qua_hwood": [
+      {
+        "position": 1,
+        "title": "Giá tấm nhựa PVC vân đá 2026: Báo giá chi tiết mới nhất",
+        "url": "https://hwood.vn",
+        "source_type": "organic",
+        "source_label": "Top 1",
+        "is_hwood": true,
+        "trang_google": 1
+      }
+    ],
+    "trang_thai": "ok"
+  },
+  {
+    "tu_khoa": "trần lam sóng ngoài trời",
+    "bot_id": "bot_01",
+    "bot_name": "Bot 1",
+    "thoi_gian": "25/11/2026 10:10:08",
+    "ket_qua_hwood": [
+      {
+        "position": 1,
+        "title": "Trần Lam Sóng Ngoài Trời Chống Nắng Mưa Tốt Nhất",
+        "url": "https://hwood.vn",
+        "source_type": "organic",
+        "source_label": "Top 1",
+        "is_hwood": true,
+        "trang_google": 1
+      }
+    ],
+    "trang_thai": "ok"
+  },
+  {
+    "tu_khoa": "lam sóng gỗ nhựa ngoài trời",
+    "bot_id": "bot_03",
+    "bot_name": "Bot 3",
+    "thoi_gian": "25/11/2026 10:10:15",
+    "ket_qua_hwood": [
+      {
+        "position": 1,
+        "title": "Báo Giá Lam Sóng Ngoài Trời Theo Mét Dài Mới Nhất [2026]",
+        "url": "https://hwood.vn",
+        "source_type": "organic",
+        "source_label": "Top 1",
+        "is_hwood": true,
+        "trang_google": 1
+      }
+    ],
+    "trang_thai": "ok"
+  },
+  {
+    "tu_khoa": "bàn ghế ngoài trời",
+    "bot_id": "bot_04",
+    "bot_name": "Bot 4",
+    "thoi_gian": "25/11/2026 10:10:23",
+    "ket_qua_hwood": [
+      {
+        "position": 1,
+        "title": "Bàn ghế ngoài trời Polywood",
+        "url": "https://hwood.vn/ban-ghe-ngoai-troi/",
+        "source_type": "organic",
+        "source_label": "Top 1",
+        "is_hwood": true,
+        "trang_google": 1
+      }
+    ],
+    "trang_thai": "ok"
+  },
+  {
+    "tu_khoa": "vật liệu gỗ ốp cổng",
+    "bot_id": "bot_02",
+    "bot_name": "Bot 2",
+    "thoi_gian": "25/11/2026 10:10:58",
+    "ket_qua_hwood": [
+      {
+        "position": 1,
+        "title": "Vật Liệu Gỗ Ốp Cổng: So Sánh 4 Loại & Báo Giá Chuẩn ...",
+        "url": "https://hwood.vn",
+        "source_type": "organic",
+        "source_label": "Top 1",
+        "is_hwood": true,
+        "trang_google": 1
+      }
+    ],
+    "trang_thai": "ok"
+  },
+  {
+    "tu_khoa": "cách vệ sinh gỗ nhựa asa",
+    "bot_id": "bot_05",
+    "bot_name": "Bot 5",
+    "thoi_gian": "25/11/2026 10:10:51",
+    "ket_qua_hwood": [
+      {
+        "position": 1,
+        "title": "Gỗ nhựa phủ ASA là gì? Đặc điểm và ứng dụng",
+        "url": "https://hwood.vn",
+        "source_type": "organic",
+        "source_label": "Top 1",
+        "is_hwood": true,
+        "trang_google": 3
+      }
+    ],
+    "trang_thai": "ok"
+  },
+  {
+    "tu_khoa": "ốp phòng thờ bằng nhựa nano",
+    "bot_id": "bot_01",
+    "bot_name": "Bot 1",
+    "thoi_gian": "25/11/2026 10:11:31",
+    "ket_qua_hwood": [
+      {
+        "position": 1,
+        "title": "Tổng hợp mẫu phòng thờ ốp nhựa giả gỗ ưa chuộng 2026",
+        "url": "https://hwood.vn",
+        "source_type": "organic",
+        "source_label": "Top 1",
+        "is_hwood": true,
+        "trang_google": 1
+      }
+    ],
+    "trang_thai": "ok"
+  },
+  {
+    "tu_khoa": "cách thi công sàn gỗ nhựa ngoài trời",
+    "bot_id": "bot_03",
+    "bot_name": "Bot 3",
+    "thoi_gian": "25/11/2026 10:11:45",
+    "ket_qua_hwood": [
+      {
+        "position": 1,
+        "title": "Quy Trình Lắp Đặt Sàn Gỗ Nhựa Ngoài Trời Chi Tiết Từ A-Z",
+        "url": "https://hwood.vn",
+        "source_type": "organic",
+        "source_label": "Top 1",
+        "is_hwood": true,
+        "trang_google": 1
+      }
+    ],
+    "trang_thai": "ok"
+  },
+  {
+    "tu_khoa": "cách thi công tấm nhựa ốp tường nano",
+    "bot_id": "bot_04",
+    "bot_name": "Bot 4",
+    "thoi_gian": "25/11/2026 10:12:07",
+    "ket_qua_hwood": [
+      {
+        "position": 1,
+        "title": "Hướng dẫn thi công tấm ốp nano chi tiết từ A-Z cho người ...",
+        "url": "https://hwood.vn",
+        "source_type": "organic",
+        "source_label": "Top 1",
+        "is_hwood": true,
+        "trang_google": 1
+      }
+    ],
+    "trang_thai": "ok"
+  },
+  {
+    "tu_khoa": "tấm nhựa ốp tường",
+    "bot_id": "bot_02",
+    "bot_name": "Bot 2",
+    "thoi_gian": "25/11/2026 10:12:48",
+    "ket_qua_hwood": [
+      {
+        "position": 1,
+        "title": "Có nên dùng tấm nhựa ốp tường trong năm 2026 không?",
+        "url": "https://hwood.vn",
+        "source_type": "organic",
+        "source_label": "Top 1",
+        "is_hwood": true,
+        "trang_google": 1
+      }
+    ],
+    "trang_thai": "ok"
+  },
+  {
+    "tu_khoa": "trần nhựa giả gỗ",
+    "bot_id": "bot_05",
+    "bot_name": "Bot 5",
+    "thoi_gian": "25/11/2026 10:12:49",
+    "ket_qua_hwood": [
+      {
+        "position": 1,
+        "title": "Trần nhựa giả gỗ chống ẩm mốc, chống mối mọt: Đẹp như ...",
+        "url": "https://hwood.vn",
+        "source_type": "organic",
+        "source_label": "Top 1",
+        "is_hwood": true,
+        "trang_google": 1
+      }
+    ],
+    "trang_thai": "ok"
+  },
+  {
+    "tu_khoa": "sàn gỗ nhựa ngoài trời",
+    "bot_id": "bot_01",
+    "bot_name": "Bot 1",
+    "thoi_gian": "25/11/2026 10:13:10",
+    "ket_qua_hwood": [
+      {
+        "position": 1,
+        "title": "Sàn gỗ ngoài trời - Giải pháp trang trí hiện đại",
+        "url": "https://hwood.vn/g/",
+        "source_type": "organic",
+        "source_label": "Top 1",
+        "is_hwood": true,
+        "trang_google": 1
+      }
+    ],
+    "trang_thai": "ok"
+  },
+  {
+    "tu_khoa": "trần nano",
+    "bot_id": "bot_04",
+    "bot_name": "Bot 4",
+    "thoi_gian": "25/11/2026 10:13:14",
+    "ket_qua_hwood": [
+      {
+        "position": 1,
+        "title": "Trần nhựa nano: Giải pháp tối ưu cho ngôi nhà hiện đại",
+        "url": "https://hwood.vn",
+        "source_type": "organic",
+        "source_label": "Top 1",
+        "is_hwood": true,
+        "trang_google": 1
+      }
+    ],
+    "trang_thai": "ok"
+  },
+  {
+    "tu_khoa": "cách nhận biết gỗ nhựa asa chính hãng",
+    "bot_id": "bot_03",
+    "bot_name": "Bot 3",
+    "thoi_gian": "25/11/2026 10:13:15",
+    "ket_qua_hwood": [
+      {
+        "position": 1,
+        "title": "5 yếu tố quyết định giá thành tấm ốp ASA cần biết 2026",
+        "url": "https://hwood.vn",
+        "source_type": "organic",
+        "source_label": "Top 1",
+        "is_hwood": true,
+        "trang_google": 1
+      }
+    ],
+    "trang_thai": "ok"
+  },
+  {
+    "tu_khoa": "pergola gỗ nhựa ngoài trời",
+    "bot_id": "bot_02",
+    "bot_name": "Bot 2",
+    "thoi_gian": "25/11/2026 10:13:59",
+    "ket_qua_hwood": [
+      {
+        "position": 1,
+        "title": "Giàn pergola gỗ nhựa – Giải pháp lý tưởng cho sân vườn ...",
+        "url": "https://hwood.vn",
+        "source_type": "organic",
+        "source_label": "Top 1",
+        "is_hwood": true,
+        "trang_google": 1
+      }
+    ],
+    "trang_thai": "ok"
+  },
+  {
+    "tu_khoa": "vỉ nhựa lắp ghép vs sàn gỗ nhựa",
+    "bot_id": "bot_01",
+    "bot_name": "Bot 1",
+    "thoi_gian": "25/11/2026 10:14:21",
+    "ket_qua_hwood": [
+      {
+        "position": 1,
+        "title": "So sánh sàn gỗ nhựa và vỉ gỗ nhựa - Hwood Việt Nam",
+        "url": "https://hwood.vn",
+        "source_type": "organic",
+        "source_label": "Top 1",
+        "is_hwood": true,
+        "trang_google": 1
+      }
+    ],
+    "trang_thai": "ok"
+  },
+  {
+    "tu_khoa": "có nên dùng gỗ nhựa ngoài trời",
+    "bot_id": "bot_05",
+    "bot_name": "Bot 5",
+    "thoi_gian": "25/11/2026 10:14:16",
+    "ket_qua_hwood": [
+      {
+        "position": 1,
+        "title": "Có Nên Dùng Gỗ Nhựa Ngoài Trời Ở Việt Nam? Ưu ...",
+        "url": "https://hwood.vn",
+        "source_type": "organic",
+        "source_label": "Top 1",
+        "is_hwood": true,
+        "trang_google": 1
+      }
+    ],
+    "trang_thai": "ok"
+  },
+  {
+    "tu_khoa": "tấm nhựa ốp tường chống ẩm",
+    "bot_id": "bot_03",
+    "bot_name": "Bot 3",
+    "thoi_gian": "25/11/2026 10:14:56",
+    "ket_qua_hwood": [
+      {
+        "position": 1,
+        "title": "Top 5 tấm ốp tường chống ẩm mốc tốt nhất 2026",
+        "url": "https://hwood.vn",
+        "source_type": "organic",
+        "source_label": "Top 1",
+        "is_hwood": true,
+        "trang_google": 2
+      }
+    ],
+    "trang_thai": "ok"
+  },
+  {
+    "tu_khoa": "sàn nhựa giả gỗ có bền không",
+    "bot_id": "bot_04",
+    "bot_name": "Bot 4",
+    "thoi_gian": "25/11/2026 10:14:43",
+    "ket_qua_hwood": [
+      {
+        "position": 1,
+        "title": "Sàn nhựa giả gỗ chống nước: Ưu điểm và cách lựa chọn ...",
+        "url": "https://hwood.vn",
+        "source_type": "organic",
+        "source_label": "Top 1",
+        "is_hwood": true,
+        "trang_google": 3
+      }
+    ],
+    "trang_thai": "ok"
+  },
+  {
+    "tu_khoa": "báo giá gỗ nhựa ngoài trời",
+    "bot_id": "bot_02",
+    "bot_name": "Bot 2",
+    "thoi_gian": "25/11/2026 10:15:08",
+    "ket_qua_hwood": [
+      {
+        "position": 1,
+        "title": "Báo giá sàn gỗ nhựa ngoài trời mới nhất 2026",
+        "url": "https://hwood.vn",
+        "source_type": "organic",
+        "source_label": "Top 1",
+        "is_hwood": true,
+        "trang_google": 1
+      }
+    ],
+    "trang_thai": "ok"
   }
 ]
