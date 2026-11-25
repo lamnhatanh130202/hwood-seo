@@ -62,14 +62,17 @@ def render_tab7(api_key, chon_model, ket_noi_wp, wp_site_url, royal_api_key, dan
         # AI tự động rút ra quy chuẩn từ cuộc hội thoại
         st.markdown("<br>", unsafe_allow_html=True)
         if st.button("🤖 AI Tự Động Rút Nguyên Tắc Mới Từ Cuộc Chat", key="btn_ai_extract_rules", use_container_width=True):
-            if not api_key:
-                st.error("Vui lòng nhập DeepSeek API Key ở thanh bên trái!")
+            from modules.antigravity_bridge import is_antigravity_mode, save_antigravity_prompt
+            lich_su_hien_tai = doc_lich_su_chat_advisor()
+            if not lich_su_hien_tai:
+                st.warning("Chưa có đoạn chat nào để phân tích. Hãy trao đổi với AI ở khung chat bên trái trước nhé!")
+            elif is_antigravity_mode(api_key):
+                hist_txt = "\n".join([f"{m['role']}: {m['content']}" for m in lich_su_hien_tai[-10:]])
+                ext_prompt = f"Hãy rút trích các nguyên tắc SEO/kỹ thuật mới từ đoạn hội thoại sau thành danh sách ngắn gọn:\n\n{hist_txt}"
+                save_antigravity_prompt("rut_nguyen_tac", "Rút nguyên tắc từ cuộc chat", ext_prompt)
+                st.session_state["ag_tab7_prompt"] = ext_prompt
             else:
-                lich_su_hien_tai = doc_lich_su_chat_advisor()
-                if not lich_su_hien_tai:
-                    st.warning("Chưa có đoạn chat nào để phân tích. Hãy trao đổi với AI ở khung chat bên trái trước nhé!")
-                else:
-                    with st.spinner("🤖 AI đang tổng hợp các lỗi sai & nguyên tắc mới từ cuộc trò chuyện..."):
+                with st.spinner("🤖 AI đang tổng hợp các lỗi sai & nguyên tắc mới từ cuộc trò chuyện..."):
                         try:
                             nt_moi = ai_trich_xuat_quy_chuan_tu_chat(api_key, chon_model, lich_su_hien_tai)
                             if nt_moi:
