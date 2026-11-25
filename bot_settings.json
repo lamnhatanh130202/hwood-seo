@@ -6,5 +6,6 @@
   "dwell_max": 90,
   "visit_pages": true,
   "click_zalo": false,
-  "headless": false
+  "headless": false,
+  "deep_browse": true
 }
