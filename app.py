@@ -217,7 +217,7 @@ with st.sidebar:
     if st.button("🔄 Làm mới trang (F5)", key="sidebar_btn_f5", use_container_width=True, help="Tải lại toàn bộ ứng dụng và dữ liệu mới nhất (như phím F5 hoặc Ctrl+R)"):
         st.rerun()
 
-    # 1. Nhập API Key DeepSeek & Chọn Model
+    # 1. Chọn nguồn AI: Antigravity (Miễn phí) hoặc DeepSeek API Key
     DEEPSEEK_KEY_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "deepseek_key.txt")
     loaded_api_key = ""
     if os.path.exists(DEEPSEEK_KEY_FILE):
@@ -229,26 +229,40 @@ with st.sidebar:
     if not loaded_api_key:
         loaded_api_key = os.environ.get("DEEPSEEK_API_KEY", "")
 
-    api_key = st.text_input(
-        "DeepSeek API Key:",
-        value=loaded_api_key,
-        type="password",
-        placeholder="sk-...",
-        help="Nhập API Key DeepSeek của bạn. Key được lưu an toàn cục bộ trên máy và không bao giờ đồng bộ lên GitHub."
-    )
-    if api_key and api_key != loaded_api_key:
-        try:
-            with open(DEEPSEEK_KEY_FILE, "w", encoding="utf-8") as f:
-                f.write(api_key.strip())
-        except Exception:
-            pass
-
-    chon_model = st.selectbox(
-        "Chọn Model DeepSeek:",
-        options=["deepseek-flash", "deepseek-chat", "deepseek-reasoner"],
+    ai_mode = st.radio(
+        "🤖 Nguồn xử lý AI:",
+        options=["🚀 Dùng Antigravity (Miễn phí - Không cần API)", "🔑 Dùng DeepSeek API Key"],
         index=0,
-        help="• deepseek-flash: Model RẺ NHẤT HIỆN NAY (DeepSeek-V3 siêu tốc độ, tối ưu chi phí ~0.14$/1M token, viết bài SEO cực mượt).\n• deepseek-chat: Model tiêu chuẩn.\n• deepseek-reasoner: Suy luận phản biện chuyên sâu (R1)."
+        help="• Dùng Antigravity: Không tốn phí API! App tự gom Tri thức HWOOD & dữ liệu thành Prompt chuẩn để gửi Antigravity xử lý.\n• Dùng DeepSeek API Key: Gọi tự động qua key DeepSeek trả phí."
     )
+    use_antigravity = ai_mode.startswith("🚀")
+    st.session_state["use_antigravity"] = use_antigravity
+
+    if use_antigravity:
+        api_key = ""
+        chon_model = "antigravity"
+        st.success("✅ Đang dùng **Antigravity** (Miễn phí 100%, không cần API Key). Bấm nút ở các Tab để lấy Prompt chuẩn HWOOD!")
+    else:
+        api_key = st.text_input(
+            "DeepSeek API Key:",
+            value=loaded_api_key,
+            type="password",
+            placeholder="sk-...",
+            help="Nhập API Key DeepSeek của bạn. Key được lưu an toàn cục bộ trên máy và không bao giờ đồng bộ lên GitHub."
+        )
+        if api_key and api_key != loaded_api_key:
+            try:
+                with open(DEEPSEEK_KEY_FILE, "w", encoding="utf-8") as f:
+                    f.write(api_key.strip())
+            except Exception:
+                pass
+
+        chon_model = st.selectbox(
+            "Chọn Model DeepSeek:",
+            options=["deepseek-flash", "deepseek-chat", "deepseek-reasoner"],
+            index=0,
+            help="• deepseek-flash: Model RẺ NHẤT HIỆN NAY (DeepSeek-V3 siêu tốc độ, tối ưu chi phí ~0.14$/1M token, viết bài SEO cực mượt).\n• deepseek-chat: Model tiêu chuẩn.\n• deepseek-reasoner: Suy luận phản biện chuyên sâu (R1)."
+        )
 
     st.markdown("---")
 
