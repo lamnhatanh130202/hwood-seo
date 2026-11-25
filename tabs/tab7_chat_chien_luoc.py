@@ -123,19 +123,28 @@ def render_tab7(api_key, chon_model, ket_noi_wp, wp_site_url, royal_api_key, dan
         # Ô nhập tin nhắn
         user_msg = st.chat_input("Nhập câu hỏi chiến lược hoặc lỗi sai cần lưu ý chung...")
         if user_msg:
-            if not api_key:
-                st.error("Vui lòng nhập DeepSeek API Key ở thanh bên trái!")
+            file_context = ""
+            if file_chat:
+                text_extracted, summary = doc_noi_dung_file_dinh_kem(file_chat)
+                file_context = f"{summary}\n{text_extracted}"
+
+            chat_history.append({"role": "user", "content": user_msg})
+            luu_lich_su_chat_advisor(chat_history)
+
+            from modules.antigravity_bridge import is_antigravity_mode, save_antigravity_prompt
+            if is_antigravity_mode(api_key):
+                recent_hist = "\n".join([f"{m['role'].upper()}: {m['content']}" for m in chat_history[-6:]])
+                adv_prompt = (
+                    f"Bạn là Cố vấn Chiến lược SEO cao cấp của HWOOD VIỆT NAM.\n"
+                    f"TRI THỨC HWOOD:\n{kho_tri_thuc[:4000]}\n\n"
+                    f"NGỮ CẢNH HỘI THOẠI GẦN ĐÂY:\n{recent_hist}\n\n"
+                    f"TÀI LIỆU ĐÍNH KÈM:\n{file_context}\n\n"
+                    f"Hãy trả lời câu hỏi/yêu cầu mới nhất của người dùng thật sắc sảo, thực chiến."
+                )
+                save_antigravity_prompt("chat_chien_luoc", user_msg[:60], adv_prompt)
+                st.session_state["ag_tab7_prompt"] = adv_prompt
+                st.rerun()
             else:
-                # Đọc nội dung file đính kèm nếu có
-                file_context = ""
-                if file_chat:
-                    text_extracted, summary = doc_noi_dung_file_dinh_kem(file_chat)
-                    file_context = f"{summary}\n{text_extracted}"
-
-                # Thêm tin nhắn user vào lịch sử
-                chat_history.append({"role": "user", "content": user_msg})
-                luu_lich_su_chat_advisor(chat_history)
-
                 # Gọi AI phản hồi
                 with st.spinner("🤖 Cố vấn SEO đang phân tích và trả lời..."):
                     try:
@@ -151,3 +160,18 @@ def render_tab7(api_key, chon_model, ket_noi_wp, wp_site_url, royal_api_key, dan
                         st.rerun()
                     except Exception as ex_chat:
                         st.error(f"Lỗi phản hồi AI: {ex_chat}")
+
+        if st.session_state.get("ag_tab7_prompt"):
+            from modules.antigravity_bridge import render_antigravity_panel
+            pasted_reply = render_antigravity_panel(
+                task_key="tab7_chat",
+                title="Cố vấn Chiến lược SEO (Antigravity)",
+                prompt_text=st.session_state["ag_tab7_prompt"],
+                paste_label="📥 Dán câu trả lời từ Antigravity vào khung chat:",
+                apply_label="✅ Lưu câu trả lời vào hội thoại",
+            )
+            if pasted_reply:
+                chat_history.append({"role": "assistant", "content": pasted_reply})
+                luu_lich_su_chat_advisor(chat_history)
+                st.session_state["ag_tab7_prompt"] = ""
+                st.rerun()
