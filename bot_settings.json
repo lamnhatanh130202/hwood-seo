@@ -2,9 +2,10 @@
   "max_pages": 5,
   "delay_min": 8,
   "delay_max": 15,
-  "dwell_min": 30,
-  "dwell_max": 60,
+  "dwell_min": 60,
+  "dwell_max": 90,
   "visit_pages": true,
+  "deep_browse": true,
   "click_zalo": false,
   "headless": false
 }
