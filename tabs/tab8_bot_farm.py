@@ -425,14 +425,62 @@ def render_tab8():
                     pass
             st.session_state["bot_farm_keywords_input"] = init_kw_text
 
+        def _cb_new_kw_table():
+            st.session_state["bot_farm_keywords_input"] = ""
+            st.session_state["sel_bot_preset"] = "Nhập tay"
+            st.session_state["show_create_new_kw_table"] = True
+
         if all_presets:
-            st.selectbox(
-                "Chọn bộ từ khóa mẫu / bộ đã lưu:",
-                options=["Nhập tay"] + list(all_presets.keys()),
-                key="sel_bot_preset",
-                on_change=on_preset_change,
-                help="Chọn bộ mẫu để tự động nạp vào ô bên dưới, rồi bạn có thể thêm, sửa hoặc xóa từng từ khóa thoải mái.",
-            )
+            col_pre1, col_pre2 = st.columns([2.6, 1])
+            with col_pre1:
+                st.selectbox(
+                    "Chọn bộ từ khóa mẫu / bộ đã lưu:",
+                    options=["Nhập tay"] + list(all_presets.keys()),
+                    key="sel_bot_preset",
+                    on_change=on_preset_change,
+                    help="Chọn bộ mẫu để tự động nạp vào ô bên dưới, rồi bạn có thể thêm, sửa hoặc xóa từng từ khóa thoải mái.",
+                )
+            with col_pre2:
+                st.write("")
+                st.write("")
+                st.button(
+                    "🆕 Tạo bảng mới",
+                    key="btn_new_kw_table",
+                    on_click=_cb_new_kw_table,
+                    use_container_width=True,
+                    help="Xóa trắng để nhập và lưu thành một bảng từ khóa hoàn toàn mới",
+                )
+
+        if st.session_state.get("show_create_new_kw_table", False):
+            with st.container(border=True):
+                st.markdown("**🆕 Tạo bảng từ khóa mới (New)**")
+                c_new1, c_new2, c_new3 = st.columns([2.2, 1, 0.7])
+                with c_new1:
+                    new_tbl_name = st.text_input(
+                        "Tên bảng từ khóa mới:",
+                        placeholder="VD: Bảng từ khóa Bàn Ghế tháng 11",
+                        key="inp_new_kw_table_name",
+                        label_visibility="collapsed",
+                    )
+                with c_new2:
+                    if st.button("💾 Lưu bảng mới", key="btn_save_new_kw_table", type="primary", use_container_width=True):
+                        cur_new_kws = [l.strip() for l in st.session_state.get("bot_farm_keywords_input", "").splitlines() if l.strip()]
+                        if not new_tbl_name.strip():
+                            st.warning("Hãy nhập tên bảng từ khóa!")
+                        elif not cur_new_kws:
+                            st.warning("Hãy nhập ít nhất 1 từ khóa vào ô bên dưới rồi bấm Lưu!")
+                        else:
+                            key_label = f"⭐ [Tự tạo] {new_tbl_name.strip()} ({len(cur_new_kws)} từ)"
+                            custom_presets[key_label] = cur_new_kws
+                            _save_custom_presets(custom_presets)
+                            st.session_state["_pending_sel_preset"] = key_label
+                            st.session_state["show_create_new_kw_table"] = False
+                            st.toast(f"Đã tạo bảng mới '{new_tbl_name.strip()}'!", icon="🆕")
+                            st.rerun()
+                with c_new3:
+                    if st.button("✖️ Đóng", key="btn_close_new_kw_table", use_container_width=True):
+                        st.session_state["show_create_new_kw_table"] = False
+                        st.rerun()
 
         keywords_text = st.text_area(
             "Mỗi dòng 1 từ khóa (có thể gõ, sửa hoặc xóa trực tiếp):",
