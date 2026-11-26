@@ -375,29 +375,151 @@ def render_tab8():
     with col_cfg:
         st.markdown("#### 1️⃣ Danh sách từ khóa (5 bot dùng chung)")
 
+        CUSTOM_PRESETS_FILE = os.path.join(BASE_DIR, "custom_bot_presets.json")
+
+        def _load_custom_presets() -> dict:
+            if os.path.exists(CUSTOM_PRESETS_FILE):
+                try:
+                    with open(CUSTOM_PRESETS_FILE, "r", encoding="utf-8") as f:
+                        data = json.load(f)
+                        if isinstance(data, dict):
+                            return data
+                except Exception:
+                    pass
+            return {}
+
+        def _save_custom_presets(data: dict):
+            try:
+                with open(CUSTOM_PRESETS_FILE, "w", encoding="utf-8") as f:
+                    json.dump(data, f, ensure_ascii=False, indent=2)
+            except Exception:
+                pass
+
+        custom_presets = _load_custom_presets()
+        all_presets = {}
+        all_presets.update(custom_presets)
+        if HAS_PRESETS:
+            all_presets.update(BO_TU_KHOA_HWOOD_PRESETS)
+
         def on_preset_change():
             chosen = st.session_state.get("sel_bot_preset")
-            if chosen and chosen != "Nhập tay" and chosen in BO_TU_KHOA_HWOOD_PRESETS:
-                st.session_state["bot_farm_keywords_input"] = "\n".join(BO_TU_KHOA_HWOOD_PRESETS[chosen])
+            if chosen and chosen != "Nhập tay" and chosen in all_presets:
+                st.session_state["bot_farm_keywords_input"] = "\n".join(all_presets[chosen])
 
         if "bot_farm_keywords_input" not in st.session_state:
-            st.session_state["bot_farm_keywords_input"] = "gỗ nhựa ngoài trời\ntấm nhựa ốp tường\ntrần nano"
+            kw_file_init = os.path.join(BASE_DIR, "bot_keywords.txt")
+            init_kw_text = "gỗ nhựa ngoài trời\ntấm nhựa ốp tường\ntrần nano"
+            if os.path.exists(kw_file_init):
+                try:
+                    with open(kw_file_init, "r", encoding="utf-8") as fk:
+                        lines_k = [l.strip() for l in fk if l.strip() and not l.strip().startswith("#")]
+                        if lines_k:
+                            init_kw_text = "\n".join(lines_k)
+                except Exception:
+                    pass
+            st.session_state["bot_farm_keywords_input"] = init_kw_text
 
-        if HAS_PRESETS:
+        if all_presets:
             st.selectbox(
-                "Chọn bộ từ khóa mẫu:",
-                options=["Nhập tay"] + list(BO_TU_KHOA_HWOOD_PRESETS.keys()),
+                "Chọn bộ từ khóa mẫu / bộ đã lưu:",
+                options=["Nhập tay"] + list(all_presets.keys()),
                 key="sel_bot_preset",
                 on_change=on_preset_change,
-                help="Chọn bộ mẫu để tự động nạp vào ô bên dưới, rồi bạn có thể sửa thêm.",
+                help="Chọn bộ mẫu để tự động nạp vào ô bên dưới, rồi bạn có thể thêm, sửa hoặc xóa từng từ khóa thoải mái.",
             )
 
         keywords_text = st.text_area(
-            "Mỗi dòng 1 từ khóa:",
+            "Mỗi dòng 1 từ khóa (có thể gõ, sửa hoặc xóa trực tiếp):",
             key="bot_farm_keywords_input",
             height=160,
             placeholder="gỗ nhựa ngoài trời\ntấm nhựa ốp tường\ntrần nano\n...",
         )
+
+        # Thanh công cụ thêm / lọc trùng / xóa nhanh từ khóa
+        col_add_in, col_add_btn, col_dedup, col_clear = st.columns([2.2, 1, 1, 1])
+        with col_add_in:
+            new_kw_single = st.text_input(
+                "Thêm nhanh từ khóa:",
+                key="bot_add_single_kw",
+                label_visibility="collapsed",
+                placeholder="Nhập thêm 1 từ khóa mới...",
+            )
+        with col_add_btn:
+            if st.button("➕ Thêm", key="btn_add_single_kw", use_container_width=True):
+                if new_kw_single and new_kw_single.strip():
+                    cur_lines = [l.strip() for l in st.session_state["bot_farm_keywords_input"].splitlines() if l.strip()]
+                    nk = new_kw_single.strip()
+                    if nk not in cur_lines:
+                        cur_lines.append(nk)
+                        st.session_state["bot_farm_keywords_input"] = "\n".join(cur_lines)
+                        st.toast(f"Đã thêm '{nk}'", icon="➕")
+                        st.rerun()
+                    else:
+                        st.toast("Từ khóa này đã có trong danh sách!", icon="ℹ️")
+        with col_dedup:
+            if st.button("🧹 Lọc trùng", key="btn_dedup_kw", use_container_width=True, help="Xóa dòng trống và các từ khóa bị trùng"):
+                cur_lines = [l.strip() for l in st.session_state["bot_farm_keywords_input"].splitlines() if l.strip()]
+                unique_lines = list(dict.fromkeys(cur_lines))
+                st.session_state["bot_farm_keywords_input"] = "\n".join(unique_lines)
+                st.toast(f"Còn {len(unique_lines)} từ khóa duy nhất!", icon="🧹")
+                st.rerun()
+        with col_clear:
+            if st.button("🗑️ Xóa hết", key="btn_clear_kw", use_container_width=True, help="Xóa trắng toàn bộ ô từ khóa để nhập tay mới"):
+                st.session_state["bot_farm_keywords_input"] = ""
+                st.session_state["sel_bot_preset"] = "Nhập tay"
+                st.rerun()
+
+        cur_kw_list = [l.strip() for l in keywords_text.splitlines() if l.strip()]
+        st.caption(f"📊 Hiện có **{len(cur_kw_list)}** từ khóa trong danh sách.")
+
+        # Trình chỉnh sửa / xóa từng từ khóa dạng bảng trực quan
+        with st.expander("📝 Sửa / Xóa từng từ khóa trực quan (Dạng bảng)", expanded=False):
+            st.caption("Bấm đúp vào ô để sửa chữ, bấm chọn hàng rồi nhấn phím `Delete` (hoặc icon thùng rác) để xóa dòng, hoặc bấm dấu `+` cuối bảng để thêm dòng mới.")
+            df_kw = [{"Từ khóa": k} for k in cur_kw_list] if cur_kw_list else [{"Từ khóa": ""}]
+            edited_df = st.data_editor(
+                df_kw,
+                num_rows="dynamic",
+                use_container_width=True,
+                key="editor_bot_keywords",
+                column_config={
+                    "Từ khóa": st.column_config.TextColumn("Từ khóa SEO", width="large", required=False)
+                },
+            )
+            if st.button("✅ Cập nhật danh sách từ bảng", key="btn_apply_kw_table", type="primary", use_container_width=True):
+                cleaned = [str(r.get("Từ khóa", "")).strip() for r in edited_df if r and str(r.get("Từ khóa", "")).strip()]
+                cleaned = list(dict.fromkeys(cleaned))
+                st.session_state["bot_farm_keywords_input"] = "\n".join(cleaned)
+                st.toast(f"Đã cập nhật {len(cleaned)} từ khóa!", icon="✅")
+                st.rerun()
+
+        # Lưu / Xóa bộ từ khóa riêng
+        with st.expander("💾 Lưu / Quản lý bộ từ khóa riêng của bạn", expanded=False):
+            c_sv1, c_sv2 = st.columns([2.2, 1])
+            with c_sv1:
+                custom_name = st.text_input("Tên bộ từ khóa muốn lưu:", placeholder="VD: Bộ từ khóa ưu tiên tháng 11", key="inp_custom_preset_name")
+            with c_sv2:
+                st.write("")
+                st.write("")
+                if st.button("💾 Lưu bộ này", key="btn_save_custom_preset", use_container_width=True):
+                    if not custom_name.strip():
+                        st.warning("Vui lòng nhập tên bộ từ khóa!")
+                    elif not cur_kw_list:
+                        st.warning("Danh sách từ khóa đang trống!")
+                    else:
+                        key_label = f"⭐ [Tự tạo] {custom_name.strip()} ({len(cur_kw_list)} từ)"
+                        custom_presets[key_label] = cur_kw_list
+                        _save_custom_presets(custom_presets)
+                        st.success(f"Đã lưu bộ '{key_label}'!")
+                        st.rerun()
+
+            chosen_now = st.session_state.get("sel_bot_preset", "")
+            if chosen_now in custom_presets:
+                if st.button(f"🗑️ Xóa bộ đang chọn: {chosen_now}", key="btn_del_custom_preset", use_container_width=True):
+                    del custom_presets[chosen_now]
+                    _save_custom_presets(custom_presets)
+                    st.session_state["sel_bot_preset"] = "Nhập tay"
+                    st.success("Đã xóa bộ từ khóa tự tạo!")
+                    st.rerun()
 
         st.markdown("#### 2️⃣ Cấu hình Proxy/VPN cho Bot")
         st.caption(
