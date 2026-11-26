@@ -406,6 +406,12 @@ def render_tab8():
             if chosen and chosen != "Nhập tay" and chosen in all_presets:
                 st.session_state["bot_farm_keywords_input"] = "\n".join(all_presets[chosen])
 
+        # Nạp cập nhật đang chờ trước khi khởi tạo widget text_area (tránh lỗi StreamlitWidgetAlreadyInstantiatedError)
+        if "_pending_sel_preset" in st.session_state:
+            st.session_state["sel_bot_preset"] = st.session_state.pop("_pending_sel_preset")
+        if "_pending_kw_text" in st.session_state:
+            st.session_state["bot_farm_keywords_input"] = st.session_state.pop("_pending_kw_text")
+
         if "bot_farm_keywords_input" not in st.session_state:
             kw_file_init = os.path.join(BASE_DIR, "bot_keywords.txt")
             init_kw_text = "gỗ nhựa ngoài trời\ntấm nhựa ốp tường\ntrần nano"
@@ -435,60 +441,129 @@ def render_tab8():
             placeholder="gỗ nhựa ngoài trời\ntấm nhựa ốp tường\ntrần nano\n...",
         )
 
+        # Callbacks an toàn cho các nút thao tác trực tiếp trên bot_farm_keywords_input
+        def _cb_add_single_kw():
+            nk = (st.session_state.get("bot_add_single_kw") or "").strip()
+            if nk:
+                cur_lines = [l.strip() for l in st.session_state.get("bot_farm_keywords_input", "").splitlines() if l.strip()]
+                if nk not in cur_lines:
+                    cur_lines.append(nk)
+                    st.session_state["bot_farm_keywords_input"] = "\n".join(cur_lines)
+                    st.session_state["bot_add_single_kw"] = ""
+                    st.toast(f"Đã thêm '{nk}'", icon="➕")
+                else:
+                    st.toast("Từ khóa này đã có trong danh sách!", icon="ℹ️")
+
+        def _cb_dedup_kw():
+            cur_lines = [l.strip() for l in st.session_state.get("bot_farm_keywords_input", "").splitlines() if l.strip()]
+            unique_lines = list(dict.fromkeys(cur_lines))
+            st.session_state["bot_farm_keywords_input"] = "\n".join(unique_lines)
+            st.toast(f"Còn {len(unique_lines)} từ khóa duy nhất!", icon="🧹")
+
+        def _cb_clear_kw():
+            st.session_state["bot_farm_keywords_input"] = ""
+            st.session_state["sel_bot_preset"] = "Nhập tay"
+
         # Thanh công cụ thêm / lọc trùng / xóa nhanh từ khóa
         col_add_in, col_add_btn, col_dedup, col_clear = st.columns([2.2, 1, 1, 1])
         with col_add_in:
-            new_kw_single = st.text_input(
+            st.text_input(
                 "Thêm nhanh từ khóa:",
                 key="bot_add_single_kw",
                 label_visibility="collapsed",
                 placeholder="Nhập thêm 1 từ khóa mới...",
             )
         with col_add_btn:
-            if st.button("➕ Thêm", key="btn_add_single_kw", use_container_width=True):
-                if new_kw_single and new_kw_single.strip():
-                    cur_lines = [l.strip() for l in st.session_state["bot_farm_keywords_input"].splitlines() if l.strip()]
-                    nk = new_kw_single.strip()
-                    if nk not in cur_lines:
-                        cur_lines.append(nk)
-                        st.session_state["bot_farm_keywords_input"] = "\n".join(cur_lines)
-                        st.toast(f"Đã thêm '{nk}'", icon="➕")
-                        st.rerun()
-                    else:
-                        st.toast("Từ khóa này đã có trong danh sách!", icon="ℹ️")
+            st.button("➕ Thêm", key="btn_add_single_kw", on_click=_cb_add_single_kw, use_container_width=True)
         with col_dedup:
-            if st.button("🧹 Lọc trùng", key="btn_dedup_kw", use_container_width=True, help="Xóa dòng trống và các từ khóa bị trùng"):
-                cur_lines = [l.strip() for l in st.session_state["bot_farm_keywords_input"].splitlines() if l.strip()]
-                unique_lines = list(dict.fromkeys(cur_lines))
-                st.session_state["bot_farm_keywords_input"] = "\n".join(unique_lines)
-                st.toast(f"Còn {len(unique_lines)} từ khóa duy nhất!", icon="🧹")
-                st.rerun()
+            st.button("🧹 Lọc trùng", key="btn_dedup_kw", on_click=_cb_dedup_kw, use_container_width=True, help="Xóa dòng trống và các từ khóa bị trùng")
         with col_clear:
-            if st.button("🗑️ Xóa hết", key="btn_clear_kw", use_container_width=True, help="Xóa trắng toàn bộ ô từ khóa để nhập tay mới"):
-                st.session_state["bot_farm_keywords_input"] = ""
-                st.session_state["sel_bot_preset"] = "Nhập tay"
-                st.rerun()
+            st.button("🗑️ Xóa hết", key="btn_clear_kw", on_click=_cb_clear_kw, use_container_width=True, help="Xóa trắng toàn bộ ô từ khóa để nhập tay mới")
 
         cur_kw_list = [l.strip() for l in keywords_text.splitlines() if l.strip()]
         st.caption(f"📊 Hiện có **{len(cur_kw_list)}** từ khóa trong danh sách.")
 
-        # Trình chỉnh sửa / xóa từng từ khóa dạng bảng trực quan
-        with st.expander("📝 Sửa / Xóa từng từ khóa trực quan (Dạng bảng)", expanded=False):
-            st.caption("Bấm đúp vào ô để sửa chữ, bấm chọn hàng rồi nhấn phím `Delete` (hoặc icon thùng rác) để xóa dòng, hoặc bấm dấu `+` cuối bảng để thêm dòng mới.")
-            df_kw = [{"Từ khóa": k} for k in cur_kw_list] if cur_kw_list else [{"Từ khóa": ""}]
+        # Nạp danh sách bài viết hwood.vn từ cache để đối chiếu Tiêu đề chính của từng từ khóa
+        wp_posts_cache = []
+        wp_cache_path = os.path.join(BASE_DIR, "wp_content_cache.json")
+        if os.path.exists(wp_cache_path):
+            try:
+                with open(wp_cache_path, "r", encoding="utf-8") as fw:
+                    wp_posts_cache = json.load(fw)
+            except Exception:
+                wp_posts_cache = []
+
+        import html as _html_lib
+        try:
+            from modules.rank_tracker import tim_bai_viet_khop_nhat_wp
+        except Exception:
+            tim_bai_viet_khop_nhat_wp = None
+
+        # Chọn nhanh theo Tiêu đề Bài viết chính trên hwood.vn
+        if wp_posts_cache:
+            with st.expander("📰 Chọn theo Tiêu đề Bài viết chính trên hwood.vn", expanded=False):
+                wp_options = {}
+                for p in wp_posts_cache:
+                    t_raw = p.get("title", {}).get("rendered", "") if isinstance(p.get("title"), dict) else str(p.get("title", ""))
+                    t_clean = _html_lib.unescape(t_raw).strip()
+                    slug_p = p.get("slug", "").replace("-", " ").strip()
+                    if t_clean:
+                        label = f"{t_clean} ({p.get('slug', '')})"
+                        wp_options[label] = slug_p or t_clean
+                chosen_articles = st.multiselect(
+                    "Tìm & chọn bài viết muốn bot chạy:",
+                    options=list(wp_options.keys()),
+                    key="ms_wp_articles_bot",
+                    placeholder="Gõ tên bài viết hoặc sản phẩm trên hwood.vn...",
+                )
+                if st.button("➕ Nạp từ khóa từ bài đã chọn", key="btn_add_from_wp_articles", use_container_width=True):
+                    if chosen_articles:
+                        cur_lines = list(cur_kw_list)
+                        added_cnt = 0
+                        for lbl in chosen_articles:
+                            kw_derived = wp_options[lbl]
+                            if kw_derived and kw_derived not in cur_lines:
+                                cur_lines.append(kw_derived)
+                                added_cnt += 1
+                        st.session_state["_pending_kw_text"] = "\n".join(cur_lines)
+                        st.toast(f"Đã nạp thêm {added_cnt} từ khóa từ bài viết đã chọn!", icon="📰")
+                        st.rerun()
+                    else:
+                        st.warning("Vui lòng chọn ít nhất 1 bài viết ở trên!")
+
+        # Trình chỉnh sửa / xóa từng từ khóa dạng bảng trực quan (kèm Tiêu đề chính của từ khóa đó)
+        with st.expander("📝 Sửa / Xóa từng từ khóa & Xem Tiêu đề chính (Dạng bảng)", expanded=False):
+            st.caption("Bấm đúp vào cột **Từ khóa SEO** để sửa chữ, chọn hàng bấm `Delete` (hoặc thùng rác) để xóa, bấm `+` để thêm dòng. Cột **Tiêu đề chính (hwood.vn)** tự động khớp bài viết mục tiêu.")
+            df_kw = []
+            for k in cur_kw_list:
+                main_title = "— Chưa đồng bộ WP —"
+                main_link = ""
+                if tim_bai_viet_khop_nhat_wp and wp_posts_cache:
+                    matched = tim_bai_viet_khop_nhat_wp(k, wp_posts_cache)
+                    if matched:
+                        main_title = matched.get("title", "") or "—"
+                        main_link = matched.get("link", "") or ""
+                    else:
+                        main_title = "⚠️ Chưa khớp bài viết nào"
+                df_kw.append({"Từ khóa": k, "Tiêu đề chính (hwood.vn)": main_title, "Link bài viết": main_link})
+            if not df_kw:
+                df_kw = [{"Từ khóa": "", "Tiêu đề chính (hwood.vn)": "", "Link bài viết": ""}]
+
             edited_df = st.data_editor(
                 df_kw,
                 num_rows="dynamic",
                 use_container_width=True,
                 key="editor_bot_keywords",
                 column_config={
-                    "Từ khóa": st.column_config.TextColumn("Từ khóa SEO", width="large", required=False)
+                    "Từ khóa": st.column_config.TextColumn("Từ khóa SEO", width="medium", required=False),
+                    "Tiêu đề chính (hwood.vn)": st.column_config.TextColumn("Tiêu đề chính (hwood.vn)", width="large", disabled=True),
+                    "Link bài viết": st.column_config.LinkColumn("Link bài viết", width="medium", disabled=True),
                 },
             )
             if st.button("✅ Cập nhật danh sách từ bảng", key="btn_apply_kw_table", type="primary", use_container_width=True):
                 cleaned = [str(r.get("Từ khóa", "")).strip() for r in edited_df if r and str(r.get("Từ khóa", "")).strip()]
                 cleaned = list(dict.fromkeys(cleaned))
-                st.session_state["bot_farm_keywords_input"] = "\n".join(cleaned)
+                st.session_state["_pending_kw_text"] = "\n".join(cleaned)
                 st.toast(f"Đã cập nhật {len(cleaned)} từ khóa!", icon="✅")
                 st.rerun()
 
@@ -517,7 +592,7 @@ def render_tab8():
                 if st.button(f"🗑️ Xóa bộ đang chọn: {chosen_now}", key="btn_del_custom_preset", use_container_width=True):
                     del custom_presets[chosen_now]
                     _save_custom_presets(custom_presets)
-                    st.session_state["sel_bot_preset"] = "Nhập tay"
+                    st.session_state["_pending_sel_preset"] = "Nhập tay"
                     st.success("Đã xóa bộ từ khóa tự tạo!")
                     st.rerun()
 
