@@ -112,6 +112,22 @@ VIEWPORTS = [
     {"width": 1280, "height": 720},
 ]
 
+# Pool thiết bị di động (Mobile Traffic Simulation)
+MOBILE_USER_AGENTS = [
+    "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Mobile/15E148 Safari/604.1",
+    "Mozilla/5.0 (Linux; Android 14; SM-S918B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Mobile Safari/537.36",
+    "Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/127.0.6533.77 Mobile/15E148 Safari/604.1",
+    "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Mobile Safari/537.36",
+]
+
+MOBILE_VIEWPORTS = [
+    {"width": 390, "height": 844},
+    {"width": 412, "height": 915},
+    {"width": 393, "height": 852},
+]
+
+PROFILES_DIR = os.path.join(BASE_DIR, "bot_profiles")
+
 # Thử import playwright-stealth (chống phát hiện tốt hơn) - nếu không có thì bỏ qua
 try:
     from playwright_stealth import stealth_sync
@@ -132,6 +148,7 @@ class BotConfig:
     proxy_password: str = ""
     user_agent: str = field(default_factory=lambda: random.choice(USER_AGENTS))
     viewport: Dict = field(default_factory=lambda: random.choice(VIEWPORTS))
+    is_mobile: bool = False
 
     def proxy_dict(self) -> Optional[Dict]:
         if not self.proxy_server:
@@ -300,6 +317,12 @@ class BotWorker(threading.Thread):
         start_delay: float = 0.0,
         pacing_state: Optional[Dict] = None,
         pacing_lock: Optional[threading.Lock] = None,
+        save_profile: bool = True,
+        max_clicks_session: int = 0,
+        break_every: int = 10,
+        break_minutes: float = 3.0,
+        session_state: Optional[Dict] = None,
+        session_lock: Optional[threading.Lock] = None,
     ):
         super().__init__(daemon=True)
         self.config = config
@@ -322,6 +345,12 @@ class BotWorker(threading.Thread):
         self.start_delay = start_delay
         self.pacing_state = pacing_state
         self.pacing_lock = pacing_lock
+        self.save_profile = save_profile
+        self.max_clicks_session = max_clicks_session
+        self.break_every = break_every
+        self.break_minutes = break_minutes
+        self.session_state = session_state
+        self.session_lock = session_lock
         self.processed = 0
         self.found_count = 0
         self.errors = []
@@ -824,6 +853,12 @@ class BotWorker(threading.Thread):
 
     def _visit_hwood_page(self, page, result: Dict):
         """Click vào kết quả hwood.vn (AI Overview, Cụm hình ảnh, hay Organic) để tăng traffic chuẩn Google."""
+        if self.max_clicks_session > 0 and self.session_lock is not None and self.session_state is not None:
+            with self.session_lock:
+                if self.session_state.get("clicks", 0) >= self.max_clicks_session:
+                    self._log(f"🛑 [Giới hạn phiên] Đã đạt đủ {self.max_clicks_session} lượt nhấp! Dừng an toàn.")
+                    self.stop_event.set()
+                    return
         self._wait_for_pacing_slot()
         if self.stop_event.is_set():
             return
@@ -1045,6 +1080,23 @@ class BotWorker(threading.Thread):
                     active_page.goto(target_url, timeout=30000)
                 except Exception:
                     pass
+
+        # 4.5. Kiểm tra trang đã tải nội dung thật chưa (bỏ qua ngay nếu trang trắng/rớt mạng/lỗi Proxy)
+        try:
+            curr_u_check = (active_page.url or "").lower()
+            body_len = len((active_page.locator("body").inner_text(timeout=3000) or "").strip())
+            if TARGET_DOMAIN not in curr_u_check or body_len < 50:
+                self._log("⚠️ [Mạng/Proxy lỗi] Trang không tải được nội dung hoặc bị trắng trang, chuyển nhanh sang từ khóa khác!")
+                return
+            if self.session_lock is not None and self.session_state is not None:
+                with self.session_lock:
+                    self.session_state["clicks"] = self.session_state.get("clicks", 0) + 1
+                    cur_clicks = self.session_state["clicks"]
+                if self.max_clicks_session > 0 and cur_clicks >= self.max_clicks_session:
+                    self._log(f"🛑 [Giới hạn phiên] Đã hoàn thành lượt nhấp thứ {cur_clicks}/{self.max_clicks_session}. Dừng sau khi đọc xong bài này.")
+        except Exception:
+            self._log("⚠️ [Mạng/Proxy lỗi] Không kiểm tra được nội dung trang, bỏ qua để tránh treo bot.")
+            return
 
         # 5. Đọc nội dung bài viết và tương tác cuộn tự nhiên như người thật trên hwood.vn
         try:
@@ -1274,13 +1326,24 @@ class BotWorker(threading.Thread):
                                 )
                             else:
                                 raise e_br
-                        ctx = br.new_context(
-                            user_agent=self.config.user_agent,
-                            viewport=self.config.viewport,
-                            locale="vi-VN",
-                            timezone_id="Asia/Ho_Chi_Minh",
-                            proxy=use_proxy_dict,
-                        )
+                        profile_state_path = os.path.join(PROFILES_DIR, f"{self.config.bot_id}_state.json")
+                        ctx_kwargs = {
+                            "user_agent": self.config.user_agent,
+                            "viewport": self.config.viewport,
+                            "is_mobile": bool(self.config.is_mobile),
+                            "has_touch": bool(self.config.is_mobile),
+                            "locale": "vi-VN",
+                            "timezone_id": "Asia/Ho_Chi_Minh",
+                            "proxy": use_proxy_dict,
+                        }
+                        if self.save_profile and os.path.exists(profile_state_path):
+                            try:
+                                with open(profile_state_path, "r", encoding="utf-8") as _fp:
+                                    json.load(_fp)
+                                ctx_kwargs["storage_state"] = profile_state_path
+                            except Exception:
+                                pass
+                        ctx = br.new_context(**ctx_kwargs)
                         if HAS_STEALTH:
                             stealth_sync(ctx)
                         # Chống lộ dấu vân tay WebDriver & khóa rò rỉ IP thật qua WebRTC trên toàn bộ tab
@@ -1498,12 +1561,36 @@ class BotWorker(threading.Thread):
 
                         self.result_store.add(record)
 
-                        # Chỉ nghỉ ngẫu nhiên nếu trong hàng đợi VẪN CÒN TỪ KHÓA!
+                        # Kiểm tra giới hạn số lượt click trong phiên
+                        if self.max_clicks_session > 0 and self.session_lock is not None and self.session_state is not None:
+                            with self.session_lock:
+                                if self.session_state.get("clicks", 0) >= self.max_clicks_session:
+                                    self.stop_event.set()
+                                    break
+
+                        # Chỉ nghỉ ngẫu nhiên hoặc nghỉ giải lao nếu trong hàng đợi VẪN CÒN TỪ KHÓA!
                         if not self.keyword_queue.empty() and not self.stop_event.is_set():
-                            pause_s = round(random.uniform(self.delay_between_min, self.delay_between_max), 1)
-                            self._log(f"⏸️ Nghỉ an toàn {pause_s}s trước từ tiếp theo để tránh Google quét...")
-                            self._write_progress("resting", f"Nghỉ an toàn {pause_s}s trước từ tiếp theo")
-                            time.sleep(pause_s)
+                            if self.break_every > 0 and self.break_minutes > 0 and self.processed > 0 and (self.processed % self.break_every == 0):
+                                br_secs = int(self.break_minutes * 60)
+                                self._log(f"☕ [Nghỉ giải lao] Đã chạy {self.processed} từ khóa, nghỉ {self.break_minutes} phút ({br_secs}s) để bảo vệ IP...")
+                                self._write_progress("resting", f"Nghỉ giải lao {self.break_minutes} phút sau {self.processed} từ")
+                                waited_br = 0.0
+                                while waited_br < br_secs and not self.stop_event.is_set():
+                                    time.sleep(min(0.5, br_secs - waited_br))
+                                    waited_br += 0.5
+                            else:
+                                pause_s = round(random.uniform(self.delay_between_min, self.delay_between_max), 1)
+                                self._log(f"⏸️ Nghỉ an toàn {pause_s}s trước từ tiếp theo để tránh Google quét...")
+                                self._write_progress("resting", f"Nghỉ an toàn {pause_s}s trước từ tiếp theo")
+                                time.sleep(pause_s)
+
+                    if self.save_profile:
+                        try:
+                            os.makedirs(PROFILES_DIR, exist_ok=True)
+                            profile_state_path = os.path.join(PROFILES_DIR, f"{self.config.bot_id}_state.json")
+                            context.storage_state(path=profile_state_path)
+                        except Exception:
+                            pass
 
                     try:
                         browser.close()
@@ -1541,6 +1628,11 @@ def chay_5_bot(
     delay_between_min: int = 8,
     delay_between_max: int = 15,
     steady_pacing: bool = False,
+    save_profile: bool = True,
+    mobile_pct: int = 30,
+    max_clicks_session: int = 0,
+    break_every: int = 10,
+    break_minutes: float = 3.0,
 ) -> Tuple[List[Dict], List[BotWorker]]:
     """
     Khởi chạy 5 bot song song. Trả về (danh_sach_ket_qua, danh_sach_thread_bot).
@@ -1580,6 +1672,20 @@ def chay_5_bot(
     stop_event = threading.Event()
     pacing_lock = threading.Lock()
     pacing_state = {"last_click_ts": 0.0}
+    session_lock = threading.Lock()
+    session_state = {"clicks": 0}
+
+    # Gán tỷ lệ thiết bị di động (Mobile Traffic Simulation) cho các bot cuối danh sách
+    total_bots = len(danh_sach_bot)
+    n_mobile = int(round(total_bots * max(0, min(100, mobile_pct)) / 100.0)) if total_bots >= 2 else (1 if mobile_pct >= 50 else 0)
+    if n_mobile > 0:
+        for m_idx in range(total_bots - n_mobile, total_bots):
+            danh_sach_bot[m_idx].is_mobile = True
+            danh_sach_bot[m_idx].user_agent = random.choice(MOBILE_USER_AGENTS)
+            danh_sach_bot[m_idx].viewport = random.choice(MOBILE_VIEWPORTS)
+            if "Mobile" not in danh_sach_bot[m_idx].name:
+                danh_sach_bot[m_idx].name = f"{danh_sach_bot[m_idx].name} (Mobile)"
+
     bots = []
     for idx, cfg in enumerate(danh_sach_bot):
         s_delay = (idx * random.uniform(22.0, 35.0)) if (steady_pacing and idx > 0) else 0.0
@@ -1601,6 +1707,12 @@ def chay_5_bot(
             start_delay=s_delay,
             pacing_state=pacing_state,
             pacing_lock=pacing_lock,
+            save_profile=save_profile,
+            max_clicks_session=max_clicks_session,
+            break_every=break_every,
+            break_minutes=break_minutes,
+            session_state=session_state,
+            session_lock=session_lock,
         )
         bots.append(bot)
 
