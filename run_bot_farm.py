@@ -60,6 +60,11 @@ def doc_cai_dat() -> dict:
         "visit_pages": True,
         "deep_browse": True,
         "steady_pacing": True,
+        "save_profile": True,
+        "mobile_pct": 30,
+        "max_clicks_session": 0,
+        "break_every": 10,
+        "break_minutes": 3.0,
         "headless": False,
         "click_zalo": False,
     }
@@ -92,6 +97,11 @@ if __name__ == "__main__":
         delay_between_min=int(settings.get("delay_min", 8)),
         delay_between_max=int(settings.get("delay_max", 15)),
         steady_pacing=bool(settings.get("steady_pacing", True)),
+        save_profile=bool(settings.get("save_profile", True)),
+        mobile_pct=int(settings.get("mobile_pct", 30)),
+        max_clicks_session=int(settings.get("max_clicks_session", 0)),
+        break_every=int(settings.get("break_every", 10)),
+        break_minutes=float(settings.get("break_minutes", 3.0)),
     )
 
     for b in bots:
