@@ -126,7 +126,7 @@ MOBILE_VIEWPORTS = [
     {"width": 393, "height": 852},
 ]
 
-PROFILES_DIR = os.path.join(BASE_DIR, "bot_profiles")
+PROFILES_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "bot_profiles")
 
 # Thử import playwright-stealth (chống phát hiện tốt hơn) - nếu không có thì bỏ qua
 try:
