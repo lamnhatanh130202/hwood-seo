@@ -433,8 +433,8 @@ class BotWorker(threading.Thread):
                 }
             }
 
-            // Quét tất cả các khối kết quả xuất hiện trên trang, lọc sạch để tránh trùng lặp giữa card cha và con
-            const rawCards = Array.from(document.querySelectorAll('[data-attrid*="overview"], [aria-label*="AI"], .c2xzTb, .xpdopen, div.MjjYud, div.g, div.tF2Cxc'));
+            // Quét tất cả các khối kết quả xuất hiện trên trang (hỗ trợ cả Desktop & Mobile Google SERP), lọc sạch để tránh trùng lặp giữa card cha và con
+            const rawCards = Array.from(document.querySelectorAll('[data-attrid*="overview"], [aria-label*="AI"], .c2xzTb, .xpdopen, div.MjjYud, div.g, div.tF2Cxc, div.mnr-c, div.xpd, div.ezO2md'));
             const cards = [];
             rawCards.forEach(c => {
                 if (cards.some(other => other.contains(c))) return;
@@ -987,24 +987,31 @@ class BotWorker(threading.Thread):
                     self._log(f"🎯 Đã khóa vị trí bài viết HWOOD ({source_label}), chuẩn bị click vào trang...")
                     human_sleep(1.2, 2.0)
 
-                    # Bấm chuẩn xác bằng click chuột thật của Playwright trước, fallback sang JS click nếu bị che
+                    # Bấm chuẩn xác: trên Mobile dùng tap() cảm ứng thật, trên Desktop dùng click() thật, fallback sang JS click nếu bị che
                     try:
-                        target_locator.click(timeout=3500)
+                        if self.config.is_mobile:
+                            target_locator.tap(timeout=3500)
+                        else:
+                            target_locator.click(timeout=3500)
                         clicked = True
                     except Exception:
                         try:
-                            page.evaluate("""(el) => {
-                                if (!el) return;
-                                const a = el.closest('a') || el.querySelector('a') || el;
-                                a.click();
-                            }""", target_locator.element_handle())
+                            target_locator.click(timeout=3000)
                             clicked = True
                         except Exception:
                             try:
-                                target_locator.click(force=True, timeout=2500)
+                                page.evaluate("""(el) => {
+                                    if (!el) return;
+                                    const a = el.closest('a') || el.querySelector('a') || el;
+                                    a.click();
+                                }""", target_locator.element_handle())
                                 clicked = True
                             except Exception:
-                                clicked = False
+                                try:
+                                    target_locator.click(force=True, timeout=2500)
+                                    clicked = True
+                                except Exception:
+                                    clicked = False
 
                     # Chờ hoàn tất chuyển hướng sang domain hwood.vn
                     # Sử dụng wait_for_timeout để Playwright CDP event loop cập nhật URL và tab mới kịp thời
@@ -1124,7 +1131,11 @@ class BotWorker(threading.Thread):
                 self._write_progress("dwelling", f"{status_label}: {elapsed}/{dwell}s (cuộn chuột)")
                 if random.random() < 0.65:
                     try:
-                        active_page.mouse.wheel(0, random.randint(150, 450))
+                        dy = random.randint(180, 460)
+                        if self.config.is_mobile:
+                            active_page.evaluate(f"window.scrollBy({{top: {dy}, behavior: 'smooth'}})")
+                        else:
+                            active_page.mouse.wheel(0, dy)
                     except Exception:
                         pass
 
@@ -1516,22 +1527,36 @@ class BotWorker(threading.Thread):
                                     self._log(f"   ✅ Trang {page_num}: thấy {len(hwood_hits)} kết quả hwood.vn")
                                     break
 
-                                # Nếu chưa thấy: cuộn thêm hoặc bấm chuyển trang nếu có nút Next
+                                # Nếu chưa thấy: cuộn thêm hoặc bấm chuyển trang (hỗ trợ cả Desktop #pnnext và Mobile "Xem thêm kết quả")
                                 if page_num < self.max_pages:
                                     try:
-                                        page.mouse.wheel(0, 800)
+                                        if self.config.is_mobile:
+                                            page.evaluate("window.scrollBy({top: 900, behavior: 'smooth'})")
+                                        else:
+                                            page.mouse.wheel(0, 800)
                                         human_sleep(1.0, 1.8)
-                                        next_btn = page.locator("#pnnext, a#pnnext, a[aria-label*='Next'], a[aria-label*='Tiếp'], [jsname='TeSSvd']")
+                                        next_btn = page.locator(
+                                            "#pnnext, a#pnnext, a[aria-label*='Next'], a[aria-label*='Tiếp'], [jsname='TeSSvd'], "
+                                            "a[aria-label*='Xem thêm'], a[aria-label*='More results'], "
+                                            "button:has-text('Xem thêm kết quả'), a:has-text('Xem thêm kết quả'), "
+                                            "button:has-text('More results'), a:has-text('More results')"
+                                        )
                                         if next_btn.count() > 0 and next_btn.first.is_visible():
                                             next_btn.first.scroll_into_view_if_needed(timeout=3000)
                                             human_sleep(0.8, 1.5)
-                                            next_btn.first.click(timeout=5000)
+                                            if self.config.is_mobile:
+                                                next_btn.first.tap(timeout=5000)
+                                            else:
+                                                next_btn.first.click(timeout=5000)
                                             human_sleep(2.0, 3.5)
                                             if not self._handle_captcha_if_needed(page, keyword):
                                                 break
                                         else:
-                                            # Hỗ trợ giao diện cuộn vô tận của Google
-                                            page.mouse.wheel(0, 1000)
+                                            # Hỗ trợ giao diện cuộn vô tận của Google (đặc biệt trên Mobile)
+                                            if self.config.is_mobile:
+                                                page.evaluate("window.scrollBy({top: 1200, behavior: 'smooth'})")
+                                            else:
+                                                page.mouse.wheel(0, 1000)
                                             human_sleep(1.5, 2.5)
                                     except Exception:
                                         pass
