@@ -8,5 +8,10 @@
   "deep_browse": true,
   "click_zalo": false,
   "headless": false,
-  "steady_pacing": true
+  "steady_pacing": true,
+  "save_profile": true,
+  "mobile_pct": 30,
+  "max_clicks_session": 0,
+  "break_every": 10,
+  "break_minutes": 3.0
 }
