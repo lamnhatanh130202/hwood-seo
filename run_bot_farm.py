@@ -59,6 +59,7 @@ def doc_cai_dat() -> dict:
         "dwell_max": 90,
         "visit_pages": True,
         "deep_browse": True,
+        "steady_pacing": True,
         "headless": False,
         "click_zalo": False,
     }
@@ -90,6 +91,7 @@ if __name__ == "__main__":
         click_zalo=bool(settings.get("click_zalo", False)),
         delay_between_min=int(settings.get("delay_min", 8)),
         delay_between_max=int(settings.get("delay_max", 15)),
+        steady_pacing=bool(settings.get("steady_pacing", True)),
     )
 
     for b in bots:
