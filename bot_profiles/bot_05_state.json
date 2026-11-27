@@ -1,0 +1,276 @@
+{
+  "cookies": [
+    {
+      "name": "SNID",
+      "value": "ANBxh3ic0tO5D7NowB3AXzKcUDjVagp9TaoVPZdxvcBqvyJWxomenws1SKCrwFfjbR898EnkseuG0FxAXNbm6pQwwt-G70qz",
+      "domain": ".google.com.vn",
+      "path": "/verify",
+      "expires": 1811557361.030288,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "SEARCH_SAMESITE",
+      "value": "CgQIsKIB",
+      "domain": ".google.com.vn",
+      "path": "/",
+      "expires": 1811298160.395343,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Strict"
+    },
+    {
+      "name": "AEC",
+      "value": "Aaa9EJr0TVUvp2QIfWKW2dVoC3VymTy7IJ0aVqMcRajrO-IavbL4mgp1Qw",
+      "domain": ".google.com.vn",
+      "path": "/",
+      "expires": 1811298160.39536,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "YSC",
+      "value": "6Z3gyCYDhTw",
+      "domain": ".youtube.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None",
+      "partitionKey": "https://google.com.vn",
+      "_crHasCrossSiteAncestor": true
+    },
+    {
+      "name": "VISITOR_INFO1_LIVE",
+      "value": "574wyOGMUGA",
+      "domain": ".youtube.com",
+      "path": "/",
+      "expires": 1811312590.949434,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None",
+      "partitionKey": "https://google.com.vn",
+      "_crHasCrossSiteAncestor": true
+    },
+    {
+      "name": "VISITOR_PRIVACY_METADATA",
+      "value": "CgJWThIEGgAgZg%3D%3D",
+      "domain": ".youtube.com",
+      "path": "/",
+      "expires": 1811312590.949498,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None",
+      "partitionKey": "https://google.com.vn",
+      "_crHasCrossSiteAncestor": true
+    },
+    {
+      "name": "__Secure-YNID",
+      "value": "CtsBCAUSjQEBDB6PDCNOrNNH5aSzxjSpn8dLAjoxP6CrpakKLOzxPLf1_E_dSRtBI8DU-bxkaej8x1c3R8N9_9KzoG-EYKFiX_dOaHn9yvDKWNFv4Up2z1BTqshK4ZLJlpt5TSmux6NxRjuOjfD6HB3piTNncJqBYTaVwG4oDqe6iFyXoT7DoQ_LiWm2LPDvpPcj_cQoBTJFARxY9WoJiLFDPlwRR53ysvHX0sC2syupxr6zrLdna4kBbNcRYXVCv2P2_NIlbMsL_mdPrGZOBqIuNJcXYZZBL7r8ZUMD",
+      "domain": ".youtube.com",
+      "path": "/",
+      "expires": 1811298163.152269,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None",
+      "partitionKey": "https://google.com.vn",
+      "_crHasCrossSiteAncestor": true
+    },
+    {
+      "name": "__Secure-ROLLOUT_TOKEN",
+      "value": "CJv21-rR-r7DRxCYh5bji6eYAxjpuKbji6eYAw%3D%3D",
+      "domain": ".youtube.com",
+      "path": "/",
+      "expires": 1811298163.152388,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None",
+      "partitionKey": "https://google.com.vn",
+      "_crHasCrossSiteAncestor": true
+    },
+    {
+      "name": "datr",
+      "value": "7OkIa8BV_Qpjl4O6hZxr2har",
+      "domain": ".facebook.com",
+      "path": "/",
+      "expires": 1830306280.467671,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "m_pixel_ratio",
+      "value": "1",
+      "domain": ".facebook.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "wd",
+      "value": "393x852",
+      "domain": ".facebook.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "IDE",
+      "value": "AHWqTUk4__32lOrNthE1pFOk3WLXXNS3-xvq1SBqv1_o7e3t5PVP8rlBcZgAd2ob",
+      "domain": ".doubleclick.net",
+      "path": "/",
+      "expires": 1830306293.160745,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "VISITOR_INFO1_LIVE",
+      "value": "574wyOGMUGA",
+      "domain": ".youtube.com",
+      "path": "/",
+      "expires": 1811306463.294137,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "VISITOR_PRIVACY_METADATA",
+      "value": "CgJWThIEGgAgZg%3D%3D",
+      "domain": ".youtube.com",
+      "path": "/",
+      "expires": 1811306463.29422,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "NID",
+      "value": "CuUBCAESlwEBM9Agl5IyvIqEE7jQ_6w-sIR1V2WHro-_h31Od3H3_LXEPo75pK3GYuWjgPBQtsTVUqIVTUxVi5doprT60HKewLsXURZNQ3zDdWFmBqtdJkysDsAEvaS3V1zUFTlHAuiVDuVpT0leSZ_jJBIqYCpx0CwDWMS5-_fl8zl173QE9ufVRjsMRbNAcxYBgSlufMmvv_UCZdbXKAEyRQFwSkLP63mOmaPSwQ_TPlgZoCi-223E2JOVbg3CFho5iyO-K6PyK4CoHv1GfhsufFddl8spQ-N5ISU3r66RxPb-l2dRBQ",
+      "domain": ".google.com",
+      "path": "/",
+      "expires": 1811557363.319573,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "__Secure-STRP",
+      "value": "ABNhA6iHhIX4kbCgZaj6Q9PbE6bby2GFIMwmTcyShuPotE5rvmdj4e8aSar5-1yRHwfRyov-9OHf-oUKHP-WBSjg_x6oq8Va1tnN",
+      "domain": ".google.com.vn",
+      "path": "/",
+      "expires": 1795760735.852369,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "Strict"
+    },
+    {
+      "name": "NID",
+      "value": "Cq0CCAES3wEBM9AglwK8lME-FlLEIExBFUBiOm8W7xYUsWWPSf0aIAtiylcW5gZa1WgGVPPHqa5hgHPhvmkvh9E8-FmGu5wg87-vygkN5kO4nIiRrGMf6ebhK2FnBaSr2xOWzfY74DYz0hfqjIgEt4HxNPOJ1pxjAs0oPq2-aUDTBkoO--Zc56Tfgu8epGFeDHS448i4g3d7H9-Z1W_ABWwTkOsGA3Dhd06Ra6rNQiCE2ovrRW6GXKjvGCryXeZ4oWDN1tj7XsbeyxosNQBe0ckvoI7cTEp4ShdSNrqxxSFLMVNSFxHSKAEyRQFwSkLP2e3XxWTnTFR-SZXHikCte1eRZkje-5zzTN1wj8EfMnfn9S9aKmYPjuy63kWKnqPmSlpFpQG8GuI5ruXLt66IBg",
+      "domain": ".google.com.vn",
+      "path": "/",
+      "expires": 1811557359.448259,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "DV",
+      "value": "wzErDlFklK8h4Ovh8UQyktR7rMG6IVp_Hk7tc0SfCwcAAAA",
+      "domain": "www.google.com.vn",
+      "path": "/",
+      "expires": 1795761190,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    }
+  ],
+  "origins": [
+    {
+      "origin": "https://www.google.com.vn",
+      "localStorage": [
+        {
+          "name": "sb_wiz.pq_tm_hp",
+          "value": "1795760589570"
+        },
+        {
+          "name": "sb_wiz.pq",
+          "value": "tấm sàn composite"
+        },
+        {
+          "name": "sb_wiz.zpc.",
+          "value": "{\"0\":[],\"1\":{\"av\":\"1199132416065581437\",\"by\":[{\"icon_uri\":\"https://www.gstatic.com/apigee-edge/connectors/viator.png\",\"name\":\"viator\",\"umid\":\"751158034\"},{\"name\":\"experian\",\"icon_uri\":\"https://www.google.com/s2/favicons?domain=experian.com&sz=64\",\"umid\":\"825646013\"},{\"name\":\"hrblock\",\"icon_uri\":\"https://www.google.com/s2/favicons?domain=hrblock.com&sz=64\",\"umid\":\"576370425\"},{\"name\":\"localiza\",\"umid\":\"611861196\",\"icon_uri\":\"https://www.google.com/s2/favicons?domain=localiza.com&sz=64\"},{\"umid\":\"132100238\",\"icon_uri\":\"https://www.google.com/s2/favicons?domain=adobe.com&sz=64\",\"name\":\"adobe\"},{\"icon_uri\":\"https://www.google.com/s2/favicons?domain=albertsons.com&sz=64\",\"umid\":\"331715476\",\"name\":\"albertsons\"},{\"icon_uri\":\"https://www.google.com/s2/favicons?domain=bigbasket.com&sz=64\",\"name\":\"bigbasket\",\"umid\":\"965231999\"},{\"umid\":\"899058104\",\"name\":\"carrefour\",\"icon_uri\":\"https://www.google.com/s2/favicons?domain=carrefour.com.br&sz=64\"},{\"icon_uri\":\"https://www.google.com/s2/favicons?domain=calm.com&sz=64\",\"umid\":\"843319859\",\"name\":\"calm\"},{\"umid\":\"956064194\",\"icon_uri\":\"https://www.google.com/s2/favicons?domain=fandango.com&sz=64\",\"name\":\"fandango\"},{\"name\":\"fredmeyer\",\"icon_uri\":\"https://www.google.com/s2/favicons?domain=fredmeyer.com&sz=64\",\"umid\":\"577505061\"},{\"umid\":\"622141986\",\"icon_uri\":\"https://www.google.com/s2/favicons?domain=instamart.in&sz=64\",\"name\":\"instamart\"},{\"name\":\"kingsoopers\",\"icon_uri\":\"https://www.google.com/s2/favicons?domain=kingsoopers.com&sz=64\",\"umid\":\"535446415\"},{\"icon_uri\":\"https://www.google.com/s2/favicons?domain=kroger.com&sz=64\",\"name\":\"kroger\",\"umid\":\"760635250\"},{\"icon_uri\":\"https://www.google.com/s2/favicons?domain=onepeloton.com&sz=64\",\"name\":\"peloton\",\"umid\":\"472861794\"},{\"name\":\"safeway\",\"umid\":\"762910803\",\"icon_uri\":\"https://www.google.com/s2/favicons?domain=safeway.com&sz=64\"},{\"umid\":\"492828547\",\"icon_uri\":\"https://www.google.com/s2/favicons?domain=shaws.com&sz=64\",\"name\":\"shaws\"},{\"name\":\"swiggy\",\"icon_uri\":\"https://www.google.com/s2/favicons?domain=swiggy.com&sz=64\",\"umid\":\"612584656\"},{\"name\":\"target\",\"icon_uri\":\"https://www.google.com/s2/favicons?domain=target.com&sz=64\",\"umid\":\"452264765\"},{\"umid\":\"191396498\",\"icon_uri\":\"https://www.google.com/s2/favicons?domain=zepto.com&sz=64\",\"name\":\"zepto\"},{\"icon_uri\":\"https://lh3.googleusercontent.com/3GpU00eA8LUyIcRlR9TuX317QPT7VxX0e6iuA7ZX_yBXKX1vXWma9btmH757ievZBLw\",\"name\":\"androiddevsummit\",\"umid\":\"508961876\"},{\"icon_uri\":\"https://www.google.com/s2/favicons?domain=urbancompany.com&sz=64\",\"umid\":\"905961806\",\"name\":\"urbancompany\"},{\"icon_uri\":\"https://www.google.com/s2/favicons?domain=alltrails.com&sz=64\",\"umid\":\"394817265\",\"name\":\"alltrails\"},{\"icon_uri\":\"https://lh3.googleusercontent.com/74CjZGJK-G0t85oGWVaRWkphK_sY8bai4ZGhz_QBjnbta20fGFDbwKs6u-7NnxZ48ls\",\"umid\":\"480828052\",\"name\":\"angi\"},{\"icon_uri\":\"https://lh3.googleusercontent.com/O9FB7V1j6kxgeYyo0jOHWSJqn8U-qDcNemJ_KQbkZMqTNOPzXZX7QDbmsFLJmlR0Imo\",\"name\":\"apartmentlist\",\"umid\":\"181894810\"},{\"icon_uri\":\"https://lh3.googleusercontent.com/VsmVcTF0gHfajjlKTcH-ROa-2M8UHbGOXX4HSxNzmZk-ipMQ7l5VfBCRoYkl7tomHA\",\"name\":\"apartmentscom\",\"umid\":\"412746582\"},{\"umid\":\"229336575\",\"icon_uri\":\"https://www.google.com/s2/favicons?domain=bandsintown.com&sz=64\",\"name\":\"bandsintown\"},{\"name\":\"clickbus\",\"umid\":\"700782567\",\"icon_uri\":\"https://www.google.com/s2/favicons?domain=clickbus.com.br&sz=64\"},{\"umid\":\"692992785\",\"icon_uri\":\"https://www.google.com/s2/favicons?domain=coinbase.com&sz=64\",\"name\":\"coinbase\"},{\"umid\":\"900883004\",\"icon_uri\":\"https://www.gstatic.com/lamda/images/tools/logo_fever_2dda28d8d96d128169489.jpg\",\"name\":\"fever\"},{\"icon_uri\":\"https://www.google.com/s2/favicons?domain=getninjas.com.br&sz=64\",\"name\":\"getninjas\",\"umid\":\"906780208\"},{\"name\":\"getyourguide\",\"umid\":\"521132125\",\"icon_uri\":\"https://www.google.com/s2/favicons?domain=getyourguide.com&sz=64\"},{\"name\":\"goodrx\",\"icon_uri\":\"https://images.ctfassets.net/4f3rgqwzdznj/6aPqDDuIpaMZcg8Gqqc59E/cdfb20f2037dee689c3a6b27deb3bed6/GoodRx_logo.png?w=512&h=512&fm=png\",\"umid\":\"170468956\"},{\"icon_uri\":\"https://lh3.googleusercontent.com/3qNnT3-Ez81EmD9PglQeOBXhC0_MljxKeLwZYczq3NHa3_ZhomjM_2FYxIna7kTZ9ek\",\"umid\":\"400712977\",\"name\":\"homh\"},{\"umid\":\"377356219\",\"icon_uri\":\"https://www.google.com/s2/favicons?domain=ibkr.com&sz=64\",\"name\":\"interactivebrokers\"},{\"umid\":\"982099113\",\"icon_uri\":\"https://www.google.com/s2/favicons?domain=movida.com.br&sz=64\",\"name\":\"movida\"},{\"name\":\"olx\",\"icon_uri\":\"https://lh3.googleusercontent.com/SmKvTxrnfwWhAY-AmjqMASteU7WyCj5uz86Ag_5CQl9GO2EexFiXL8Yv7l1HYdQj2w\",\"umid\":\"609609983\"},{\"umid\":\"106152521\",\"icon_uri\":\"https://www.gstatic.com/lamda/images/tools/logo_picsart_47fb14ba1ad15c0ae9662.png\",\"name\":\"picsart\"},{\"umid\":\"875856631\",\"icon_uri\":\"https://www.google.com/s2/favicons?domain=realtor.com&sz=64\",\"name\":\"realtor\"},{\"name\":\"seatgeek\",\"icon_uri\":\"https://lh3.googleusercontent.com/UQPL8lZMCan1nojOTQN1b4dYqVxWCShrCSUdLkQ1yoq5KaEEEjimnoDT3C41YRwPXZk\",\"umid\":\"681971427\"},{\"name\":\"strava\",\"icon_uri\":\"https://www.google.com/s2/favicons?domain=strava.com&sz=64\",\"umid\":\"788271576\"},{\"name\":\"thumbtack\",\"icon_uri\":\"https://www.gstatic.com/lamda/images/tools/logo_thumbtack_light_cddb78567f46a154ca30.png\",\"umid\":\"218040109\"},{\"name\":\"ticketmaster\",\"umid\":\"438860541\",\"icon_uri\":\"https://www.gstatic.com/lamda/images/tools/logo_ticketmaster_5903d8fb81ed6cdf74e29ba7e235f5ce.webp\"},{\"icon_uri\":\"https://www.google.com/s2/favicons?domain=turbotax.intuit.com&sz=64\",\"umid\":\"428519637\",\"name\":\"turbotax\"},{\"icon_uri\":\"https://www.google.com/s2/favicons?domain=zillow.com&sz=64\",\"name\":\"zillow\",\"umid\":\"628684133\"},{\"umid\":\"648291735\",\"icon_uri\":\"https://www.google.com/s2/favicons?domain=zocdoc.com&sz=64\",\"name\":\"zocdoc\"}]}}"
+        },
+        {
+          "name": "rkLudSA403",
+          "value": "gLhrphTWV7IINdLX5fJ5XEjX8fBEsyGU3nWBlQedprq-7Cw12WJ2Yk4awrA4x7WycZ0Y7txdlT8HCCCA9UcvBBBY_ofci07JJr9qMJU-Md5ztNLLlN1g_oBNyRtphUsJIYbkXFDfo9aqPcYANR0B-80kF1Ofqkwbf2_DNCY6qtv4JfRPWIihOFn1MZiCD2iJQb9W-S8jF9G3H4GRLzCgquJ8Lj5wZjZCXwF-b_wok99_u4kU606mvDCb0mKfEUigb-WD0bBz8p0l6MCn3VmDoM_m_loYZQ7yn8HR0HQmZznyJTI5yWYeN3RJTlM_nbwipuhr_1g6lQzeG6F_XEBRbSF94AVqWrRoFxz-GW4NLiL_EIFnzhYDOSTDtZpXSJjQgCqCP9zw_FknkwbFncU-bnwTp3n5bI46SF91wU9TjFfDyYb8QrziAm4LdY7JCDXS4clJmQGW1LDCjOPmHQbwuFrifAkVvYu-RAXkznFEgv5rpVzlgfLribtJUgYkSMkqG7P7l8eglWBTADwuzikVFQLVZooI-ihtoS_Z0cIq1KT4pxo3lilEhNy-oZrCDBAMOn-gT1MBYt98XN_0aMYI_OvbZW_tuwGorzs6PJ99cQmKd1hR_RY78y4eJ66QPYRgkwtpYxnNS_QnJoN2394xzUeRH1kBpkoySUqgICAs2-p0z2CxJx-BLOVifo-tafY9xK0rfKeye7CWRfyWAIfSofZE9t9U8k4M7PajIBs7yAg0mvEOT6AKGj7WI2UD-jh6rucQbGxHHrHR6VwyPT70KKXNzGO05CUuMHr4j7tgXC_hme6NxeZL3t1FjmoV3XbxSSemlhdJLHODv_rS_SNJocpD4Os3abzFmbTd_Z211_RuWPNIVAmwnGy0qL_64QjVQi0w_fx2fxprvaNg1llSRZVzMozjXCl-iQDeMU1oeJks4pnWKYokSPKbv_cfpKi6b8AAwG0LfgFLBtzWPIAfCjZqdCE1SJ3vsIERt81x_mzg4C-W8Y8c_pUdvDqFMC1Jxy4FrdLfM9G_6Y1pQl-hp4GUea98ljXQlR4lQzAx3nh_qnSbGEld6TI9Tcmdhr_uBt6ms2h8vl3gPb9F3-jOqkbTaYdMVkoSqwYuuffFfsKC0tAMY5nDXSIj0NzdBWBXcUSOcfTu5SfNgLCagAAtzjBWt0-pp9GZrzDYhY0kAdYaG1Gcd7rMXGkUH_1MW6dw9EJ0hm8dIgNrm_exni8lBdKC3oHPIc1OSyWsW01VOLvkdV-tqp2FT7BGKaBAZsigVQ1T6hVZSupntXK73goh4xdBerTLkCOTgxA3izUZsohkPhYGKw9djE0hsJj2J925xk8UUgicP8m1NfnTsekhiGEvXpo1HqFJS-wOOHw31DXh7TWenyiNn0q5FHXijPk4ZBj-0zwTwEJlu9siQJ0MaM6NuEmt2Dz-_tzLI0zgG3X99r6A6g9wnEGuwfLLPm3es3IdF-Q7LgehKqar1bxTNQwNHnAE965KjWiH7IjuwC3QHd93qDyBTs62xknfrUwAlndVBkM_VLf2rs5cu_sAtoe5i0sMoo2Rc-blhVaXEYPxmQZmngi01c6np2Qj5swCQqjXrPB8PgWX-FYPTT9kRyiVV9Lrw8ILPlbCJ9C-bBMKOm3NO6pYarF5iFTzc0D6lM-j_cIZcTyi"
+        },
+        {
+          "name": "udla::ltp",
+          "value": "1795754308883"
+        },
+        {
+          "name": "sb_wiz.dhp.",
+          "value": "Ch8KFHThuqVtIHPDoG4gY29tcG9zaXRlIAEog5aw3aE0CisKIHPDoG4gbmjhu7FhIGdp4bqjIGfhu5cgaOG7kyBixqFpIAEo_5et3aE0Ci4KI2dpw6Egc8OgbiBn4buXIG5o4buxYSBuZ2_DoGkgdHLhu51pIAIo6PCm3aE0CiAKFXPDoG4gbmjhu7FhIGJhbiBjw7RuZyABKPf1qd2hNAofChR04bqlbSBsw7N0IGJhbiBjw7RuZyABKOWdutqhNAolChpzw6BuIGfhu5cgbmjhu7FhIGjhu5MgYsahaSABKN2Pt9qhNAozCihiw6FvIGdpw6Egc8OgbiBn4buXIG5o4buxYSBuZ2_DoGkgdHLhu51pIAEoyIW02qE0CigKHWLDoG4gZ2jhur8gY2FmZSBuZ2_DoGkgdHLhu51pIAEovOax2KE0CiwKIXBlcmdvbGEgZ-G7lyBuaOG7sWEgbmdvw6BpIHRy4budaSABKJzJrtihNAo2Citiw6BuIGdo4bq_IG5nb8OgaSB0cuG7nWkgY2jhu4t1IG7huq9uZyBtxrBhIAEo9ber2KE0CiAKFXThuqVtIOG7kXAgZ2nhuqMgxJHDoSABKLX3z9ahNAoaCg904bqlbSB2w6JuIMSRw6EgASjR8szWoTQKIwoYdOG6pW0gcHZjIHRyw6FuZyBnxrDGoW5nIAEomcjJ1qE0ChsKEHThuqVtIGdp4bqjIMSRw6EgASjo4sXWoTQKIQoWdOG6pW0gbmjhu7FhIHbDom4gxJHDoSABKPnFv9ahNA"
+        },
+        {
+          "name": "sb_wiz.sc_pq",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "origin": "https://www.youtube.com",
+      "localStorage": [
+        {
+          "name": "ytidb::LAST_RESULT_ENTRY_KEY",
+          "value": "{\"data\":{\"hasSucceededOnce\":true},\"expiration\":1798352594766,\"creation\":1795760594766}"
+        },
+        {
+          "name": "yt-icons-last-purged",
+          "value": "1794018212618"
+        }
+      ]
+    },
+    {
+      "origin": "https://www.facebook.com",
+      "localStorage": [
+        {
+          "name": "Session",
+          "value": "8jg69s:1795746356669"
+        },
+        {
+          "name": "_cs_viewer",
+          "value": "0"
+        },
+        {
+          "name": "_cs_version",
+          "value": "_@_2h"
+        },
+        {
+          "name": "CacheStorageVersion",
+          "value": "3b"
+        },
+        {
+          "name": "banzai:last_storage_flush",
+          "value": "1795746282726.4001"
+        }
+      ]
+    },
+    {
+      "origin": "https://www.fbsbx.com",
+      "localStorage": [
+        {
+          "name": "_gcl_ls",
+          "value": "{\"schema\":\"gcl\",\"version\":1,\"gsid_dc\":{\"value\":{\"joinId\":\"4cF5Wopv0Z1ArRC_67tqZ7QePUufRSG4sA\",\"lastJoinedTimeMs\":1795746283379},\"expires\":1795746583379},\"gcl_ctr\":{\"value\":{\"value\":0,\"timeouts\":0,\"errors\":0,\"eopCount\":0,\"creationTimeMs\":1795746293066},\"expires\":1803522293066}}"
+        }
+      ]
+    }
+  ]
+}
