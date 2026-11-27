@@ -296,6 +296,10 @@ class BotWorker(threading.Thread):
         delay_between_min: int = 8,
         delay_between_max: int = 15,
         stop_event: Optional[threading.Event] = None,
+        steady_pacing: bool = False,
+        start_delay: float = 0.0,
+        pacing_state: Optional[Dict] = None,
+        pacing_lock: Optional[threading.Lock] = None,
     ):
         super().__init__(daemon=True)
         self.config = config
@@ -314,6 +318,10 @@ class BotWorker(threading.Thread):
         self.delay_between_min = delay_between_min
         self.delay_between_max = delay_between_max
         self.stop_event = stop_event or threading.Event()
+        self.steady_pacing = steady_pacing
+        self.start_delay = start_delay
+        self.pacing_state = pacing_state
+        self.pacing_lock = pacing_lock
         self.processed = 0
         self.found_count = 0
         self.errors = []
@@ -794,8 +802,31 @@ class BotWorker(threading.Thread):
             except Exception:
                 continue
 
+    def _wait_for_pacing_slot(self):
+        """Giãn nhịp click chung giữa các bot để giữ đều 1–2 lượt nhấp/phút (~32–55s/lượt)."""
+        if not self.steady_pacing or self.pacing_lock is None or self.pacing_state is None:
+            return
+        gap = random.uniform(32.0, 55.0)
+        logged = False
+        while not self.stop_event.is_set():
+            with self.pacing_lock:
+                now = time.time()
+                last_ts = self.pacing_state.get("last_click_ts", 0.0)
+                wait_s = (last_ts + gap) - now
+                if wait_s <= 0:
+                    self.pacing_state["last_click_ts"] = now
+                    return
+            if not logged:
+                self._log(f"⏱️ [Nhịp đều] Giãn nhịp ~{int(wait_s)}s để giữ đều 1–2 nhấp/phút...")
+                self._write_progress("waiting", f"Giãn nhịp đều (~{int(wait_s)}s)")
+                logged = True
+            time.sleep(min(0.5, max(0.1, wait_s)))
+
     def _visit_hwood_page(self, page, result: Dict):
         """Click vào kết quả hwood.vn (AI Overview, Cụm hình ảnh, hay Organic) để tăng traffic chuẩn Google."""
+        self._wait_for_pacing_slot()
+        if self.stop_event.is_set():
+            return
         source_type = result.get("source_type", "organic")
         source_label = result.get("source_label", f"Top {result.get('position', '?')}")
         target_url = result.get("url", "")
@@ -1199,6 +1230,14 @@ class BotWorker(threading.Thread):
         import urllib.parse
         self._write_progress("starting", "Khởi động trình duyệt")
 
+        if self.start_delay > 0:
+            self._write_progress("waiting", f"Chờ khởi động lệch pha ({int(self.start_delay)}s)")
+            self._log(f"⏱️ [Nhịp đều] Khởi động lệch pha sau {int(self.start_delay)}s...")
+            waited = 0.0
+            while waited < self.start_delay and not self.stop_event.is_set():
+                time.sleep(min(0.5, self.start_delay - waited))
+                waited += 0.5
+
         while not self.stop_event.is_set() and not self.keyword_queue.empty():
             try:
                 with sync_playwright() as p:
@@ -1468,6 +1507,7 @@ def chay_5_bot(
     click_zalo: bool = False,
     delay_between_min: int = 8,
     delay_between_max: int = 15,
+    steady_pacing: bool = False,
 ) -> Tuple[List[Dict], List[BotWorker]]:
     """
     Khởi chạy 5 bot song song. Trả về (danh_sach_ket_qua, danh_sach_thread_bot).
@@ -1505,8 +1545,11 @@ def chay_5_bot(
 
     store = ResultStore()
     stop_event = threading.Event()
+    pacing_lock = threading.Lock()
+    pacing_state = {"last_click_ts": 0.0}
     bots = []
-    for cfg in danh_sach_bot:
+    for idx, cfg in enumerate(danh_sach_bot):
+        s_delay = (idx * random.uniform(22.0, 35.0)) if (steady_pacing and idx > 0) else 0.0
         bot = BotWorker(
             config=cfg,
             keyword_queue=kw_queue,
@@ -1521,6 +1564,10 @@ def chay_5_bot(
             delay_between_min=delay_between_min,
             delay_between_max=delay_between_max,
             stop_event=stop_event,
+            steady_pacing=steady_pacing,
+            start_delay=s_delay,
+            pacing_state=pacing_state,
+            pacing_lock=pacing_lock,
         )
         bots.append(bot)
 
