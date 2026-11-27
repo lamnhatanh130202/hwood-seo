@@ -1,0 +1,366 @@
+{
+  "cookies": [
+    {
+      "name": "SNID",
+      "value": "ANBxh3gEkzF0A80lfrduAousrAvTq1UJe6O5Uo8dXqtdX6O2JqVk4Ma3xpcyIm27lbVwnGxgS7Czd9OthLMlTy9CjB9nIeFWHQ",
+      "domain": ".google.com.vn",
+      "path": "/verify",
+      "expires": 1811557283.565943,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "SEARCH_SAMESITE",
+      "value": "CgQIsKIB",
+      "domain": ".google.com.vn",
+      "path": "/",
+      "expires": 1811298083.222601,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Strict"
+    },
+    {
+      "name": "AEC",
+      "value": "Aaa9EJqU7qh5NL9sgguRM25B_jd8xv8oBvofX92uzn_RMp3gjcMIXi-ACQ",
+      "domain": ".google.com.vn",
+      "path": "/",
+      "expires": 1811298083.222621,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "YSC",
+      "value": "Tt6JdFHxm6U",
+      "domain": ".youtube.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None",
+      "partitionKey": "https://google.com.vn",
+      "_crHasCrossSiteAncestor": true
+    },
+    {
+      "name": "VISITOR_INFO1_LIVE",
+      "value": "cD8u0YIJoF4",
+      "domain": ".youtube.com",
+      "path": "/",
+      "expires": 1811318239.032445,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None",
+      "partitionKey": "https://google.com.vn",
+      "_crHasCrossSiteAncestor": true
+    },
+    {
+      "name": "VISITOR_PRIVACY_METADATA",
+      "value": "CgJWThIEGgAgYw%3D%3D",
+      "domain": ".youtube.com",
+      "path": "/",
+      "expires": 1811318239.03256,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None",
+      "partitionKey": "https://google.com.vn",
+      "_crHasCrossSiteAncestor": true
+    },
+    {
+      "name": "__Secure-ROLLOUT_TOKEN",
+      "value": "CMGX-oPIiZbVnwEQ3oizvounmAMY3eLCvounmAM%3D",
+      "domain": ".youtube.com",
+      "path": "/",
+      "expires": 1811298086.016023,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None",
+      "partitionKey": "https://google.com.vn",
+      "_crHasCrossSiteAncestor": true
+    },
+    {
+      "name": "YSC",
+      "value": "EytupTVSumA",
+      "domain": ".youtube.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None",
+      "partitionKey": "https://hwood.vn",
+      "_crHasCrossSiteAncestor": true
+    },
+    {
+      "name": "VISITOR_INFO1_LIVE",
+      "value": "mfL-j7OJ5Qw",
+      "domain": ".youtube.com",
+      "path": "/",
+      "expires": 1811318252.848625,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None",
+      "partitionKey": "https://hwood.vn",
+      "_crHasCrossSiteAncestor": true
+    },
+    {
+      "name": "VISITOR_PRIVACY_METADATA",
+      "value": "CgJWThIEGgAgDA%3D%3D",
+      "domain": ".youtube.com",
+      "path": "/",
+      "expires": 1811318252.848682,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None",
+      "partitionKey": "https://hwood.vn",
+      "_crHasCrossSiteAncestor": true
+    },
+    {
+      "name": "sbjs_migrations",
+      "value": "1418474375998%3D1",
+      "domain": ".hwood.vn",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "sbjs_first_add",
+      "value": "fd%3D2026-11-27%2002%3A23%3A26%7C%7C%7Cep%3Dhttps%3A%2F%2Fhwood.vn%2Fgia-tam-nhua-pvc%2F%7C%7C%7Crf%3Dhttps%3A%2F%2Fwww.google.com.vn%2F",
+      "domain": ".hwood.vn",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "sbjs_current",
+      "value": "typ%3Dorganic%7C%7C%7Csrc%3Dgoogle%7C%7C%7Cmdm%3Dorganic%7C%7C%7Ccmp%3D%28none%29%7C%7C%7Ccnt%3D%28none%29%7C%7C%7Ctrm%3D%28none%29%7C%7C%7Cid%3D%28none%29%7C%7C%7Cplt%3D%28none%29%7C%7C%7Cfmt%3D%28none%29%7C%7C%7Ctct%3D%28none%29",
+      "domain": ".hwood.vn",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "sbjs_first",
+      "value": "typ%3Dorganic%7C%7C%7Csrc%3Dgoogle%7C%7C%7Cmdm%3Dorganic%7C%7C%7Ccmp%3D%28none%29%7C%7C%7Ccnt%3D%28none%29%7C%7C%7Ctrm%3D%28none%29%7C%7C%7Cid%3D%28none%29%7C%7C%7Cplt%3D%28none%29%7C%7C%7Cfmt%3D%28none%29%7C%7C%7Ctct%3D%28none%29",
+      "domain": ".hwood.vn",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "_gcl_au",
+      "value": "1.1.1231212666.1795746207",
+      "domain": ".hwood.vn",
+      "path": "/",
+      "expires": 1803522207,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "_ga",
+      "value": "GA1.1.1797400813.1795746207",
+      "domain": ".hwood.vn",
+      "path": "/",
+      "expires": 1830326297.747342,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "IDE",
+      "value": "AHWqTUnP_A4VoZ1TaXvnfkQwUUGsgU5Im_j88nWFUZmjcVQSWPlSWqEf3C6kqH2p",
+      "domain": ".doubleclick.net",
+      "path": "/",
+      "expires": 1830306254.595513,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "__Secure-YNID",
+      "value": "CtoBCAUSjAEBDB6PDGUFomwpgN0cyDMqfOLb-lGZKPrDFd11423_8g-x-oqavD5CnMzQKtAeHnVclnfLNuZDtQqDdroY2yKRFn4NaiIYxh2dwYDK3LtKrz0iJazbSNibooYGHAPW3HQOrGgbIf7HPflZ2dx-xbgkQC5NZJqBS0KcO409Zuv2QPINY_IdGsxj6R2XZCgFMkUBHFj1apVjM89zu4xZVoziFZxoNe3sdjMVGgdWOqsvSTrryhnbDFNqVqRkCGjApPqc__hzXUCfDdD9QocWpJMq76J4UQs",
+      "domain": ".youtube.com",
+      "path": "/",
+      "expires": 1811298205.944537,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None",
+      "partitionKey": "https://hwood.vn",
+      "_crHasCrossSiteAncestor": true
+    },
+    {
+      "name": "__Secure-ROLLOUT_TOKEN",
+      "value": "CIOd5pGl2aSEtQEQmpX394unmAMY_ue4uoynmAM%3D",
+      "domain": ".youtube.com",
+      "path": "/",
+      "expires": 1811298345.944662,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None",
+      "partitionKey": "https://hwood.vn",
+      "_crHasCrossSiteAncestor": true
+    },
+    {
+      "name": "__Secure-YNID",
+      "value": "Cu0BCAUSnwEBDB6PDOObGWYVXHke9gTeu4CT1-BNQsjNq-Y0OAbXeFu7PlRw3rsLxsvGXLnraHpAUscpCmLaDEY3FAhlJgCzKZ3UkyW0VzwvV7K4OeyRMyaATiy-RCu1AQna_xpEdUOdTFH-vGw-Qx_3YIBBpVlsTcVGgOrik_8v6SEnABoVQB92f24kbSV-P7i2iv9JDlZSRO4Vg7lZ-RAGuZYI3tYoBTJFARxY9Wpmv4vfRUisgiRVs4LVR3YO-oYIs1NUWOE9OZpnPo2EieTWNtnnH2xd-rcAbFftJ_xSbLBNJKm_fkqQGhVeU4YM",
+      "domain": ".youtube.com",
+      "path": "/",
+      "expires": 1811298084.593874,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None",
+      "partitionKey": "https://google.com.vn",
+      "_crHasCrossSiteAncestor": true
+    },
+    {
+      "name": "__Secure-STRP",
+      "value": "ABNhA6ivyNur8zQ-RcYMEVM58M3YutudeLfQJU0aqyBoW3RZYGDtX2Y12vhWv7GaJm-H_A4FAeaPLXRE0t7sWKs76Rw7AiG-OugV",
+      "domain": ".google.com.vn",
+      "path": "/",
+      "expires": 1795766346.947357,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "Strict"
+    },
+    {
+      "name": "NID",
+      "value": "CuQBCAESlgEBM9AglzlCe8zdhO409OEjtSEJVhv8l-IyATo2KjMTaKsUg9NJfSkK5aVYlWrXJR7iZiouORchq91JYV3XAQYBG-Yy13f_lii8P8_lpgXTY-83eSUsIUpzuAlcin6Ml7L1zKs5U59O0Cjupe_SOubPZXwZAZP7VAse6IJ7N4XKKa_zIUbOg9ukHSzq28Gc59VHH8_IVrsoATJFAXBKQs99gbkdrnAf4_Lkv5NLTXF9HyfipJtvfAO8F8UY4xkdScBfKIcHJsD_Co8vg7glRsgiOw-XmIVRYUa22KQPyn4J",
+      "domain": ".google.com",
+      "path": "/",
+      "expires": 1811557284.402347,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "sbjs_udata",
+      "value": "vst%3D5%7C%7C%7Cuip%3D%28none%29%7C%7C%7Cuag%3DMozilla%2F5.0%20%28Windows%20NT%2010.0%3B%20Win64%3B%20x64%29%20AppleWebKit%2F537.36%20%28KHTML%2C%20like%20Gecko%29%20Chrome%2F127.0.0.0%20Safari%2F537.36",
+      "domain": ".hwood.vn",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "DV",
+      "value": "Y6RT3GVWeAMs4Ovh8UQyktR7ZSTAIVp_Hk7tc0SfywYAAAA",
+      "domain": "www.google.com.vn",
+      "path": "/",
+      "expires": 1795766838,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "NID",
+      "value": "Cq0CCAES3wEBM9Agl5BDHf3USyTai1SvTtRsfDmpsCJPRDwvL9OhFSRvioqVcB5X7-jdXrV1i6cNl_52XHOakJT9f9lUP8ds1Zi-9xALKD_HDCSA4Zrp4k7L7u-E0zabOIMZFmAQqxQPMNyZfhvahs0J4cuQZUnZC8G6I_JRwAfq0e6gaQ7Up3dXpdfjqIG_ppEEYOhKDFxzEGoBHTeyLofzJTqt6VbWn0Edtrc-5lOj-SpXWwQrbJGx4uB5NJ0pv0o5kUM9sIFS4q0WvRzqdV8h9aRhp7idSux0UVpvSG2x0L55XTdvKAEyRQFwSkLP0h0tth-5rTCP_2k87KtL0vYSh_UfdL37QsuNaUvsftoaqwsqyyutRlZCUZdm_IGtrh6T7LWqQkHetmKokLFMBQ",
+      "domain": ".google.com.vn",
+      "path": "/",
+      "expires": 1811557282.87803,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "sbjs_current_add",
+      "value": "fd%3D2026-11-27%2007%3A57%3A32%7C%7C%7Cep%3Dhttps%3A%2F%2Fhwood.vn%2Fgia-tam-nhua-pvc%2F%7C%7C%7Crf%3Dhttps%3A%2F%2Fwww.google.com.vn%2F",
+      "domain": ".hwood.vn",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "sbjs_session",
+      "value": "pgs%3D4%7C%7C%7Ccpg%3Dhttps%3A%2F%2Fhwood.vn%2Flien-he%2F",
+      "domain": ".hwood.vn",
+      "path": "/",
+      "expires": 1795768097,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "_ga_Z9198DF1XP",
+      "value": "GS2.1.s1795766120$o5$g1$t1795766326$j60$l0$h0",
+      "domain": ".hwood.vn",
+      "path": "/",
+      "expires": 1830326326.317192,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    }
+  ],
+  "origins": [
+    {
+      "origin": "https://hwood.vn",
+      "localStorage": [
+        {
+          "name": "_gcl_ls",
+          "value": "{\"schema\":\"gcl\",\"version\":1,\"gcl_ctr\":{\"value\":{\"value\":0,\"timeouts\":0,\"errors\":0,\"eopCount\":0,\"creationTimeMs\":1795746207051},\"expires\":1803522207051},\"gsid_dc\":{\"value\":{\"joinId\":\"P2-NaVS8FLSV2xUONCky1ddk_fscAvNAbQ\",\"lastJoinedTimeMs\":1795766253220},\"expires\":1795766553220},\"last_convs\":{\"value\":[],\"expires\":1803530401673}}"
+        }
+      ]
+    },
+    {
+      "origin": "https://www.google.com.vn",
+      "localStorage": [
+        {
+          "name": "rkLudSA403",
+          "value": "FVfP8NP97mRbEdQ4bDwwoG8A2mzcsyDXPkW3B2jDDPSDDScc6xOtXqv-Xd3j0EX_yDpmX7LMuwge9BkYv9KlTNy0cpRjwrzPHi4x21PVcalJMBB_piBBtzOIJFcxM86oPEkEfj8qsWFv14mHEJozDrjOOa5F6kyjnYD7BfvPgxwHtBx9AMUOmu6fHvLo2Dfj4B7QBq4LzPNMxV9nuApb2wtwE-g8uLlDOlgF5u78fyrgxIKkctpAwwa8qwHV-W2hKNbgR6L6fzUSRwGtFOCZFS_jOQRbwUEvrd3-sXa_07W3JMCtmuhaOZ0VFurPT3SNuvFCMCluZ_PnfQWaz5NzuV2eXlDj5bkSq_Z3NBqEUEQVGg1YyCgw9lza2sfyhV3IqnLrGy03lLcPsdYFwTeL0OD4efapbKKzg6tFFYWaixDiSxG-WlrcnSkfdXtNWl74UJqR2YAnlj8u9j88_gFTJHN4Irkn5Mnptj1FUk9Zs3O3zsksBb50vtlHIADgBpu_tUNtHqDvip8YzmczauB-Mc0YNS6szyTt42buZYJOzFGrh4_aMHJYYaZ9mEiiMGkcZldbEwY8seYbqyU6mMYUbC4-qi1hrz4oHqnCfQdz9X2hEFLNO2nmxNDDkTNmK0iZMLzDxcTpwHCdwWYscRAhwlLh_x04MY6b7YlQHnIek7Aq0XjBPYF7IviFVuiGtHrzPSv7E5ZBE-rI296I5u_sGkLcwrTkzPu1PdKyIX7xWDYtTw8JDthY0grgRTZCTljrJcFc1FfaE1P2UH9YHGmpPtdv9u-Ieyga1U7mkGnUmwA0VeMpQf3LtNBW0PPVZCRAXbCKbwQ14HiWEwUyia-3Vp-3fmiB-NO73Gjwd37aMzglGSJMK5toVXo8_LQcDQKn1PTEka5C8rl8JxmEZk0xHb_xYCw9XvGPPx-cEqeAwDmjJfXJ4XRXY3pl5uO9gUMXBnNEHtz3jd02v9ph5-VR3DzrgXegN7vP3hhncQ0VH9lAZqQl2UOGCV2ma6pe-y1xtmIQDUUnot7CheBfP31L6BMR_IKrcoPNhFKA60qtGu3d85ez1yNn8ogBQ_Aa2W7LQfPaD72H1_rxTl4AZoVWbfnaJlaAzDXihP_MDNAs7QtHaT_30-VJ2bMqDBiUmRlK7XRpciVAoY8F73JocrXA7ca95uTjNxxfdDgkDNIhYG9Db3MVvHLuHSzvmI7rRyvSwlBHiD-dJrbg54g3WjWDznu0hRyrNU_a4niQOzdo57XQnYnU72jWUwlHM68HWtG_Xq79WcXrEyIj76SCz41rUCTPhZp-a_rvv4BaxoJACUNX_MFj9UHgN2CZdeD9Ooa_hsDFMRiNQD9hkRA7oanfJcxvIcZG_XIWedlzMMUqBSpExlkOFbm_mmIkkeIxT1OhmfSIp36VLg6Yt3UBG6vwICWLT4wSA-aEx7KsFMfMGN_Nl27hllihc9Yn60zkuurDESF8i6IIhCg637JudfLJkbL9X5p451rVExvM5xRqFmnNaYAP3O-nM9bnGzhcx1owqAKzy2GnEWZYdqvccVl31Xbfho6ffY1q0I5HOKSDp7kAJxPKW409t4yxWOMVwS4WiiWlbKbtH6nXUWs5qyuSLLzEUfUvR9rhv_-g-_rDMcYfkAo2U0ww5fcPJ2e51FbKqsgwEJ_n733vHsyqzUgymExTMklkYzmxj54Z7q78qVk65XtKJ3xM2PYvXOKj1dySFW78ngMjNsqy2uoHyHdRfZv0Lnn5j9rzSOf4LqgGeNQTRNdrtyiDaibVO4SqC-G-ORW2HZqLzKrcknVcf4JtYlczqJeHJcRj9So39ONOfWYQbdHHx5B6jzBFEkvjcKMpziEPo4Wg3k_YunpSrh0yWFivNn17wBXnG1Xj5GQ7UrUkiaicT0pcN9oT5yNIKFy126oOYVM2KhLeqV7jr1aog37tHqlfYGIwU10oI8MBY5maAKaInr1opkxH0SKz-Th48-GAXEGR4do0osfiTEVT9a8HsHFVgRhxLvcNk7Ia56yU3Y6Ek8zYF9gngXvvovvfIjL5xt_YCvl2RIrs7XL-1Tz_lic3cm6BMEVuT36kSnjUYHYuLTF7_vOKV7GSLCrUo8wPP2VZ9qE6qSxI4N_VyfnR0a2a7ZG2kolJoAhsJ7lNS4NcpSTdbCTbw2pEjvjgCoK6arKwJ1yhCCSZjVByo3XCC-ayXO7V9mtxErOCsqs9jhtpMdu7VHdBPgARegTJcbmcsIj5rnRGICQCg93awHOH096bGvNRsW2xJaOBtEis-fj0SnqYrIK9skO8bZM0zr-Xa3LSM81joQjUqln9KxQ1X-YMR3TnzfMcvVKm9pLUzwklRM6awokDhBPBUSnWaOez0bvgYg"
+        },
+        {
+          "name": "sb_wiz.zpc.gws-wiz-serp.",
+          "value": "{\"0\":[[\"tấm pu giả đá\",0,[512,650,67,871,362,308],{\"zl\":90000}],[\"tấm pvc vân đá ngoài trời\",0,[869,394,871,362,308],{\"zl\":90000}],[\"giá tấm pvc vân đá kosmos\",0,[869,394,871,362,308],{\"zl\":90000}],[\"tấm pvc vân đá cẩm thạch\",0,[869,394,871,362,308],{\"zl\":90000}],[\"tấm nhựa ốp tường nhà\",0,[869,394,871,362,308],{\"zl\":90000}],[\"các loại nhựa ốp tường\",0,[869,394,871,362,308],{\"zl\":90000}],[\"nhựa trần\",0,[869,394,871,362,308],{\"zl\":90000}],[\"ốp tường bằng nhựa nano\",0,[869,394,871,362,308],{\"zl\":90000}],[\"tấm nano ốp trần\",0,[869,394,871,362,308],{\"zl\":90000}],[\"vách trần nhựa nano\",0,[869,394,871,362,308],{\"zl\":90000}]],\"1\":{\"av\":\"1596377426591976494\",\"by\":[{\"icon_uri\":\"https://www.gstatic.com/apigee-edge/connectors/viator.png\",\"name\":\"viator\",\"umid\":\"751158034\"},{\"umid\":\"825646013\",\"icon_uri\":\"https://www.google.com/s2/favicons?domain=experian.com&sz=64\",\"name\":\"experian\"},{\"icon_uri\":\"https://www.google.com/s2/favicons?domain=hrblock.com&sz=64\",\"name\":\"hrblock\",\"umid\":\"576370425\"},{\"icon_uri\":\"https://www.google.com/s2/favicons?domain=localiza.com&sz=64\",\"name\":\"localiza\",\"umid\":\"611861196\"},{\"icon_uri\":\"https://www.google.com/s2/favicons?domain=adobe.com&sz=64\",\"umid\":\"132100238\",\"name\":\"adobe\"},{\"icon_uri\":\"https://www.google.com/s2/favicons?domain=albertsons.com&sz=64\",\"name\":\"albertsons\",\"umid\":\"331715476\"},{\"name\":\"bigbasket\",\"icon_uri\":\"https://www.google.com/s2/favicons?domain=bigbasket.com&sz=64\",\"umid\":\"965231999\"},{\"name\":\"carrefour\",\"icon_uri\":\"https://www.google.com/s2/favicons?domain=carrefour.com.br&sz=64\",\"umid\":\"899058104\"},{\"name\":\"calm\",\"icon_uri\":\"https://www.google.com/s2/favicons?domain=calm.com&sz=64\",\"umid\":\"843319859\"},{\"icon_uri\":\"https://www.google.com/s2/favicons?domain=fandango.com&sz=64\",\"name\":\"fandango\",\"umid\":\"956064194\"},{\"icon_uri\":\"https://www.google.com/s2/favicons?domain=fredmeyer.com&sz=64\",\"umid\":\"577505061\",\"name\":\"fredmeyer\"},{\"umid\":\"622141986\",\"icon_uri\":\"https://www.google.com/s2/favicons?domain=instamart.in&sz=64\",\"name\":\"instamart\"},{\"icon_uri\":\"https://www.google.com/s2/favicons?domain=kingsoopers.com&sz=64\",\"umid\":\"535446415\",\"name\":\"kingsoopers\"},{\"icon_uri\":\"https://www.google.com/s2/favicons?domain=kroger.com&sz=64\",\"name\":\"kroger\",\"umid\":\"760635250\"},{\"name\":\"peloton\",\"umid\":\"472861794\",\"icon_uri\":\"https://www.google.com/s2/favicons?domain=onepeloton.com&sz=64\"},{\"umid\":\"762910803\",\"name\":\"safeway\",\"icon_uri\":\"https://www.google.com/s2/favicons?domain=safeway.com&sz=64\"},{\"umid\":\"492828547\",\"icon_uri\":\"https://www.google.com/s2/favicons?domain=shaws.com&sz=64\",\"name\":\"shaws\"},{\"name\":\"swiggy\",\"umid\":\"612584656\",\"icon_uri\":\"https://www.google.com/s2/favicons?domain=swiggy.com&sz=64\"},{\"name\":\"target\",\"icon_uri\":\"https://www.google.com/s2/favicons?domain=target.com&sz=64\",\"umid\":\"452264765\"},{\"icon_uri\":\"https://www.google.com/s2/favicons?domain=zepto.com&sz=64\",\"umid\":\"191396498\",\"name\":\"zepto\"},{\"name\":\"androiddevsummit\",\"umid\":\"508961876\",\"icon_uri\":\"https://lh3.googleusercontent.com/3GpU00eA8LUyIcRlR9TuX317QPT7VxX0e6iuA7ZX_yBXKX1vXWma9btmH757ievZBLw\"},{\"icon_uri\":\"https://www.google.com/s2/favicons?domain=urbancompany.com&sz=64\",\"name\":\"urbancompany\",\"umid\":\"905961806\"},{\"umid\":\"394817265\",\"name\":\"alltrails\",\"icon_uri\":\"https://www.google.com/s2/favicons?domain=alltrails.com&sz=64\"},{\"icon_uri\":\"https://lh3.googleusercontent.com/74CjZGJK-G0t85oGWVaRWkphK_sY8bai4ZGhz_QBjnbta20fGFDbwKs6u-7NnxZ48ls\",\"name\":\"angi\",\"umid\":\"480828052\"},{\"icon_uri\":\"https://lh3.googleusercontent.com/O9FB7V1j6kxgeYyo0jOHWSJqn8U-qDcNemJ_KQbkZMqTNOPzXZX7QDbmsFLJmlR0Imo\",\"name\":\"apartmentlist\",\"umid\":\"181894810\"},{\"icon_uri\":\"https://lh3.googleusercontent.com/VsmVcTF0gHfajjlKTcH-ROa-2M8UHbGOXX4HSxNzmZk-ipMQ7l5VfBCRoYkl7tomHA\",\"umid\":\"412746582\",\"name\":\"apartmentscom\"},{\"umid\":\"229336575\",\"name\":\"bandsintown\",\"icon_uri\":\"https://www.google.com/s2/favicons?domain=bandsintown.com&sz=64\"},{\"icon_uri\":\"https://www.google.com/s2/favicons?domain=clickbus.com.br&sz=64\",\"name\":\"clickbus\",\"umid\":\"700782567\"},{\"icon_uri\":\"https://www.google.com/s2/favicons?domain=coinbase.com&sz=64\",\"name\":\"coinbase\",\"umid\":\"692992785\"},{\"icon_uri\":\"https://www.gstatic.com/lamda/images/tools/logo_fever_2dda28d8d96d128169489.jpg\",\"name\":\"fever\",\"umid\":\"900883004\"},{\"icon_uri\":\"https://www.google.com/s2/favicons?domain=getninjas.com.br&sz=64\",\"name\":\"getninjas\",\"umid\":\"906780208\"},{\"umid\":\"521132125\",\"icon_uri\":\"https://www.google.com/s2/favicons?domain=getyourguide.com&sz=64\",\"name\":\"getyourguide\"},{\"umid\":\"170468956\",\"icon_uri\":\"https://images.ctfassets.net/4f3rgqwzdznj/6aPqDDuIpaMZcg8Gqqc59E/cdfb20f2037dee689c3a6b27deb3bed6/GoodRx_logo.png?w=512&h=512&fm=png\",\"name\":\"goodrx\"},{\"icon_uri\":\"https://lh3.googleusercontent.com/3qNnT3-Ez81EmD9PglQeOBXhC0_MljxKeLwZYczq3NHa3_ZhomjM_2FYxIna7kTZ9ek\",\"name\":\"homh\",\"umid\":\"400712977\"},{\"icon_uri\":\"https://www.google.com/s2/favicons?domain=ibkr.com&sz=64\",\"umid\":\"377356219\",\"name\":\"interactivebrokers\"},{\"icon_uri\":\"https://www.google.com/s2/favicons?domain=movida.com.br&sz=64\",\"name\":\"movida\",\"umid\":\"982099113\"},{\"icon_uri\":\"https://lh3.googleusercontent.com/SmKvTxrnfwWhAY-AmjqMASteU7WyCj5uz86Ag_5CQl9GO2EexFiXL8Yv7l1HYdQj2w\",\"name\":\"olx\",\"umid\":\"609609983\"},{\"name\":\"picsart\",\"umid\":\"106152521\",\"icon_uri\":\"https://www.gstatic.com/lamda/images/tools/logo_picsart_47fb14ba1ad15c0ae9662.png\"},{\"name\":\"realtor\",\"umid\":\"875856631\",\"icon_uri\":\"https://www.google.com/s2/favicons?domain=realtor.com&sz=64\"},{\"icon_uri\":\"https://lh3.googleusercontent.com/UQPL8lZMCan1nojOTQN1b4dYqVxWCShrCSUdLkQ1yoq5KaEEEjimnoDT3C41YRwPXZk\",\"name\":\"seatgeek\",\"umid\":\"681971427\"},{\"icon_uri\":\"https://www.google.com/s2/favicons?domain=strava.com&sz=64\",\"name\":\"strava\",\"umid\":\"788271576\"},{\"icon_uri\":\"https://www.gstatic.com/lamda/images/tools/logo_thumbtack_light_cddb78567f46a154ca30.png\",\"name\":\"thumbtack\",\"umid\":\"218040109\"},{\"icon_uri\":\"https://www.gstatic.com/lamda/images/tools/logo_ticketmaster_5903d8fb81ed6cdf74e29ba7e235f5ce.webp\",\"name\":\"ticketmaster\",\"umid\":\"438860541\"},{\"umid\":\"428519637\",\"name\":\"turbotax\",\"icon_uri\":\"https://www.google.com/s2/favicons?domain=turbotax.intuit.com&sz=64\"},{\"icon_uri\":\"https://www.google.com/s2/favicons?domain=zillow.com&sz=64\",\"name\":\"zillow\",\"umid\":\"628684133\"},{\"name\":\"zocdoc\",\"umid\":\"648291735\",\"icon_uri\":\"https://www.google.com/s2/favicons?domain=zocdoc.com&sz=64\"}],\"ag\":{\"a\":{\"90000\":[\"Liên quan đến nội dung tìm kiếm gần đây\",\"\",\"\",7]}}}}"
+        },
+        {
+          "name": "sb_wiz.sr_di",
+          "value": "GIuahZSypdWDygEYiajLqI6Y2flgGLDIwqeG-bDntAEY96ONw_nw2d8tGK_dmILAvr_mPQ"
+        },
+        {
+          "name": "sb_wiz.pq_tm_hp",
+          "value": "1795766236717"
+        },
+        {
+          "name": "sb_wiz.sc_pq",
+          "value": ""
+        },
+        {
+          "name": "sb_wiz.pq",
+          "value": "tấm giả đá"
+        }
+      ]
+    },
+    {
+      "origin": "https://www.youtube.com",
+      "localStorage": [
+        {
+          "name": "ytidb::LAST_RESULT_ENTRY_KEY",
+          "value": "{\"data\":{\"hasSucceededOnce\":true},\"expiration\":1798358274282,\"creation\":1795766274282}"
+        },
+        {
+          "name": "yt-icons-last-purged",
+          "value": "1789266086482"
+        }
+      ]
+    },
+    {
+      "origin": "https://challenges.cloudflare.com",
+      "localStorage": [
+        {
+          "name": "cf.turnstile.u",
+          "value": "CkDqjx-__D4Fh-KAGLggzJtGEgiV-ptub4r9-wxOzaURIoMHnQTIKtiyHAi6gs8byccggLjYTlPOgHrwj7X53ouGP53Hvlf61NWek-WU1w"
+        }
+      ]
+    }
+  ]
+}
