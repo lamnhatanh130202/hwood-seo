@@ -1,0 +1,393 @@
+{
+  "cookies": [
+    {
+      "name": "_GRECAPTCHA",
+      "value": "09AKhCRwhHclRegibk7Gqk2FoVPsXX-6dFYTi5QCzeXpsaaKsowrFy6sEvL-U2JhiQ-tQU8_hzfcgQ7PYBo5ghhdU",
+      "domain": "www.google.com",
+      "path": "/recaptcha",
+      "expires": 1811298146.192693,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "SNID",
+      "value": "ANBxh3gUfC7I7pzvxsTKErG8iSCkF_uSN08RAZzbgcZhMjRl3MJecwzutfsJUqY2eYOC0GaZytnI447J0DsjUzk3U_ZOSX-KYg",
+      "domain": ".google.com.vn",
+      "path": "/verify",
+      "expires": 1811557306.633353,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "SEARCH_SAMESITE",
+      "value": "CgQIsKIB",
+      "domain": ".google.com.vn",
+      "path": "/",
+      "expires": 1811298147.040586,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Strict"
+    },
+    {
+      "name": "AEC",
+      "value": "Aaa9EJrznVc2c5j0-KVINFdBPYvB0iI9u9ZzQpBrEYOuKLcna1YXWMaTbg",
+      "domain": ".google.com.vn",
+      "path": "/",
+      "expires": 1811298106.076572,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "sbjs_migrations",
+      "value": "1418474375998%3D1",
+      "domain": ".hwood.vn",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "sbjs_first_add",
+      "value": "fd%3D2026-11-27%2002%3A22%3A35%7C%7C%7Cep%3Dhttps%3A%2F%2Fhwood.vn%2Fgia-tam-nhua-pvc%2F%7C%7C%7Crf%3Dhttps%3A%2F%2Fwww.google.com.vn%2F",
+      "domain": ".hwood.vn",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "sbjs_current",
+      "value": "typ%3Dorganic%7C%7C%7Csrc%3Dgoogle%7C%7C%7Cmdm%3Dorganic%7C%7C%7Ccmp%3D%28none%29%7C%7C%7Ccnt%3D%28none%29%7C%7C%7Ctrm%3D%28none%29%7C%7C%7Cid%3D%28none%29%7C%7C%7Cplt%3D%28none%29%7C%7C%7Cfmt%3D%28none%29%7C%7C%7Ctct%3D%28none%29",
+      "domain": ".hwood.vn",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "sbjs_first",
+      "value": "typ%3Dorganic%7C%7C%7Csrc%3Dgoogle%7C%7C%7Cmdm%3Dorganic%7C%7C%7Ccmp%3D%28none%29%7C%7C%7Ccnt%3D%28none%29%7C%7C%7Ctrm%3D%28none%29%7C%7C%7Cid%3D%28none%29%7C%7C%7Cplt%3D%28none%29%7C%7C%7Cfmt%3D%28none%29%7C%7C%7Ctct%3D%28none%29",
+      "domain": ".hwood.vn",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "YSC",
+      "value": "ULyFRaCbBic",
+      "domain": ".youtube.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None",
+      "partitionKey": "https://hwood.vn",
+      "_crHasCrossSiteAncestor": true
+    },
+    {
+      "name": "VISITOR_INFO1_LIVE",
+      "value": "urVZpLRrKGM",
+      "domain": ".youtube.com",
+      "path": "/",
+      "expires": 1811318305.403087,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None",
+      "partitionKey": "https://hwood.vn",
+      "_crHasCrossSiteAncestor": true
+    },
+    {
+      "name": "VISITOR_PRIVACY_METADATA",
+      "value": "CgJWThIEGgAgYQ%3D%3D",
+      "domain": ".youtube.com",
+      "path": "/",
+      "expires": 1811318305.40315,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None",
+      "partitionKey": "https://hwood.vn",
+      "_crHasCrossSiteAncestor": true
+    },
+    {
+      "name": "_gcl_au",
+      "value": "1.1.1309861998.1795746156",
+      "domain": ".hwood.vn",
+      "path": "/",
+      "expires": 1803522156,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "_ga",
+      "value": "GA1.1.2054214715.1795746156",
+      "domain": ".hwood.vn",
+      "path": "/",
+      "expires": 1830326346.168179,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "IDE",
+      "value": "AHWqTUnvZze0TEMtYpwWzrJEruq6LPA-fLRzNVbpbpWoDmPEqpltfnZ68nKtjnf9",
+      "domain": ".doubleclick.net",
+      "path": "/",
+      "expires": 1830306196.702132,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "YSC",
+      "value": "ymQGQuUMMBw",
+      "domain": ".youtube.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None",
+      "partitionKey": "https://google.com.vn",
+      "_crHasCrossSiteAncestor": true
+    },
+    {
+      "name": "VISITOR_INFO1_LIVE",
+      "value": "aPKIpmCkDAE",
+      "domain": ".youtube.com",
+      "path": "/",
+      "expires": 1811318277.348219,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None",
+      "partitionKey": "https://google.com.vn",
+      "_crHasCrossSiteAncestor": true
+    },
+    {
+      "name": "VISITOR_PRIVACY_METADATA",
+      "value": "CgJWThIEGgAgKA%3D%3D",
+      "domain": ".youtube.com",
+      "path": "/",
+      "expires": 1811318277.348326,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None",
+      "partitionKey": "https://google.com.vn",
+      "_crHasCrossSiteAncestor": true
+    },
+    {
+      "name": "__Secure-YNID",
+      "value": "CtoBCAUSjAEBDB6PDKGSoDLkZTm_1aGXKOGkmsKiNbGRSgijyqpFW1DpXl_XdfuBwhsyhODBNjyXNDafSrPrcWmTV8NTdUcq4tY7E8Ar_rP-HHxP82Q2eLNPQbr57s-2YBvzbzBJzMJZoQXLTm70CmHsAuaBoCNtdA92yXaJOidhYBue0dKRtMKRYVFKmh0qiBevSCgFMkUBHFj1aqtsV_YcbSP2upyAlwqzAZHQgI_OI4J7eIglzOlKS7G-YMQABaozjA1P8Rr-ahicmkDGcwBNy_XLO0X_nzPa5Ak",
+      "domain": ".youtube.com",
+      "path": "/",
+      "expires": 1811298275.009328,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None",
+      "partitionKey": "https://google.com.vn",
+      "_crHasCrossSiteAncestor": true
+    },
+    {
+      "name": "__Secure-ROLLOUT_TOKEN",
+      "value": "CK6-6KulhuXMyAEQ55b8mIynmAMY4t2OmYynmAM%3D",
+      "domain": ".youtube.com",
+      "path": "/",
+      "expires": 1811298276.009575,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None",
+      "partitionKey": "https://google.com.vn",
+      "_crHasCrossSiteAncestor": true
+    },
+    {
+      "name": "__Secure-YNID",
+      "value": "CtsBCAUSjQEBDB6PDBnWccAXNKnMdwiF-CcHxCDX5N_n_Jaf0S5ffEF84GF8JTrjR9yizj6ZXHH0Lp8LXHNcobseCIeBqEp8AfbI8db3J1otYufOuLP8IJ4StRCL5frec3HMtZnmapj_49diA_Pmp9Ng7Pbrce6kMcZpkb5E9f9uj3N_lflVAcxdkrs5GKVqJf6Bo2goBTJFARxY9WoZKB_6qUTuXf1Q2CrK1iDV-d1LeJdCLxuo4Bk8e-uS-fZy766yhReWtVGXxVfTrL2VR-vyN4M7r2B6GbTlNy8E",
+      "domain": ".youtube.com",
+      "path": "/",
+      "expires": 1811298154.857966,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None",
+      "partitionKey": "https://hwood.vn",
+      "_crHasCrossSiteAncestor": true
+    },
+    {
+      "name": "__Secure-ROLLOUT_TOKEN",
+      "value": "CKLohvSj69OsLhCj6eLfi6eYAxi1zsiijKeYAw%3D%3D",
+      "domain": ".youtube.com",
+      "path": "/",
+      "expires": 1811298295.858282,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None",
+      "partitionKey": "https://hwood.vn",
+      "_crHasCrossSiteAncestor": true
+    },
+    {
+      "name": "NID",
+      "value": "CuQBCAESlgEBM9Agl-tXGJsX-HL8ccGdlpJffNmoFAN2rJih5dWC1gDAomtSjdEEOVtrMkH77mOIfzmLkjA3J3mjC9nIvM7m6gHOMD6kkS72kXt9W9NaGfYwn--AMonJ-OYtUYbohG19PqKxROz211iRmtbhlikGMyZGQBib5IhfCa182-JWFydrmp_qvbe8-5DDTcEEpq5nS3aozkIoATJFAXBKQs-bx7KnSTC7YTDCfqERu88Bqf5WqY5ra-lVw_JagK3UCtZ8iimjfSSily_t07f2P6yXwIQ4iRjsoU6k4niHrbkD",
+      "domain": ".google.com",
+      "path": "/",
+      "expires": 1811557348.004369,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "sbjs_udata",
+      "value": "vst%3D5%7C%7C%7Cuip%3D%28none%29%7C%7C%7Cuag%3DMozilla%2F5.0%20%28Macintosh%3B%20Intel%20Mac%20OS%20X%2010_15_7%29%20AppleWebKit%2F537.36%20%28KHTML%2C%20like%20Gecko%29%20Chrome%2F126.0.0.0%20Safari%2F537.36",
+      "domain": ".hwood.vn",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "DV",
+      "value": "c6W3Adc2NwIUwHjd0UWPQBjJHy7AIRo",
+      "domain": "www.google.com.vn",
+      "path": "/",
+      "expires": 1795766876,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "NID",
+      "value": "Cq0CCAES3wEBM9Agl737Tga9eghW061GcQorAEn3rTDb-GF2kMaDkkyLqN7xWfj8kfkbYfddhnBNyo79r_eRyRhmXXef6xhVEy3MzH67hiT7_Z9KmTXefxDEp8QCx19JmhrsZFKYafzJREMQMec2Ps79Ir-PNm6_SsoW1LpessicaBZa5ZLSfXvHI0f5a_d0Wmh4irj6RiFvPtTQNRzsvG1Q7PTdJgRV_kUi7pUBVuHjX00RiuEehHnvS8FsvIuxDXpW13ZnzEfoL2IrjSM528D32ElKq99efXQmjEiki7jCVny9hOxZKAEyRQFwSkLPKOKi5fkmgGwTA_lXGueZw8PgJo1Zrc4csg6Xcw2F608yl2NceETUjzBdc5MZEyttGkEKTvL2RwpGf4Dl5QxnDA",
+      "domain": ".google.com.vn",
+      "path": "/",
+      "expires": 1811557305.255095,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "__Secure-STRP",
+      "value": "ABNhA6gbnBOeXiIZAjRfvjpdRE3gcgERCBG71cSt6E05a9TqD6u_uSnD5kNZSp3hH4PEJAGehhxkIBzNdekuNntXysiY-teOxw",
+      "domain": ".google.com.vn",
+      "path": "/",
+      "expires": 1795766605.076228,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "Strict"
+    },
+    {
+      "name": "sbjs_current_add",
+      "value": "fd%3D2026-11-27%2007%3A58%3A25%7C%7C%7Cep%3Dhttps%3A%2F%2Fhwood.vn%2Fgia-tam-nhua-pvc%2F%7C%7C%7Crf%3Dhttps%3A%2F%2Fwww.google.com.vn%2F",
+      "domain": ".hwood.vn",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "sbjs_session",
+      "value": "pgs%3D4%7C%7C%7Ccpg%3Dhttps%3A%2F%2Fhwood.vn%2F",
+      "domain": ".hwood.vn",
+      "path": "/",
+      "expires": 1795768146,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "_ga_Z9198DF1XP",
+      "value": "GS2.1.s1795766166$o5$g1$t1795766346$j59$l0$h0",
+      "domain": ".hwood.vn",
+      "path": "/",
+      "expires": 1830326346.167649,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    }
+  ],
+  "origins": [
+    {
+      "origin": "https://hwood.vn",
+      "localStorage": [
+        {
+          "name": "_gcl_ls",
+          "value": "{\"schema\":\"gcl\",\"version\":1,\"gcl_ctr\":{\"value\":{\"value\":0,\"timeouts\":0,\"errors\":0,\"eopCount\":0,\"creationTimeMs\":1795746155973},\"expires\":1803522155973},\"gsid_dc\":{\"value\":{\"joinId\":\"fqKbDMgmxjxcNGmi0Q4PbZRblnEXOR9RWg\",\"lastJoinedTimeMs\":1795766306281},\"expires\":1795766606281}}"
+        }
+      ]
+    },
+    {
+      "origin": "https://www.google.com.vn",
+      "localStorage": [
+        {
+          "name": "rkLudSA403",
+          "value": "3fnwykP4z2re3fbBDe5RNBOTp7ot7EZAOmnycK7e9LgQhSHvHFOVkviwq-0_pVeuzE2BXRCTxSF-7ZtKaBEk_XJJezpRfLmslWhH6-HpYl64NCFJGFn5iPXOOCv_8ijDwzzb7BVArAB87EBVBDiI9REZGa0BXPrwPMP_6JiYugbGn0apfS6RukWFccrb4-X2FWhAa8fapfHmJ7E_mzhqImUJDaZ2BIg6KOICND0p_4zyVTW0yNq0q761aPIA725Wel5ZM2U7DLUoqQcnQtwQPedxDjxyGTc1B-0BQvV78nCQq3A5nmjHov0ihbtf_2V0-BFltQPMPgdkYg2a3vnIiEDLs6zBJ21reXWdIWykdXOEcqUoxoAGXrQRdQxHD0es2PifiCqidaScADhiXTPA2ld8mvXZCuAqZ4dGx7FzSI2G8HYkZmbv8PgvKyUuRmo7VQIlbxSHAUmB_hlXiES2OmtqrPUYX0eLXQhnWUAAoAKsoMZ7uQ_cIsUctF-s3EoIP9CDmcaJJbEcn-D-S9dmgi0no8pKEWle15nhRbhzlqQAiAS9BTBpuMG7FKo3GLjGoxQFRX3ZU3u4-fzgeDtmmHr8WdHtlmgIJlfBWvGm-D3qI5Tw6t4YqWFYxIRF5Vk7iUyUgYSN0VeDtcPFjkVM9fOSCyUyS7o01o3KC3uKaP4Vecr8qA7_04GX6wI3RlzSH2efDzLYBi6IQ7IZL9an7IcsiGK6h02XYi0wrgB8snZwlw_pCB2M5spAOPa7ZxL2Z66K6-pS7OTMWFvYzxQndKxkeCybzS2ruoWozbfMWeQ4g2YwTDSFbOuE3eC_r2Wv1NRygBr80tEJ2oilvq0hR0f2fgU-ryXobPq0an4yydv_OB9dbQpM0Qjz32njrStrelMOVwPCRjniuW7kf48pNBYSJxIaIyJ4E8grvpPehnCZOK3mC6mpgIbshK0Yx78HHzBqPmwaWheT7zEAbwoJSn9oYdxijjkTZQvuGnLtd0g1BSdb25ncBZy847NFhXt3AimIC4fYLvsyKqiBAxExYgSnE1GAEVCdlx_82_woRAB4K7BtBLe3-AoXgvjjveo_wan2EmstNWisf67o-4SlaZKeAXsTCMZHzhxs81-izkCdgE_TrSfLMYRtb3l1TYhu1IYftkVAiZ1JazlOuPxpWMfEWOGWX9GxTmAdKgFM_lEYKssJvXrQnF01PWXbt9NuPDrbwiE0CieBWH2zCUF37-TMYH7aI_scI-5TPpVldWMcjGPwWCDSFxgFikXNnBW95QUrF4_XMZha7BzRWou7ddIkhvieuafINHxufLfFY5MxYXPY64_Dok-w_M0YBkj5uLyZ8qr_5GS_r_RUKj37_AwabDjeIYrZ01qRT5xAssbE8tqG2g7y5F7BZoPCMYxks_vlYCnsA9ZFfFtlQPiBAafCI8V7rTUx2rnvKJqo_SrqlnJumPdckYERwk9k-_08AnhzcsLUiLJdgjTrIulesmmpuTfYxAMCsQjWNkO02apWBoL8AKgBR__CndIy_aYazRLHagVw1PxXV0Ut_lgy_Q7RPA8sOOQwOEAT90gpMT9r1MEw-NvsbE5iXxP_LaBaQcbu72JUFs_b"
+        },
+        {
+          "name": "sb_wiz.zpc.gws-wiz-serp.",
+          "value": "{\"0\":[[\"tấm ốp than tre\",0,[512,650,67,871,362,308],{\"zl\":90000}],[\"giá tấm pvc vân đá kosmos\",0,[512,650,67,948,871,362,308],{\"zl\":90000}],[\"tấm pvc giả đá\",0,[512,650,67,871,362,308],{\"zl\":90000}],[\"túi xách da cá sấu\",0,[512,650,67,871,362,308],{\"zl\":90000}],[\"tấm pvc vân đá giá\",0,[512,650,67,871,362,308],{\"zl\":90000}],[\"cho thuê văn phòng\",0,[512,650,67,871,362,308],{\"zl\":90000}],[\"dịch\",0,[512,650,67,871,362,308],{\"zl\":90000}],[\"giá tấm nhựa pvc đặc\",0,[869,394,871,362,308],{\"zl\":90000}],[\"giá tấm nhựa pvc 3mm\",0,[869,394,871,362,308],{\"zl\":90000}],[\"tấm nhựa pvc giả đá giá bao nhiêu\",0,[869,394,871,362,308],{\"zl\":90000}],[\"vtv5\",0,[3,143,362,308],{\"zl\":90001,\"zp\":{\"gs_ss\":\"1\"},\"zf\":33}],[\"chủ tịch ủy ban nhân dân thành phố hồ chí minh\",0,[3,143,362,308],{\"zf\":33,\"zp\":{\"gs_ss\":\"1\"},\"zl\":90001}],[\"lực lượng hàng không vũ trụ nga\",0,[3,143,362,308],{\"zf\":33,\"zp\":{\"gs_ss\":\"1\"},\"zl\":90001}],[\"trại giam hạnh phúc phim\",0,[3,143,362,308],{\"zf\":33,\"zp\":{\"gs_ss\":\"1\"},\"zl\":90001}],[\"libya\",46,[3,143,362,308],{\"zp\":{\"gs_ssp\":\"eJzj4tDP1TcwSS8sMmD0Ys3JTKpMBAArjQUd\"},\"zh\":\"Libya\",\"zi\":\"Quốc gia ở Bắc Phi\",\"lm\":[],\"zf\":33,\"zs\":\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAABkCAMAAAD0WI85AAAAY1BMVEUAAADnABMjnkbrABP///+mpqagoKDFxcVUVFTNzc1hYWGEhIT7+/sICAjJycnx8fE8PDxGRkZvb2+ysrJLS0uTk5MtLS3a2tri4uKsrKy+vr54eHglJSXr6+taWlpBQUESEhJcK1Z5AAABdUlEQVR4nO3Y23KCMBQF0LQNyLVaRLy12v//ypKIjJb0JXTIPpm9Hhw5vJwNIYGol0io0A38FwZBwyBoGAQNg6BhEDQMgoZB0DAIGgZBwyBoGASNeouEIiIiIiLBsjJNyyx0F3NlKz3Ii9C9zFC/mwjrY7Pprs3p2IXux1dbmRjn8bj4DNjMDB92RD1W6lqpJlQ73urqdw5rmwboZRbzfHxNy4lul+9ljswMrM20nuj18E/INGbm3ZWjntzK51xflm7Jj7khrmWwD6KTvP/ZLd6Sl0vfauU6kdwXyKU78lT2ve4n1W63H3JUdYCmfKTTi35ND3ok5AGJKIgZWodJVeDQssuI64S0hz2a6dcuiCdHXdyC2MbyimJvSQwvjUrF8hp/+7B6Wt2/RX5Y9UnMPanK8bgR+9H+sPnQloI3H9TTdpCQ2fZvhdmgkzLVEhEREZHTayQYBA2DoGEQNAyChkHQMAgaBkHDIGgYBA2DoGEQNAyC5geaskdoG7nT2gAAAABJRU5ErkJggg==\",\"zl\":90001}],[\"nguyễn thị ánh viên\",46,[3,143,362,308],{\"zs\":\"data:image/jpeg;base64,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\",\"zl\":90001,\"zh\":\"Nguyễn Thị Ánh Viên\",\"zi\":\"Vận động viên bơi\",\"lm\":[\"https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcSOUZkXcDhl9-yYFKB1cQGsXypXhB2Yd8kh85xRVuRzK5DPtGid_HfLsxBidNk0IEzxzqSoouNVjC9y6lw9D29NqCfdI1HD&s=19\",\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTq3fAJ_QhRM-9IOEc2J7KRsORwOi1oGU0SJXHkeLeJDKdn_uEJZHhfvveAN5Q6AM3wON3_95sl3B_sb8vK-kAgk-Zeh90&s=10\",\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJimb3UexSGzKR6X5B5NXdkYInnaTS965B_DWPVlt1QtiE5y2Wz1AQg0BOkbKgtF1VEinXweq3KJUwvlihvQ7lUkdlA14&s=10\"],\"zf\":33,\"zp\":{\"gs_ssp\":\"eJzj4tLP1TfITqusTKkwYPSSzEsvrXy4uzVPoSTj4e5uhcML8zIUyjIPr8oDADKqEOw\"}}],[\"luật đất đai\",0,[3,143,362,308],{\"zp\":{\"gs_ss\":\"1\"},\"zl\":90001,\"zf\":33}],[\"pháp chủ\",0,[3,143,362,308],{\"zf\":33,\"zp\":{\"gs_ss\":\"1\"},\"zl\":90001}],[\"người tựa một vì sao\",0,[3,143,362,308],{\"zf\":33,\"zp\":{\"gs_ss\":\"1\"},\"zl\":90001}],[\"trần như mai anh\",0,[3,143,362,308],{\"zf\":33,\"zl\":90001,\"zp\":{\"gs_ss\":\"1\"}}]],\"1\":{\"by\":[{\"umid\":\"751158034\",\"name\":\"viator\",\"icon_uri\":\"https://www.gstatic.com/apigee-edge/connectors/viator.png\"},{\"icon_uri\":\"https://www.google.com/s2/favicons?domain=experian.com&sz=64\",\"name\":\"experian\",\"umid\":\"825646013\"},{\"name\":\"hrblock\",\"umid\":\"576370425\",\"icon_uri\":\"https://www.google.com/s2/favicons?domain=hrblock.com&sz=64\"},{\"icon_uri\":\"https://www.google.com/s2/favicons?domain=localiza.com&sz=64\",\"name\":\"localiza\",\"umid\":\"611861196\"},{\"name\":\"adobe\",\"umid\":\"132100238\",\"icon_uri\":\"https://www.google.com/s2/favicons?domain=adobe.com&sz=64\"},{\"icon_uri\":\"https://www.google.com/s2/favicons?domain=albertsons.com&sz=64\",\"name\":\"albertsons\",\"umid\":\"331715476\"},{\"icon_uri\":\"https://www.google.com/s2/favicons?domain=bigbasket.com&sz=64\",\"umid\":\"965231999\",\"name\":\"bigbasket\"},{\"icon_uri\":\"https://www.google.com/s2/favicons?domain=carrefour.com.br&sz=64\",\"umid\":\"899058104\",\"name\":\"carrefour\"},{\"icon_uri\":\"https://www.google.com/s2/favicons?domain=calm.com&sz=64\",\"name\":\"calm\",\"umid\":\"843319859\"},{\"icon_uri\":\"https://www.google.com/s2/favicons?domain=fandango.com&sz=64\",\"name\":\"fandango\",\"umid\":\"956064194\"},{\"icon_uri\":\"https://www.google.com/s2/favicons?domain=fredmeyer.com&sz=64\",\"umid\":\"577505061\",\"name\":\"fredmeyer\"},{\"umid\":\"622141986\",\"name\":\"instamart\",\"icon_uri\":\"https://www.google.com/s2/favicons?domain=instamart.in&sz=64\"},{\"name\":\"kingsoopers\",\"umid\":\"535446415\",\"icon_uri\":\"https://www.google.com/s2/favicons?domain=kingsoopers.com&sz=64\"},{\"name\":\"kroger\",\"umid\":\"760635250\",\"icon_uri\":\"https://www.google.com/s2/favicons?domain=kroger.com&sz=64\"},{\"name\":\"peloton\",\"umid\":\"472861794\",\"icon_uri\":\"https://www.google.com/s2/favicons?domain=onepeloton.com&sz=64\"},{\"icon_uri\":\"https://www.google.com/s2/favicons?domain=safeway.com&sz=64\",\"umid\":\"762910803\",\"name\":\"safeway\"},{\"umid\":\"492828547\",\"name\":\"shaws\",\"icon_uri\":\"https://www.google.com/s2/favicons?domain=shaws.com&sz=64\"},{\"name\":\"swiggy\",\"umid\":\"612584656\",\"icon_uri\":\"https://www.google.com/s2/favicons?domain=swiggy.com&sz=64\"},{\"icon_uri\":\"https://www.google.com/s2/favicons?domain=target.com&sz=64\",\"name\":\"target\",\"umid\":\"452264765\"},{\"icon_uri\":\"https://www.google.com/s2/favicons?domain=zepto.com&sz=64\",\"name\":\"zepto\",\"umid\":\"191396498\"},{\"umid\":\"508961876\",\"name\":\"androiddevsummit\",\"icon_uri\":\"https://lh3.googleusercontent.com/3GpU00eA8LUyIcRlR9TuX317QPT7VxX0e6iuA7ZX_yBXKX1vXWma9btmH757ievZBLw\"},{\"icon_uri\":\"https://www.google.com/s2/favicons?domain=urbancompany.com&sz=64\",\"name\":\"urbancompany\",\"umid\":\"905961806\"},{\"icon_uri\":\"https://www.google.com/s2/favicons?domain=alltrails.com&sz=64\",\"umid\":\"394817265\",\"name\":\"alltrails\"},{\"icon_uri\":\"https://lh3.googleusercontent.com/74CjZGJK-G0t85oGWVaRWkphK_sY8bai4ZGhz_QBjnbta20fGFDbwKs6u-7NnxZ48ls\",\"umid\":\"480828052\",\"name\":\"angi\"},{\"icon_uri\":\"https://lh3.googleusercontent.com/O9FB7V1j6kxgeYyo0jOHWSJqn8U-qDcNemJ_KQbkZMqTNOPzXZX7QDbmsFLJmlR0Imo\",\"name\":\"apartmentlist\",\"umid\":\"181894810\"},{\"name\":\"apartmentscom\",\"umid\":\"412746582\",\"icon_uri\":\"https://lh3.googleusercontent.com/VsmVcTF0gHfajjlKTcH-ROa-2M8UHbGOXX4HSxNzmZk-ipMQ7l5VfBCRoYkl7tomHA\"},{\"umid\":\"229336575\",\"name\":\"bandsintown\",\"icon_uri\":\"https://www.google.com/s2/favicons?domain=bandsintown.com&sz=64\"},{\"icon_uri\":\"https://www.google.com/s2/favicons?domain=clickbus.com.br&sz=64\",\"name\":\"clickbus\",\"umid\":\"700782567\"},{\"icon_uri\":\"https://www.google.com/s2/favicons?domain=coinbase.com&sz=64\",\"name\":\"coinbase\",\"umid\":\"692992785\"},{\"icon_uri\":\"https://www.gstatic.com/lamda/images/tools/logo_fever_2dda28d8d96d128169489.jpg\",\"name\":\"fever\",\"umid\":\"900883004\"},{\"umid\":\"906780208\",\"name\":\"getninjas\",\"icon_uri\":\"https://www.google.com/s2/favicons?domain=getninjas.com.br&sz=64\"},{\"icon_uri\":\"https://www.google.com/s2/favicons?domain=getyourguide.com&sz=64\",\"name\":\"getyourguide\",\"umid\":\"521132125\"},{\"icon_uri\":\"https://images.ctfassets.net/4f3rgqwzdznj/6aPqDDuIpaMZcg8Gqqc59E/cdfb20f2037dee689c3a6b27deb3bed6/GoodRx_logo.png?w=512&h=512&fm=png\",\"name\":\"goodrx\",\"umid\":\"170468956\"},{\"name\":\"homh\",\"umid\":\"400712977\",\"icon_uri\":\"https://lh3.googleusercontent.com/3qNnT3-Ez81EmD9PglQeOBXhC0_MljxKeLwZYczq3NHa3_ZhomjM_2FYxIna7kTZ9ek\"},{\"icon_uri\":\"https://www.google.com/s2/favicons?domain=ibkr.com&sz=64\",\"name\":\"interactivebrokers\",\"umid\":\"377356219\"},{\"name\":\"movida\",\"umid\":\"982099113\",\"icon_uri\":\"https://www.google.com/s2/favicons?domain=movida.com.br&sz=64\"},{\"name\":\"olx\",\"umid\":\"609609983\",\"icon_uri\":\"https://lh3.googleusercontent.com/SmKvTxrnfwWhAY-AmjqMASteU7WyCj5uz86Ag_5CQl9GO2EexFiXL8Yv7l1HYdQj2w\"},{\"icon_uri\":\"https://www.gstatic.com/lamda/images/tools/logo_picsart_47fb14ba1ad15c0ae9662.png\",\"name\":\"picsart\",\"umid\":\"106152521\"},{\"icon_uri\":\"https://www.google.com/s2/favicons?domain=realtor.com&sz=64\",\"umid\":\"875856631\",\"name\":\"realtor\"},{\"umid\":\"681971427\",\"name\":\"seatgeek\",\"icon_uri\":\"https://lh3.googleusercontent.com/UQPL8lZMCan1nojOTQN1b4dYqVxWCShrCSUdLkQ1yoq5KaEEEjimnoDT3C41YRwPXZk\"},{\"icon_uri\":\"https://www.google.com/s2/favicons?domain=strava.com&sz=64\",\"umid\":\"788271576\",\"name\":\"strava\"},{\"icon_uri\":\"https://www.gstatic.com/lamda/images/tools/logo_thumbtack_light_cddb78567f46a154ca30.png\",\"umid\":\"218040109\",\"name\":\"thumbtack\"},{\"icon_uri\":\"https://www.gstatic.com/lamda/images/tools/logo_ticketmaster_5903d8fb81ed6cdf74e29ba7e235f5ce.webp\",\"name\":\"ticketmaster\",\"umid\":\"438860541\"},{\"umid\":\"428519637\",\"name\":\"turbotax\",\"icon_uri\":\"https://www.google.com/s2/favicons?domain=turbotax.intuit.com&sz=64\"},{\"icon_uri\":\"https://www.google.com/s2/favicons?domain=zillow.com&sz=64\",\"name\":\"zillow\",\"umid\":\"628684133\"},{\"icon_uri\":\"https://www.google.com/s2/favicons?domain=zocdoc.com&sz=64\",\"name\":\"zocdoc\",\"umid\":\"648291735\"}],\"av\":\"6374630762674681630\",\"ag\":{\"a\":{\"8\":[\"Nội dung tìm kiếm thịnh hành\"],\"90000\":[\"Liên quan đến nội dung tìm kiếm gần đây\",\"\",\"\",7],\"90001\":[\"Nội dung tìm kiếm thịnh hành\",\"\",1,10]}}}}"
+        },
+        {
+          "name": "sb_wiz.sr_di",
+          "value": "GK_dmILAvr_mPRih4p6ah4T--_wBGMvOrsep_oTFFRi0me_Z8o3ktK0BGJu2vPnIjr6HKQ"
+        },
+        {
+          "name": "sb_wiz.pq_tm_hp",
+          "value": "1795766276336"
+        },
+        {
+          "name": "sb_wiz.sc_pq",
+          "value": ""
+        },
+        {
+          "name": "sb_wiz.pq",
+          "value": "tấm pvc vân đá"
+        }
+      ]
+    },
+    {
+      "origin": "https://www.google.com",
+      "localStorage": [
+        {
+          "name": "_grecaptcha",
+          "value": "09AKhCRwjNKcO1gpUcZXq7E8mHJfNsDiWArsJfjI0Jg6TLyicegTUCdRrUslA3dVm-Ruku0VLooUkAz2Ccmd7myyRTlf61UjernKBOvnbncLR72c5iL_BCIlD3cAzLI7Df"
+        },
+        {
+          "name": "rc::a",
+          "value": "MWxidGF2N3U4cmdxZg=="
+        },
+        {
+          "name": "rc::f",
+          "value": "0aAEONSEviZLC4mL8-lssQ18iAT-8IJdFTiNjrZA8qfpqv7QUQZiUZ0-PbaHouq2ICRbjnlV8"
+        }
+      ]
+    },
+    {
+      "origin": "https://www.youtube.com",
+      "localStorage": [
+        {
+          "name": "ytidb::LAST_RESULT_ENTRY_KEY",
+          "value": "{\"data\":{\"hasSucceededOnce\":true},\"expiration\":1798358308832,\"creation\":1795766308832}"
+        },
+        {
+          "name": "yt-icons-last-purged",
+          "value": "1792117356364"
+        }
+      ]
+    },
+    {
+      "origin": "https://challenges.cloudflare.com",
+      "localStorage": [
+        {
+          "name": "cf.turnstile.u",
+          "value": "Cg4wONLElmAAi7JIhs1-MyifgFIqGoEkNajQS1f7cIFjeO_CDlULEEp-cKvm5ssN1wT27hDaRZEJrcZ83WEXiPZEiLBYuQI79xcoHnfWOw"
+        }
+      ]
+    }
+  ]
+}
