@@ -7,5 +7,6 @@
   "visit_pages": true,
   "deep_browse": true,
   "click_zalo": false,
-  "headless": false
+  "headless": false,
+  "steady_pacing": true
 }
