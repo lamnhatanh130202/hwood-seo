@@ -1251,6 +1251,8 @@ class BotWorker(threading.Thread):
                         "--disable-quic",
                         "--disable-ipv6",
                         "--ignore-certificate-errors",
+                        "--force-webrtc-ip-handling-policy=disable_non_proxied_udp",
+                        "--enforce-webrtc-ip-permission-check",
                     ]
 
                     def _create_browser_session(use_proxy_dict):
@@ -1281,8 +1283,39 @@ class BotWorker(threading.Thread):
                         )
                         if HAS_STEALTH:
                             stealth_sync(ctx)
+                        # Chống lộ dấu vân tay WebDriver & khóa rò rỉ IP thật qua WebRTC trên toàn bộ tab
+                        ctx.add_init_script("""
+                            Object.defineProperty(navigator, 'webdriver', {get: () => undefined});
+                            (function() {
+                                const OrigRTC = window.RTCPeerConnection || window.webkitRTCPeerConnection || window.mozRTCPeerConnection;
+                                if (!OrigRTC) return;
+                                const WrappedRTC = function(config, constraints) {
+                                    if (config && Array.isArray(config.iceServers)) {
+                                        config = Object.assign({}, config, { iceServers: [] });
+                                    }
+                                    const pc = new OrigRTC(config, constraints);
+                                    const origAddEvent = pc.addEventListener.bind(pc);
+                                    pc.addEventListener = function(type, listener, options) {
+                                        if (type === 'icecandidate' && typeof listener === 'function') {
+                                            const wrappedListener = function(ev) {
+                                                if (ev && ev.candidate && ev.candidate.candidate &&
+                                                    (ev.candidate.candidate.includes('typ host') || ev.candidate.candidate.includes('typ srflx'))) {
+                                                    return;
+                                                }
+                                                return listener.apply(this, arguments);
+                                            };
+                                            return origAddEvent(type, wrappedListener, options);
+                                        }
+                                        return origAddEvent(type, listener, options);
+                                    };
+                                    return pc;
+                                };
+                                WrappedRTC.prototype = OrigRTC.prototype;
+                                window.RTCPeerConnection = WrappedRTC;
+                                if (window.webkitRTCPeerConnection) window.webkitRTCPeerConnection = WrappedRTC;
+                            })();
+                        """)
                         pg = ctx.new_page()
-                        pg.add_init_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
                         return br, ctx, pg
 
                     try:
