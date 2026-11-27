@@ -776,8 +776,27 @@ def render_tab8():
                 value=True,
                 help="Các bot khởi động lệch pha (22–35s) và giãn nhịp click chung (32–55s/lượt) để tổng tốc độ bấm vào hwood.vn luôn đều đặn 1–2 lượt/phút, tự nhiên hơn và giảm nguy cơ Google Captcha."
             )
+            save_profile = st.checkbox(
+                "🍪 Lưu Cookie & Hồ sơ riêng cho từng Bot (Giảm Captcha)",
+                value=True,
+                help="Lưu giữ cookie và trạng thái trình duyệt riêng cho từng bot qua các lượt chạy để Google nhận diện là người dùng thật quen thuộc."
+            )
+            mobile_pct = st.slider(
+                "📱 Tỷ lệ thiết bị Di động (Mobile %):",
+                0, 100, 30, step=10,
+                help="Chuyển một phần bot sang giả lập điện thoại iPhone/Android (390x844, cảm ứng) để khớp tỷ lệ traffic thực tế tại Việt Nam."
+            )
             click_zalo = st.checkbox("💬 Bấm nút/icon Zalo OA sau khi đọc bài (Tăng traffic Zalo)", value=False, help="Sau khi đọc bài xong đủ thời gian dwell time, bot sẽ tìm nút Zalo trong bài viết hoặc icon Zalo nổi ở góc phải để bấm vào, giúp tăng chuyển đổi và traffic Zalo OA.")
             headless = st.checkbox("Chạy ẩn (Bỏ chọn để hiện cửa sổ trình duyệt trên màn hình)", value=False)
+
+        with st.expander("🛡️ Giới hạn phiên & Nghỉ giải lao giữa chặng (Tùy chọn)", expanded=False):
+            col_lim1, col_lim2, col_lim3 = st.columns(3)
+            with col_lim1:
+                max_clicks_session = st.number_input("Dừng sau tối đa (lượt nhấp, 0 = hết list):", min_value=0, max_value=500, value=0)
+            with col_lim2:
+                break_every = st.number_input("Nghỉ giải lao sau mỗi (từ khóa, 0 = tắt):", min_value=0, max_value=100, value=10)
+            with col_lim3:
+                break_minutes = st.number_input("Thời gian nghỉ (phút):", min_value=0.5, max_value=30.0, value=3.0, step=0.5)
 
         settings = {
             "max_pages": int(max_pages),
@@ -788,6 +807,11 @@ def render_tab8():
             "visit_pages": bool(visit_pages),
             "deep_browse": bool(deep_browse),
             "steady_pacing": bool(steady_pacing),
+            "save_profile": bool(save_profile),
+            "mobile_pct": int(mobile_pct),
+            "max_clicks_session": int(max_clicks_session),
+            "break_every": int(break_every),
+            "break_minutes": float(break_minutes),
             "click_zalo": bool(click_zalo),
             "headless": bool(headless),
         }
